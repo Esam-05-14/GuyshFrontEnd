@@ -1,34 +1,107 @@
-import React from 'react'
+import React from "react";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+  FaYoutube,
+} from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className='sticky bottom-0 flex w-full items-center justify-around  h-20 bg-[#202020] text-white'>
-        <div className='flex gap-2 cursor-pointer' onClick={()=>window.open("https://www.facebook.com/profile.php?id=61557650207920","_blank")}>
-            <i className=" fa-brands fa-facebook pt-[2px]"></i>
-            <p className='text-sm'>Facebook</p>
+    <footer className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 text-white py-10 border-t border-gray-600">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 px-6 md:px-0 w-11/12">
+
+        {/* Logo + About */}
+        <div className="flex flex-col items-center md:items-start">
+          <img
+            src="/logo.png"
+            alt="Guysh Logo"
+            className="h-16 w-16 mb-3 rounded-full border-2 border-gray-400 hover:scale-110 transition-transform duration-300"
+          />
+          <p className="text-sm text-gray-300 text-center md:text-left leading-relaxed">
+            Guysh Hungary — connecting and supporting Yemeni students in Hungary
+            through community, events, and guidance.
+          </p>
         </div>
-        <span className="w-[2px] h-8 bg-gray-400"></span>
-        
-        <div
-          className="flex gap-2 cursor-pointer">
+
+        {/* Contact */}
+        <div className="flex flex-col items-center md:items-start">
+          <h3 className="text-xl font-semibold mb-4 text-gray-100">
+            Contact Us
+          </h3>
           <a
-          href="mailto:yemitehad.hungary@gmail.com"
-          className="flex gap-2 items-center"
+            href="mailto:yemitehad.hungary@gmail.com"
+            className="flex gap-3 items-center hover:text-gray-300 transition-colors"
           >
-            <i className="fa-solid fa-envelope pt-[2px]"></i>
-            <p className="text-sm">Email</p>
+            <i className="fa-solid fa-envelope text-lg"></i>
+            <p className="text-sm">yemitehad.hungary@gmail.com</p>
           </a>
         </div>
 
-        <span className="w-[2px] h-8 bg-gray-400 pt-[2px]"></span>
-        
-        <div className='flex gap-2 cursor-pointer' onClick={()=>window.open("https://www.youtube.com/@YemenStudentUnion-Hungary","_blank")}>
-            <i className=" fa-brands fa-youtube"></i>
-            <p className='text-sm'>Youtube</p>
+        {/* Social Media */}
+        <div className="flex flex-col items-center md:items-start">
+          <h3 className="text-xl font-semibold mb-4 text-gray-100">
+            Follow Us
+          </h3>
+          <div className="flex space-x-5">
+            {[
+              {
+                href: "https://www.facebook.com/profile.php?id=61557650207920",
+                icon: <FaFacebook />,
+              },
+              { href: "https://twitter.com/", icon: <FaTwitter /> },
+              { href: "https://www.instagram.com/", icon: <FaInstagram /> },
+              {
+                href: "https://www.youtube.com/@YemenStudentUnion-Hungary",
+                icon: <FaYoutube />,
+              },
+            ].map(({ href, icon }, index) => (
+              <a
+                key={index}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-2xl text-gray-200 hover:text-yellow-400 transition-transform duration-300 hover:scale-125"
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
         </div>
-        
-    </div>
-  )
+
+        {/* Services */}
+        <div className="flex flex-col items-center md:items-start">
+          <h3 className="text-xl font-semibold mb-4 text-gray-100">
+            Our Services
+          </h3>
+          <ul className="space-y-2">
+            <li>
+              <a
+                href="/services"
+                className="hover:text-yellow-400 transition-colors"
+              >
+                Joining the Group
+              </a>
+            </li>
+            <li>
+              <a
+                href="/services"
+                className="hover:text-yellow-400 transition-colors"
+              >
+                Reserve Booking
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom line */}
+      <div className="mt-10 text-center text-gray-400 text-sm border-t border-gray-600 pt-5">
+        © {new Date().getFullYear()} Guysh Hungary. All Rights Reserved.
+      </div>
+    </footer>
+  );
 }
 
-export default Footer
+export default Footer;

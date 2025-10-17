@@ -66,7 +66,7 @@ export function AuthProvider({ children }) {
         setUser(userData);
         localStorage.setItem("user", JSON.stringify(userData));
         // console.log(userData);
-        // await getUsers(userData.token.jwt)
+        await getUsers(userData.token.jwt)
 
       } else {
         console.error("Login failed: No token received");
