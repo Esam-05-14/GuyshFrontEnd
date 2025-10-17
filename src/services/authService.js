@@ -149,7 +149,29 @@ export async function getUsers() {
     throw new Error("unable to get users");
   }
 
-  // 2️⃣ Get login response (likely contains token)
+  
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
+export async function getUsersProfiles() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch("http://localhost:8000/api/users/admin/profiles/", {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  
   const data = await response.json();
   console.log(data);
   return data;

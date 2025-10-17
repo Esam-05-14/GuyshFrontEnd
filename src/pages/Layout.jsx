@@ -12,7 +12,7 @@ export default function Layout() {
         <Outlet /> {/* Child routes (pages) render here */}
       </main>
 
-      {/* Footer - paste yours here */}
+      
       <footer>
         <Footer />
       </footer>

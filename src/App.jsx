@@ -16,6 +16,10 @@ import NewsDetails from './pages/NewsDetails'
 import Admin from './pages/Admin'
 import Users from './pages/Users'
 import Login from './pages/Login'
+import UserProfiles from './pages/UserProfiles'
+import UserProfilePage from './components/UserProfilePage'
+import AirportPickupForm from './components/AirportForm'
+import MembershipForm from './components/MembershipForm'
 
 
 function App() {
@@ -27,6 +31,8 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/services/airport-form" element={<AirportPickupForm />} />
+        <Route path="/services/membership-form" element={<MembershipForm />} />
         <Route path="/news" element={<News />} />
         <Route path="/universities" element={<Universities />} />
         <Route path="/events" element={<Events />} />
@@ -34,6 +40,8 @@ function App() {
         <Route path="/news/:id" element={<NewsDetails />} />
         <Route path='/admin' element={<Admin/>} />
         <Route path='/admin/users' element={<Users/>} />
+        <Route path='/admin/profiles' element={<UserProfiles/>} />
+        <Route path="/admin/profiles/:id" element={<UserProfilePage />} />
         <Route path='/login' element={<Login/>} />
 
       </Route>  

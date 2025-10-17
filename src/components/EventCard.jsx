@@ -1,4 +1,4 @@
-export default function EventCard({ name , description , location , date } ) {
+export default function EventCard({ name , description , location , date , src } ) {
 
   
     return (
@@ -7,7 +7,7 @@ export default function EventCard({ name , description , location , date } ) {
       <div className="flex p-4 gap-4">
         {/* Event Image Placeholder */}
         <div className="flex items-center justify-center w-32 h-32 bg-gray-800 text-white rounded-md text-center text-sm">
-          Photo <br /> of <br /> Event
+          <img src={src} alt="image of event" className=" h-full w-full rounded" />
         </div>
 
         {/* Event Details */}

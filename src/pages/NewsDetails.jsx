@@ -1,31 +1,73 @@
-import { useParams, Link } from "react-router-dom";
-
-
-const news = [
-  { id: 1, title: "Tech Conference", description: "A great tech event with talks, networking, and innovation showcases." },
-  { id: 2, title: "Music Festival", description: "Enjoy music, food, and cultural performances at this exciting festival." }
-];
+import { useParams, useLocation } from "react-router-dom";
 
 export default function NewsDetails() {
   const { id } = useParams();
-  const news_ = news.find((e) => e.id === parseInt(id));
+  const location = useLocation();
+  const news_ = location.state?.news;
 
-  if (!news_) return <p className="text-center mt-10">News not found</p>;
+  if (!news_) {
+    return <p className="text-center mt-10 text-gray-500 italic">News not found.</p>;
+  }
 
   return (
+    <div className="min-h-screen bg-[#F3F4F6] py-12 px-4">
+      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        {/* Image */}
+        {news_.image && (
+          <div className="relative">
+            <img
+              src='/public/guysh1.jpg'
+              alt="news"
+              className="w-full h-72 object-cover transition-transform duration-500 hover:scale-[1.02]"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+              <h1 className="text-2xl font-bold text-white">{news_.title}</h1>
+            </div>
+          </div>
+        )}
 
-    
-    <div className="max-w-3xl mx-auto p-6 bg-gray-100">
-      
-      
-      <div className="mt-6 rounded-md border border-gray-300 shadow p-6 bg-gray-100">
-        <h1 className="text-2xl font-bold text-red-700">{news_.title}</h1>
+        {/* Content */}
+        <div className="p-6">
+          {/* Meta Info */}
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+            <span>
+              🗓️ {news_.date || new Date().toLocaleDateString("en-GB")}
+            </span>
+            <span>
+              ✍️ {news_.author || "Admin"}
+            </span>
+          </div>
 
-        <div className="mt-4">
-          <p className="text-gray-700 leading-relaxed">{news_.description}</p>
+          {/* Main Text */}
+          <div className="text-gray-800 leading-relaxed space-y-4">
+            {news_.content.split("\n").map((para, idx) => (
+              <p key={idx}>{para}</p>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <hr className="my-6 border-gray-200" />
+
+          {/* Footer Links */}
+          <div className="flex justify-between items-center">
+            <button
+              onClick={() => window.history.back()}
+              className="text-[#193042] font-semibold hover:underline"
+            >
+              ← Back to News
+            </button>
+
+            <a
+              href={news_.source || "/news"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-600 hover:underline font-medium"
+            >
+              View Original Source ↗
+            </a>
+          </div>
         </div>
       </div>
-      
     </div>
   );
 }

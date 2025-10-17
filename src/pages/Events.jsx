@@ -1,38 +1,78 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import EventCard from '../components/EventCard'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../data/AuthContext'
-
-// const events = [
-//   { id: 1, name: "Tech Conference", location: "Budapest", date: "2025-10-05", description: "A great tech event..." },
-//   { id: 2, name: "Music Festival", location: "Debrecen", date: "2025-11-12", description: "Enjoy music and fun..." }
-// ];
-
-
-
+import dayjs from 'dayjs'
 
 function Events() {
   const events = useAuth().events;
-  console.log(events);
-  return (
-    <div className='bg-[#D9D9D9] flex flex-col items-center justify-center w-full'>
 
-      <div className="w-full px-20 mt-20">
-        <h1 className="text-3xl text-[#a3301e] my-7">Our Events</h1>
+  return (
+    <div className="bg-[#D9D9D9]  min-h-screen flex flex-col items-center">
+      
+      {/* Header */}
+      <div className="w-full px-8 md:px-20 mt-20 text-center">
+        <h1 className="text-3xl md:text-3xl  text-[#a3301e] mb-2">Our Events</h1>
+        <p className="text-gray-600 text-lg md:text-xl">
+          Discover upcoming events and activities organized by our team.
+        </p>
       </div>
-      <div className='w-full px-20 flex flex-col gap-10 mt-5 mb-10 items-center'>
-        {events.map(event => (
-          <Link key={event.id} to={`/events/${event.id}`}>
-            <EventCard
-              name={event.title}
-              description={event.content}
-              location={event.location}
-              date={Date(event.timestamp).toString().slice(0, 15)}
-            />
-          </Link>
-        ))}
+      
+      {/* Event List */}
+      <div className="w-full px-8 md:px-20 flex flex-col sm:flex-row flex-wrap justify-center gap-8 mt-10 mb-20">
+        {events.map(event => {
+          const formattedDate = dayjs(event.timestamp).format("dddd, MMMM D, YYYY h:mm A");
+
+          return (
+            <>
+            <Link 
+              key={event.id} 
+              to={`/events/${event.id}`} 
+              state={{ event }}
+              className="max-w-sm w-full transform transition-transform hover:scale-105"
+            >
+              <EventCard
+                src='/public/guysh1.jpg' //event.image
+                name={event.title}
+                description={event.content}
+                location={event.location}
+                date={formattedDate}
+                className="shadow-lg rounded-xl bg-white hover:shadow-2xl transition-shadow p-6 flex flex-col justify-between h-full"
+              />
+            </Link>
+            <Link 
+              key={event.id} 
+              to={`/events/${event.id}`} 
+              state={{ event }}
+              className="max-w-sm w-full transform transition-transform hover:scale-105"
+            >
+              <EventCard
+                src='/public/guysh1.jpg' //event.image
+                name={event.title}
+                description={event.content}
+                location={event.location}
+                date={formattedDate}
+                className="shadow-lg rounded-xl bg-white hover:shadow-2xl transition-shadow p-6 flex flex-col justify-between h-full"
+              />
+            </Link>
+            <Link 
+              key={event.id} 
+              to={`/events/${event.id}`} 
+              state={{ event }}
+              className="max-w-sm w-full transform transition-transform hover:scale-105"
+            >
+              <EventCard
+                src='/public/guysh1.jpg' //event.image
+                name={event.title}
+                description={event.content}
+                location={event.location}
+                date={formattedDate}
+                className="shadow-lg rounded-xl bg-white hover:shadow-2xl transition-shadow p-6 flex flex-col justify-between h-full"
+              />
+            </Link>
+            </>
+          )
+        })}
       </div>
 
     </div>

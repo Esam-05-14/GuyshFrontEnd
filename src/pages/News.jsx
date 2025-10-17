@@ -21,15 +21,18 @@ import { useAuth } from '../data/AuthContext'
 
 function News() {
   const news = useAuth().posts;
+
   return (
     <div className='bg-[#D9D9D9] flex flex-col items-center justify-center w-full'>
 
       <div className="w-full px-20 mt-20">
-        <h1 className="text-4xl font-bold text-[#a3301e] my-7">News</h1>
+        <h1 className="text-3xl  text-[#a3301e] my-7">News</h1>
       </div>
       <div className='flex flex-col w-full px-20 gap-10 mt-5 mb-10 justify-items-center'>
         {news.map(n => (
-          <Link key={n.id} to={`/news/${n.id}`}>
+          <Link key={n.id} to={`/news/${n.id}`}
+          state={{news : n}}
+          >
             <NewsCard
               title={n.title}
               content={n.content}

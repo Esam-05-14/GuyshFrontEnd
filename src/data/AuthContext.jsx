@@ -1,10 +1,11 @@
 // src/context/AuthContext.js
 import { createContext, useState, useEffect, useContext } from "react";
-import { loginRequest, getUsers, getUniversities, getBoardMembers, logoutRequest, fetchUserRole, getEvents, getPosts } from "../services/authService";
+import { loginRequest, getUsers, getUniversities, getBoardMembers, logoutRequest, fetchUserRole, getEvents, getPosts, getUsersProfiles } from "../services/authService";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+  const [token , setToken] = useState(null)
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   
@@ -15,6 +16,8 @@ export function AuthProvider({ children }) {
 
 
   const [users , setUsers] = useState([])
+  const [profiles , setProfiles] = useState([])
+
 
   useEffect(() => {
     async function fetchUnis() {
@@ -50,7 +53,8 @@ export function AuthProvider({ children }) {
     try {
       
       
-      await loginRequest(email, password);
+      const token = await loginRequest(email, password);
+      setToken(token);
       setIsLoggedIn(true);        
       const data = await fetchUserRole();
 
@@ -66,12 +70,22 @@ export function AuthProvider({ children }) {
         setUser(userData);
         localStorage.setItem("user", JSON.stringify(userData));
         // console.log(userData);
-        await getUsers(userData.token.jwt)
 
       } else {
         console.error("Login failed: No token received");
         // setIsLoggedIn(false)
       }
+      const users_data = await getUsers()
+      if(users_data){
+        setUsers(users_data)
+      }
+      const users_prof = await getUsersProfiles()
+      if(users_prof){
+        console.log(users_prof);
+        
+        setProfiles(users_prof)
+      }
+      
     } catch (error) {
       console.error("Login error:", error.message);
       // setIsLoggedIn(false)
@@ -97,7 +111,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, universities, boardMembers, users , isLoggedIn , events, posts }}>
+    <AuthContext.Provider value={{ token, user, login, logout, universities, boardMembers, users , isLoggedIn , events, posts, profiles }}>
       {children}
     </AuthContext.Provider>
   );

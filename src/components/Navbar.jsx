@@ -8,7 +8,7 @@ function Navbar() {
   const auth = useAuth();
   return (
     <>
-      <div className="fixed  flex bg-white justify-around h-20 w-screen top-0 z-20  p-3">
+      <div className="fixed top-0 bg-white/80 backdrop-blur-md flex justify-around h-20 w-screen z-20 p-3 shadow-sm">
         <div>
           <img src="/logo.png" alt="Guysh Logo" className="h-16 w-16" />
         </div>
