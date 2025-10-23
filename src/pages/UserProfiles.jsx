@@ -35,9 +35,7 @@ function UserProfiles() {
                 >
                   <td className="py-3 px-5">{u.english_name}</td>
                   
-                    
                   <td className="py-3 px-5 text-center relative">
-                    
                     <Link
                       to={`/admin/profiles/${u.id}`}
                       state={{ user: u }}

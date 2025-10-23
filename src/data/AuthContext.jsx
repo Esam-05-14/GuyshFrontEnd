@@ -1,33 +1,44 @@
 // src/context/AuthContext.js
 import { createContext, useState, useEffect, useContext } from "react";
-import { loginRequest, getUsers, getUniversities, getBoardMembers, logoutRequest, fetchUserRole, getEvents, getPosts, getUsersProfiles } from "../services/authService";
+import {
+  loginRequest,
+  getUsers,
+  getUniversities,
+  getBoardMembers,
+  logoutRequest,
+  fetchUserRole,
+  getEvents,
+  getPosts,
+  getUsersProfiles,
+  getBoardMembers_Admin
+} from "../services/authService";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token , setToken] = useState(null)
+  const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  
-  const [universities , setUniversities] = useState([])
-  const [boardMembers , setBoardMembers] = useState([])
-  const [events , setEvents] = useState([])
-  const [posts , setPosts] = useState([])
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true); // ✅ add loading flag
 
+  const [universities, setUniversities] = useState([]);
+  const [boardMembers, setBoardMembers] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [profiles, setProfiles] = useState([]);
+  const [boardMembers_A, setBoardMembers_A] = useState([]);
 
-  const [users , setUsers] = useState([])
-  const [profiles , setProfiles] = useState([])
-
-
+  // Initial data (public content)
   useEffect(() => {
     async function fetchUnis() {
       try {
         const unis = await getUniversities();
         if (unis) setUniversities(unis);
-        const board = await getBoardMembers()
-        if(board) setBoardMembers(board)
-        const news = await getPosts()
-        if(news) setPosts(news)
+        const board = await getBoardMembers();
+        if (board) setBoardMembers(board);
+        const news = await getPosts();
+        if (news) setPosts(news);
       } catch (error) {
         console.error("Failed to fetch universities or board or news:", error.message);
       }
@@ -35,89 +46,97 @@ export function AuthProvider({ children }) {
     fetchUnis();
   }, []);
 
+  // Fetch events when logged in
   useEffect(() => {
-  console.log("🟢 isLoggedIn changed:", isLoggedIn);
-  if(isLoggedIn){
-    const data = getEvents().then((res) => {
-      setEvents(res)
-      console.log("Events data:", res);
-    }).catch((err) => {
-      console.error("Failed to fetch events:", err.message);
-    });
-  }
+    if (isLoggedIn) {
+      getEvents()
+        .then((res) => setEvents(res))
+        .catch((err) => console.error("Failed to fetch events:", err.message));
+    }
   }, [isLoggedIn]);
 
-  
-  // login function
+  // ✅ LOGIN FUNCTION
   const login = async (email, password) => {
-    try {
-      
-      
-      const token = await loginRequest(email, password);
-      setToken(token);
-      setIsLoggedIn(true);        
-      const data = await fetchUserRole();
+  try {
+    const token = await loginRequest(email, password);
+    setToken(token);
 
-      // console.log("this is the data from get users", data);
-      
+    const data = await fetchUserRole();
 
-      if (data) {
-        // console.log("User role data:", data);
-        const userData = {
-          email: email,
-          roles: data.roles,
-        };
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
-        // console.log(userData);
+    if (data) {
+      const userData = { email, roles: data };
+      setUser(userData);
+      setIsLoggedIn(true);
+      localStorage.setItem("user", JSON.stringify(userData));
+      localStorage.setItem("isLoggedIn", "true");
 
-      } else {
-        console.error("Login failed: No token received");
-        // setIsLoggedIn(false)
+      // ✅ Only fetch admin data if the logged user is superuser
+      if (data.is_superuser) {
+        const users_data = await getUsers();
+        if (users_data) setUsers(users_data);
+
+        const users_prof = await getUsersProfiles();
+        if (users_prof) setProfiles(users_prof);
+
+        const boards_A = await getBoardMembers_Admin();
+        if (boards_A) setBoardMembers_A(boards_A);
       }
-      const users_data = await getUsers()
-      if(users_data){
-        setUsers(users_data)
-      }
-      const users_prof = await getUsersProfiles()
-      if(users_prof){
-        console.log(users_prof);
-        
-        setProfiles(users_prof)
-      }
-      
-    } catch (error) {
-      console.error("Login error:", error.message);
-      // setIsLoggedIn(false)
+    } else {
+      console.error("Login failed: No roles data received");
     }
-  };
 
-  // logout function
+  } catch (error) {
+    console.error("Login error:", error.message);
+  }
+};
+
+
+  // ✅ LOGOUT FUNCTION
   const logout = async () => {
     await logoutRequest();
     setUser(null);
-    console.log("logout done");
-    setIsLoggedIn(false)
-    
+    setIsLoggedIn(false);
     localStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
   };
 
-  // Keep user logged in after refresh
+  // ✅ Keep user logged in after refresh
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
-    if (savedUser) {
+    const savedLogin = localStorage.getItem("isLoggedIn");
+
+    if (savedUser && savedLogin === "true") {
       setUser(JSON.parse(savedUser));
+      setIsLoggedIn(true);
     }
+
+    setLoading(false); // ✅ mark that we’ve finished checking
   }, []);
 
   return (
-    <AuthContext.Provider value={{ token, user, login, logout, universities, boardMembers, users , isLoggedIn , events, posts, profiles }}>
+    <AuthContext.Provider
+      value={{
+        token,
+        user,
+        login,
+        logout,
+        universities,
+        boardMembers,
+        users,
+        isLoggedIn,
+        events,
+        posts,
+        profiles,
+        boardMembers_A,
+        loading, // ✅ export loading flag
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
 
-// Custom hook for easy access
+// Custom hook
 export function useAuth() {
   return useContext(AuthContext);
 }

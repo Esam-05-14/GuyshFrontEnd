@@ -12,10 +12,10 @@ export async function loginRequest(email, password) {
   }
 
   const data = await response.json();
-  console.log("this is the data from login", data);
+  // console.log("this is the data from login", data);
   
   const token = data.jwt;
-  console.log(typeof token);
+  // console.log(typeof token);
   
 
   if (!token) {
@@ -25,8 +25,8 @@ export async function loginRequest(email, password) {
   // Store token in localStorage for later use
   localStorage.setItem("token", token);
 
-  console.log("Token received:", token);
-  console.log("Token Type:", typeof token);
+  // console.log("Token received:", token);
+  // console.log("Token Type:", typeof token);
 
   return token;
 }
@@ -48,7 +48,7 @@ export async function fetchUserRole() {
   }
 
   const data = await response.json();
-  console.log("User roles:", data);
+  // console.log("User roles:", data);
   return data;
 }
 
@@ -80,7 +80,7 @@ export async function getUniversities() {
 
   // 2️⃣ Get login response (likely contains token)
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 export async function getBoardMembers() {
@@ -93,9 +93,10 @@ export async function getBoardMembers() {
 
   // 2️⃣ Get login response (likely contains token)
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
+
 
 export async function getEvents() {
   
@@ -116,7 +117,7 @@ export async function getEvents() {
 
   // 2️⃣ Get login response (likely contains token)
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 export async function getPosts() {
@@ -129,7 +130,7 @@ export async function getPosts() {
 
   // 2️⃣ Get login response (likely contains token)
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 
@@ -151,7 +152,7 @@ export async function getUsers() {
 
   
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 
@@ -173,10 +174,120 @@ export async function getUsersProfiles() {
 
   
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 
 
 
+export async function getBoardMembers_Admin() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch("http://localhost:8000/api/users/admin/board-members/", {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
+
+
+export async function getMembershipRequests_Admin() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch("http://127.0.0.1:8000/api/forms/admin/membership-forms/", {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
+export async function getMembershipRequestsById_Admin(id) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/forms/admin/membership-forms/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
+
+export async function getAirportPickipRequests_Admin() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch("http://127.0.0.1:8000/api/forms/admin/airport-pickup-forms/", {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
+
+
+export async function getAirportPickipRequestsById_Admin(id) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/forms/admin/airport-pickup-forms/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
 

@@ -4,6 +4,7 @@ function Admin() {
   const menuItems = [
     { name: "Users", path: "/admin/users" },
     { name: "User Profiles", path: "/admin/profiles" },
+    { name: "Board Members", path: "/admin/board-members" },
     { name: "Email Notifications", path: "/admin/email-notifications" },
     { name: "Membership Requests", path: "/admin/membership-requests" },
     { name: "Airport Pickup Requests", path: "/admin/airport-pickup" },

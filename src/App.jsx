@@ -20,6 +20,7 @@ import UserProfiles from './pages/UserProfiles'
 import UserProfilePage from './components/UserProfilePage'
 import AirportPickupForm from './components/AirportForm'
 import MembershipForm from './components/MembershipForm'
+import ProtectedRoutes from './services/ProtectedRoutes'
 
 
 function App() {
@@ -34,14 +35,19 @@ function App() {
         <Route path="/services/airport-form" element={<AirportPickupForm />} />
         <Route path="/services/membership-form" element={<MembershipForm />} />
         <Route path="/news" element={<News />} />
-        <Route path="/universities" element={<Universities />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/news/:id" element={<NewsDetails />} />
-        <Route path='/admin' element={<Admin/>} />
-        <Route path='/admin/users' element={<Users/>} />
-        <Route path='/admin/profiles' element={<UserProfiles/>} />
-        <Route path="/admin/profiles/:id" element={<UserProfilePage />} />
+        <Route path="/universities" element={<Universities />} />
+        <Route element={<ProtectedRoutes allowedRoles={['is_superuser','is_active']}/>}>
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetails />} />
+        </Route>
+        <Route element={<ProtectedRoutes allowedRoles={['is_superuser']}/>}>
+          <Route path='/admin' element={<Admin/>} />
+          <Route path='/admin/users' element={<Users/>} />
+          <Route path='/admin/profiles' element={<UserProfiles/>} />
+          <Route path="/admin/profiles/:id" element={<UserProfilePage />} />
+          <Route path="/admin/board-members" element={<UserProfilePage />} />
+        </Route>
         <Route path='/login' element={<Login/>} />
 
       </Route>  
