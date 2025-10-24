@@ -12,7 +12,7 @@ function UserProfiles() {
   
 
   return (
-    <div className="bg-[#EAEAEA] min-h-screen px-8 py-10">
+    <div className="bg-[#f8f9fa]  min-h-screen px-8 py-10">
       {/* Header */}
       
 

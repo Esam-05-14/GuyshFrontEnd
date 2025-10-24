@@ -8,7 +8,7 @@ function Events() {
   const events = useAuth().events;
 
   return (
-    <div className="bg-[#D9D9D9]  min-h-screen flex flex-col items-center">
+    <div className="bg-[#f8f9fa]   min-h-screen flex flex-col items-center">
       
       {/* Header */}
       <div className="w-full px-8 md:px-20 mt-20 text-center">

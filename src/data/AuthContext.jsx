@@ -51,7 +51,7 @@ export function AuthProvider({ children }) {
 
   // Fetch events when logged in
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && user.roles.is_member) {
       getEvents()
         .then((res) => setEvents(res))
         .catch((err) => console.error("Failed to fetch events:", err.message));

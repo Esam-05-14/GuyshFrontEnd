@@ -5,13 +5,13 @@ import UserAvatar from "./UserAvatar";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { user, isLoggedIn, logout } = useAuth();
+  const { user, isLoggedIn, logout , myProfile } = useAuth();
   const isAdmin = user?.roles?.is_superuser;
   const isMember = user?.roles?.is_member;
   const isActive = user?.roles?.is_active;
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-20">
+    <header className="sticky top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-20">
       <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-6">
         {/* Left: Logo */}
         <div className="flex items-center space-x-3 cursor-pointer" onClick={() => navigate("/")}>
@@ -40,7 +40,7 @@ function Navbar() {
             News
           </button>
 
-          {isLoggedIn && (isMember || isAdmin || isActive) && (
+          {isLoggedIn && (isMember || isAdmin ) && (
             <button className="hover:text-[#912211]" onClick={() => navigate("/events")}>
               Events
             </button>
@@ -49,6 +49,12 @@ function Navbar() {
           {isLoggedIn && isAdmin && (
             <button className="hover:text-[#912211]" onClick={() => navigate("/admin")}>
               Admin
+            </button>
+          )}
+
+          {isLoggedIn && (!isMember && !myProfile) && (
+            <button className="hover:text-[#209111] bg-amber-400 rounded-md hover:bg-[#b23a2c] transition" onClick={() => navigate("/membership-form")}>
+              Finish your Profile
             </button>
           )}
         </nav>

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../data/AuthContext"; // assumes you have your context managing token & user
-// import axios from "axios";
+import { useAuth } from "../data/AuthContext";
+import { createProfile } from "../services/authService";
 
 export default function CompleteProfileForm() {
   const navigate = useNavigate();
-  const { token } = useAuth(); // token should be available from your AuthContext
   const {universities} = useAuth()
   const [formData, setFormData] = useState({
     english_name: "",
@@ -20,50 +19,30 @@ export default function CompleteProfileForm() {
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: files ? files[0] : value,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage("");
-
-    const data = new FormData();
-    for (const key in formData) {
-      data.append(key, formData[key]);
+      e.preventDefault();
+      setLoading(true);
+      setMessage("");
+  
+      try {
+        const { data } = await createProfile(formData);
+        setMessage("✅ Profile created successfully!");
+        setFormData(data);
+  
+      } catch (err) {
+        console.error("Profile creation failed:", err);
+        setMessage("❌ Failed to create profile. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
-
-  //   try {
-  //     const res = await axios.post(
-  //       "/api/users/create-profile/",
-  //       data,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     if (res.status === 201 || res.status === 200) {
-  //       setMessage("Profile created successfully! Await admin approval.");
-  //       setTimeout(() => navigate("/"), 2000);
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //     setMessage(
-  //       err.response?.data?.detail ||
-  //         "Failed to create profile. Please check your input."
-  //     );
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50">

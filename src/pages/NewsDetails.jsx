@@ -10,7 +10,7 @@ export default function NewsDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] py-12 px-4">
+    <div className="min-h-screen bg-[#f8f9fa]  py-12 px-4">
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
         {/* Image */}
         {news_.image && (

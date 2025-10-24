@@ -52,7 +52,7 @@ function Users() {
   };
 
   return (
-    <div className="bg-[#EAEAEA] min-h-screen px-8 py-10">
+    <div className="bg-[#f8f9fa]  min-h-screen px-8 py-10">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold text-[#193042]">User Management</h1>

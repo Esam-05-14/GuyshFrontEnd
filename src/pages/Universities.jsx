@@ -6,72 +6,52 @@ import { useAuth } from '../data/AuthContext'
 
 function Universities() {
   const auth = useAuth()
-  const unis = auth.universities
-  console.log(unis);
-
-
-  const universities = [
-  "Andrássy University Budapest",
-  "Budapest Business School",
-  "Budapest University of Technology and Economics",
-  "Central European University",
-  "Corvinus University of Budapest",
-  "Eötvös Loránd University",
-  "International Business School",
-  "Károli Gáspár University of the Reformed Church",
-  "Liszt Ferenc Academy of Music",
-  "Pázmány Péter Catholic University",
-  "Semmelweis University",
-  "University of Fine Arts",
-  "University of Physical Education",
-  "University of Public Service",
-  "University of Theatre and Film Arts",
-  "University of Veterinary Medicine Budapest",
-  "Óbuda University",
-  "University of Debrecen",
-  "University of Dunaújváros",
-  "Eszterházy Károly University",
-  "Széchenyi István University",
-  "Kaposvár University",
-  "John von Neumann University",
-  "University of Miskolc",
-  "University of Nyíregyháza",
-  "University of Pécs",
-  "University of Sopron",
-  "University of Szeged",
-  "University of Pannonia"
-];
+  const unis = auth.universities;
 
   
-  return (
-    <div className='bg-[#D9D9D9] flex flex-col items-center justify-center w-full'>
-
-      <div className="w-full px-20 mt-20">
-        <h1 className="text-3xl text-[#a3301e] my-7">Universities</h1>
-      </div>
-      <div className='w-full px-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 mt-5 mb-10 justify-items-center'>
-        {unis && unis.map((uni) => <UniversityCard 
-        key={`${uni.name}-${uni.city}`}
-        name={uni.name}
-        city={uni.city}
-        src={
-          <img
-              src={`../assets/logos/${uni.name}.png`}
-              alt={uni.name}
-              onError={(e) => {
-              e.target.src = "../assets/logos/University of Szeged.png";
-              e.onerror = null
-            }
-            }
-/>
-
-        }
-          />)}
-        
+   return (
+    <div className="min-h-screen bg-[#f8f9fa] flex flex-col items-center w-full">
+      {/* Header */}
+      <div className="w-full px-6 sm:px-12 lg:px-20 mt-24 text-center lg:text-left">
+        <h1 className="text-4xl font-bold text-[#a3301e] tracking-tight mb-3">
+          Partner Universities
+        </h1>
+        <p className="text-[#193042] text-base max-w-3xl mx-auto lg:mx-0">
+          Discover Hungary’s top universities where international students thrive
+          in world-class programs under the Stipendium Hungaricum scholarship.
+        </p>
       </div>
 
+      {/* Grid */}
+      <div className="w-full px-6 sm:px-12 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 mt-10 mb-16 justify-items-center">
+        {unis &&
+          unis.map((uni) => (
+            <div
+              key={`${uni.name}-${uni.city}`}
+              className="w-full max-w-sm transform transition duration-300 hover:-translate-y-2 hover:shadow-lg bg-white rounded-xl border border-gray-100"
+            >
+              <div className="p-6 flex flex-col items-center">
+                <img
+                  src={`../assets/logos/${uni.name}.png`}
+                  alt={uni.name}
+                  onError={(e) => {
+                    e.target.src = "../assets/logos/University of Szeged.png";
+                    e.onerror = null;
+                  }}
+                  className="w-32 h-32 object-contain mb-4"
+                />
+                <h3 className="text-lg font-semibold text-[#193042] text-center">
+                  {uni.name}
+                </h3>
+                <p className="text-sm text-gray-500">{uni.city}</p>
+              </div>
+            </div>
+          ))}
+      </div>
+
+      
     </div>
-  )
+  );
 }
 
 export default Universities

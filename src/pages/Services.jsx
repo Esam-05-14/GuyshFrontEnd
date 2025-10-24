@@ -5,7 +5,7 @@ import ServiceCard from '../components/ServiceCard'
 
 function Services() {
   return (
-    <div className='bg-[#D9D9D9] flex flex-col items-center justify-center w-full'>
+    <div className='bg-[#f8f9fa]  flex flex-col items-center justify-center w-full'>
         
       <div className="w-full px-20 mt-20">
         <h1 className="text-3xl text-[#a3301e] my-7">Our Services</h1>

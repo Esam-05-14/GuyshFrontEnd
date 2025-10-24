@@ -1,6 +1,8 @@
 // src/services/authService.js
 
 export async function loginRequest(email, password) {
+  console.log("Attempt login with "+ email + " "+password);
+  
   const response = await fetch("http://localhost:8000/api/users/login/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -44,19 +46,25 @@ export async function registerRequest(email, password , username) {
   
   const data = await response.json();
   console.log("data "+data);
-  
-
   return data;
+  // return { data, status: response.status };
+  
 }
-export async function createProfile(english_name , arabic_name , phone_number, address ,rp_number, university) {
+export async function createProfile(formData) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
   const response = await fetch("http://localhost:8000/api/users/create-profile/", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ english_name , arabic_name , phone_number, address ,rp_number, university}),
+    headers: { "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`
+     },
+    body: JSON.stringify(formData),
   });
 
   if (!response.ok) {
-    throw new Error("Login failed");
+    throw new Error("Profile creation failed");
   }
   console.log("response " + response);
   
@@ -372,4 +380,93 @@ export async function getMyProfile() {
   const data = await response.json();
   // console.log(data);
   return data[0];
+}
+
+
+export async function airportPickupRequest( body) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch("http://localhost:8000/api/forms/my-airport-pickup-forms/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json",
+       "Authorization": `JWT ${token}`
+     },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new Error("Airport Request failed");
+  }
+  console.log("response " + response);
+  
+  const data = await response.json();
+  console.log("data "+data);
+  
+
+  return data;
+}
+
+const API_BASE = "http://localhost:8000/api/forms";
+
+function authHeaders() {
+  const token = localStorage.getItem("token");
+  return { "Content-Type": "application/json", Authorization: `JWT ${token}` };
+}
+
+// List user's forms
+export async function getMyAirportPickupForms() {
+  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/`, {
+    headers: authHeaders(),
+  });
+  if (!res.ok) throw new Error("Failed to load forms");
+  return await res.json();
+}
+
+// Get one form by id
+export async function getAirportPickupForm(id) {
+  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/${id}/`, {
+    headers: authHeaders(),
+  });
+  if (!res.ok) throw new Error("Failed to load form");
+  return await res.json();
+}
+
+// Create new form
+export async function createAirportPickupForm(data) {
+  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(()=>({detail:  res.text()}));
+    throw new Error(err.detail || "Create failed");
+  }
+  return await res.json();
+}
+
+// Update (PATCH)
+export async function updateAirportPickupForm(id, data) {
+  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/${id}/`, {
+    method: "PATCH",
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(()=>({detail:  res.text()}));
+    throw new Error(err.detail || "Update failed");
+  }
+  return await res.json();
+}
+
+// Delete
+export async function deleteAirportPickupForm(id) {
+  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/${id}/`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  if (!res.ok) throw new Error("Delete failed");
+  return true;
 }

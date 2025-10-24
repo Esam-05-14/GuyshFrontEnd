@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  FaFacebook,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaFacebook, FaYoutube, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -90,6 +87,56 @@ function Footer() {
           </ul>
         </div>
       </div>
+
+      {/* Developers Section */}
+      <section className="w-full max-w-6xl mx-auto py-16 px-4 text-center">
+        <h2 className="text-2xl font-semibold text-yellow-400 mb-10">
+          Developers
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+          {[
+            {
+              name: "UI/UX Designer",
+              linkedin: "https://www.linkedin.com/in/example-uiux",
+            },
+            {
+              name: "Backend Developer",
+              linkedin: "https://www.linkedin.com/in/example-backend",
+            },
+            {
+              name: "Frontend Developer",
+              linkedin: "https://www.linkedin.com/in/example-frontend",
+            },
+          ].map((dev) => (
+            <div
+              key={dev.name}
+              className="flex flex-col items-center bg-gray-100 text-gray-900 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-300"
+            >
+              <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[#193042]">
+                <img
+                  src="/manaf.jpg"
+                  alt={dev.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <p className="font-medium text-[#193042] text-sm sm:text-base">
+                  {dev.name}
+                </p>
+                <a
+                  href={dev.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#0A66C2] hover:text-[#004182] transition-colors"
+                >
+                  <FaLinkedin size={18} />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Bottom line */}
       <div className="mt-10 text-center text-gray-400 text-sm border-t border-gray-600 pt-5">

@@ -24,7 +24,8 @@ import ProtectedRoutes from './services/ProtectedRoutes'
 import Register from './pages/Register'
 import MyProfile from './pages/MyProfile'
 import CompleteProfileForm from './components/CompleteProfileForm'
-
+import AirportPickupFormList from './components/AirportPickupFormList'
+import AirportPickupFormEdit from './components/AirportPickupFormEdit'
 
 
 function App() {
@@ -58,7 +59,8 @@ function App() {
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
         <Route path='/membership-form' element={<CompleteProfileForm/>} />
-        
+        <Route path="/my-airport-forms" element={<AirportPickupFormList />} />
+        <Route path="/my-airport-forms/:id/edit" element={<AirportPickupFormEdit />} />
 
 
       </Route>  
