@@ -30,6 +30,66 @@ export async function loginRequest(email, password) {
 
   return token;
 }
+export async function registerRequest(email, password , username) {
+  const response = await fetch("http://localhost:8000/api/users/register/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password , username }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+  console.log("response " + response);
+  
+  const data = await response.json();
+  console.log("data "+data);
+  
+
+  return data;
+}
+export async function createProfile(english_name , arabic_name , phone_number, address ,rp_number, university) {
+  const response = await fetch("http://localhost:8000/api/users/create-profile/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ english_name , arabic_name , phone_number, address ,rp_number, university}),
+  });
+
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+  console.log("response " + response);
+  
+  const data = await response.json();
+  console.log("data "+data);
+  
+
+  return data;
+}
+export async function updateProfile(formData) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+
+  const response = await fetch("http://localhost:8000/api/users/my-profile/", {
+    method: "PATCH", 
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `JWT ${token}`,
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Updating failed: ${errorText}`);
+  }
+
+  const data = await response.json();
+  return { data, status: response.status };
+}
+
 export async function fetchUserRole() {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -291,3 +351,25 @@ export async function getAirportPickipRequestsById_Admin(id) {
   return data;
 }
 
+export async function getMyProfile() {
+  
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/users/my-profile`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+  })
+
+  if (!response.ok) {
+    throw new Error("unable to get my-profile");
+  }
+
+  // 2️⃣ Get login response (likely contains token)
+  const data = await response.json();
+  // console.log(data);
+  return data[0];
+}

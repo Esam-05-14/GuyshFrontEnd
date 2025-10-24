@@ -19,14 +19,20 @@ import Login from './pages/Login'
 import UserProfiles from './pages/UserProfiles'
 import UserProfilePage from './components/UserProfilePage'
 import AirportPickupForm from './components/AirportForm'
-import MembershipForm from './components/MembershipForm'
+import MembershipForm from './components/CompleteProfileForm'
 import ProtectedRoutes from './services/ProtectedRoutes'
+import Register from './pages/Register'
+import MyProfile from './pages/MyProfile'
+import CompleteProfileForm from './components/CompleteProfileForm'
+
 
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+
+
     <Routes>
       <Route path='/' element={<Layout/>}>
         <Route path="/" element={<MainPage />} />
@@ -40,6 +46,7 @@ function App() {
         <Route element={<ProtectedRoutes allowedRoles={['is_superuser','is_active']}/>}>
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetails />} />
+          <Route path="/my-profile" element={<MyProfile />} />
         </Route>
         <Route element={<ProtectedRoutes allowedRoles={['is_superuser']}/>}>
           <Route path='/admin' element={<Admin/>} />
@@ -49,9 +56,14 @@ function App() {
           <Route path="/admin/board-members" element={<UserProfilePage />} />
         </Route>
         <Route path='/login' element={<Login/>} />
+        <Route path='/register' element={<Register/>} />
+        <Route path='/membership-form' element={<CompleteProfileForm/>} />
+        
+
 
       </Route>  
     </Routes>
+    
   )
 }
 

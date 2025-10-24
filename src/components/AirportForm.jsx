@@ -25,10 +25,10 @@ export default function AirportPickupForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
+        className="bg-[#193042] p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
       >
         <h1 className="text-2xl font-semibold text-center mb-4">
           Add Airport Pickup Form

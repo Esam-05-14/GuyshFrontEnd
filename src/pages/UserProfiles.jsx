@@ -43,9 +43,6 @@ function UserProfiles() {
                     >
                       View
                     </Link>
-
-
-                    
                   </td>
                 </tr>
               ))

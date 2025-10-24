@@ -1,9 +1,6 @@
 import React from "react";
 import {
   FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
   FaYoutube,
 } from "react-icons/fa";
 
@@ -50,8 +47,6 @@ function Footer() {
                 href: "https://www.facebook.com/profile.php?id=61557650207920",
                 icon: <FaFacebook />,
               },
-              { href: "https://twitter.com/", icon: <FaTwitter /> },
-              { href: "https://www.instagram.com/", icon: <FaInstagram /> },
               {
                 href: "https://www.youtube.com/@YemenStudentUnion-Hungary",
                 icon: <FaYoutube />,
@@ -81,7 +76,7 @@ function Footer() {
                 href="/services"
                 className="hover:text-yellow-400 transition-colors"
               >
-                Joining the Group
+                Airport Packup
               </a>
             </li>
             <li>
@@ -89,7 +84,7 @@ function Footer() {
                 href="/services"
                 className="hover:text-yellow-400 transition-colors"
               >
-                Reserve Booking
+                Join The Union
               </a>
             </li>
           </ul>

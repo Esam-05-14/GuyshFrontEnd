@@ -1,38 +1,70 @@
-import { useContext, useState } from "react";
+import { useState , useEffect } from "react";
 import { useAuth } from "../data/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
-function Login() {
-    const [user , setUser] = useState(null)
-    const navigate = useNavigate();
-    const { login } = useAuth();
+import { useNavigate, Link } from "react-router-dom";
 
-    
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const email = e.target.email.value;
-      const password = e.target.password.value;
-        try {
-            console.log("Attempting login with", email, password);
-            
-            await login(email, password);
-            console.log("Login successful");
-            setUser({email : email, password : password})
-            console.log(user);
-            navigate('/');
-            // redirect to home or dashboard
-            
-        } catch (error) {
-            console.log("Login failed: " + error.message);
-        }
-    
+function Login() {
+  const navigate = useNavigate();
+  const { login , isLoggedIn } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/"); // 👈 redirect home if already logged in
     }
+  }, [isLoggedIn, navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    setLoading(true);
+    setError(""); // clear previous errors
+
+    try {
+      const success = await login(email, password);
+
+      if (!success) {
+        setError("Invalid email or password.");
+        return;
+      }
+
+      navigate("/"); // ✅ successful login
+    } catch (err) {
+      console.error("Login failed:", err.message);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
-        <h2 className="text-2xl font-bold text-center text-[#193042] mb-6">Login</h2>
+        <h2 className="text-2xl font-bold text-center text-[#193042] mb-6">
+          Login
+        </h2>
+
+        {error && (
+          <div className="mb-4 text-red-600 bg-red-50 p-3 rounded-lg text-sm text-center">
+            {error}{" "}
+            {error.includes("Invalid") && (
+              <Link
+                to="/register"
+                className="text-[#193042] font-medium hover:underline ml-1"
+              >
+                Register here
+              </Link>
+            )}
+          </div>
+        )}
+
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -41,7 +73,9 @@ function Login() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -51,11 +85,22 @@ function Login() {
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 rounded-lg font-semibold bg-gray-200 text-[#193042] hover:bg-gray-300 transition"
+            disabled={loading}
+            className="w-full py-2 px-4 rounded-lg font-semibold bg-gray-200 text-[#193042] hover:bg-gray-300 transition disabled:opacity-50"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        <p className="text-center text-sm text-gray-500 mt-4">
+          Don’t have an account?{" "}
+          <Link
+            to="/register"
+            className="text-[#193042] font-medium hover:underline"
+          >
+            Register
+          </Link>
+        </p>
       </div>
     </div>
   );

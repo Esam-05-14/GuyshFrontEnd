@@ -10,16 +10,19 @@ import {
   getEvents,
   getPosts,
   getUsersProfiles,
-  getBoardMembers_Admin
+  getBoardMembers_Admin,
+  getMyProfile
 } from "../services/authService";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true); // ✅ add loading flag
+  const [myProfile , setMyProfile] = useState(null);
 
   const [universities, setUniversities] = useState([]);
   const [boardMembers, setBoardMembers] = useState([]);
@@ -59,34 +62,43 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
   try {
     const token = await loginRequest(email, password);
+    if(!token) {
+      return false;
+    }
     setToken(token);
 
     const data = await fetchUserRole();
-
-    if (data) {
-      const userData = { email, roles: data };
-      setUser(userData);
-      setIsLoggedIn(true);
-      localStorage.setItem("user", JSON.stringify(userData));
-      localStorage.setItem("isLoggedIn", "true");
-
-      // ✅ Only fetch admin data if the logged user is superuser
-      if (data.is_superuser) {
-        const users_data = await getUsers();
-        if (users_data) setUsers(users_data);
-
-        const users_prof = await getUsersProfiles();
-        if (users_prof) setProfiles(users_prof);
-
-        const boards_A = await getBoardMembers_Admin();
-        if (boards_A) setBoardMembers_A(boards_A);
-      }
-    } else {
-      console.error("Login failed: No roles data received");
+    if (!data) {
+      console.error("Invalid login: user not found");
+      return false;
     }
 
+    const profile = await getMyProfile()
+    
+    setMyProfile(profile)
+    console.log(profile);
+
+    const userData = { email, roles: data };
+    setUser(userData);
+    setIsLoggedIn(true);
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("isLoggedIn", "true");
+
+    // ✅ Only fetch admin data if the logged user is superuser
+    if (data.is_superuser) {
+      const users_data = await getUsers();
+      if (users_data) setUsers(users_data);
+
+      const users_prof = await getUsersProfiles();
+      if (users_prof) setProfiles(users_prof);
+
+      const boards_A = await getBoardMembers_Admin();
+      if (boards_A) setBoardMembers_A(boards_A);
+    }
+    return true;
   } catch (error) {
     console.error("Login error:", error.message);
+    return false;
   }
 };
 
@@ -128,7 +140,8 @@ export function AuthProvider({ children }) {
         posts,
         profiles,
         boardMembers_A,
-        loading, // ✅ export loading flag
+        loading,
+        myProfile,
       }}
     >
       {children}

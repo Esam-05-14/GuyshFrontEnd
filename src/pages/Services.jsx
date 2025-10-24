@@ -12,7 +12,7 @@ function Services() {
       </div>
       <div className='w-full px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5 mb-10 justify-items-center'>
         <ServiceCard name="Airport Pickup" description="This is a description of service 1." />
-        <ServiceCard name="Membership Request" description="This is a description of service 2." />
+        <ServiceCard name="Applicants Support" description="This is a description of service 2." />
       </div>
 
     </div>
