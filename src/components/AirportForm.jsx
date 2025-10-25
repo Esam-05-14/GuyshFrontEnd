@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 export default function AirportPickupForm() {
 
-  const { user, isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   
@@ -45,6 +44,7 @@ export default function AirportPickupForm() {
     try {
       await airportPickupRequest(requestBody);
       alert("Airport pickup request submitted successfully!");
+      navigate("/my-airport-forms");
     } catch (error) {
       console.error("Error submitting airport pickup request:", error);
       alert("Failed to submit airport pickup request. Please try again.");
@@ -52,38 +52,6 @@ export default function AirportPickupForm() {
   };
 
   
-  if (!isLoggedIn) {
-    return (
-      <AccessMessage
-        title="Login Required"
-        message="You need to log in to access the Airport Pickup Request form."
-        buttonText="Go to Login"
-        onButtonClick={() => navigate("/login")}
-      />
-    );
-  }
-
-  if (!user.roles?.is_active) {
-    return (
-      <AccessMessage
-        title="Account Pending Activation"
-        message="Your account is not yet active. Once your registration is approved, you can request an airport pickup."
-        buttonText="Back to Home"
-        onButtonClick={() => navigate("/")}
-      />
-    );
-  }
-
-  if (user.roles?.is_member) {
-    return (
-      <AccessMessage
-        title="Service Not Available"
-        message="This service is available only for new incoming students who are not yet members."
-        buttonText="Go to Home"
-        onButtonClick={() => navigate("/")}
-      />
-    );
-  }
 
 
   return (
@@ -176,22 +144,6 @@ export default function AirportPickupForm() {
   );
 }
 
-function AccessMessage({ title, message, buttonText, onButtonClick }) {
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-800 px-4">
-      <div className="bg-white shadow-md rounded-xl p-8 text-center max-w-md">
-        <h2 className="text-2xl font-bold text-[#193042] mb-3">{title}</h2>
-        <p className="text-gray-600 mb-6">{message}</p>
-        <button
-          onClick={onButtonClick}
-          className="bg-[#193042] text-white px-6 py-2 rounded-lg hover:bg-[#102130] transition"
-        >
-          {buttonText}
-        </button>
-      </div>
-    </div>
-  );
-}
 
 
 // import React, { useEffect, useState } from "react";

@@ -60,7 +60,9 @@ function App() {
         <Route path='/register' element={<Register/>} />
         <Route path='/membership-form' element={<CompleteProfileForm/>} />
         <Route path="/my-airport-forms" element={<AirportPickupFormList />} />
-        <Route path="/my-airport-forms/:id/edit" element={<AirportPickupFormEdit />} />
+        <Route path="/my-airport-forms/edit/:id" element={<AirportPickupFormEdit />} />
+
+        
 
 
       </Route>  
