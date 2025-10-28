@@ -43,7 +43,7 @@ export default function EventCard({ name, description, location, date, src }) {
   const { t } = useTranslation();
 
   return (
-    <div className="max-w-4xl space-y-6 p-4 max-w-3xl mx-auto rounded-md border border-gray-300 shadow-sm overflow-hidden bg-white">
+    <div className="max-w-4xl space-y-6 p-4  mx-auto rounded-md border border-gray-300 shadow-sm overflow-hidden bg-white">
       {/* Top Section */}
       <div className="flex p-4 gap-4">
         {/* Event Image */}
