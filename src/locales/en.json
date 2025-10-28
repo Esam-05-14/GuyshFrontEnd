@@ -1,0 +1,82 @@
+{
+  "about_title": "About Us",
+  "about_paragraph": "The Yemeni Students Union in Hungary is a student organization dedicated to serving Yemeni students across the country and providing them with both academic and social support. The Union strives to strengthen cooperation and solidarity among students while organizing cultural, educational, social, and sporting activities that foster personal growth and preserve national identity. It also represents Yemeni students before official institutions and universities in Hungary, advocates for their rights, and assists newcomers in adapting to university life and the local environment. Furthermore, the Union seeks to build bridges of understanding and collaboration between the Yemeni student community and Hungarian society, promoting cultural exchange and mutual respect.",
+  "board_members": "Board Members",
+  "city_representatives": "City Representatives",
+  "loading": "Loading board members...",
+  "no_representatives": "No representatives yet.",
+
+  
+  "nav": {
+    "about": "About Us",
+    "services": "Our Services",
+    "universities": "Universities",
+    "news": "News",
+    "events": "Events",
+    "admin": "Admin",
+    "finishProfile": "Finish your Profile",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "cities": {
+  "budapest": "Budapest",
+  "debrecen": "Debrecen",
+  "pecs": "Pécs"
+},
+"footer": {
+    "about_text": "Guysh Hungary — connecting and supporting Yemeni students in Hungary through community, events, and guidance.",
+    "contact_us": "Contact Us",
+    "follow_us": "Follow Us",
+    "services": "Our Services",
+    "airport_pickup": "Airport Pickup",
+    "join_union": "Students Support",
+    "developers": "Developers",
+    "developers_names": {
+      "ui_designer": "UI/UX Designer",
+      "backend_dev": "Backend Developer",
+      "frontend_dev": "Frontend Developer"
+    },
+    "all_rights_reserved": "All Rights Reserved"
+  },
+  "services": {
+    "apply_button": "Apply",
+    "title": "Our Services",
+    "cards": {
+      "airport_pickup": {
+        "name": "Airport Pickup",
+        "description": "Apply for airport pickup service"
+      },
+      "applicants_support": {
+        "name": "Applicants Support",
+        "description": "Get guidance and support from experienced students"
+      }
+    }
+    
+  },
+  "universities": {
+    "title": "Universities",
+    "description": "Discover Hungary’s top universities where international students thrive in world-class programs under the Stipendium Hungaricum scholarship."
+  },
+  "news": {
+    "title": "News",
+    "no_posts": "No news articles are available at the moment.",
+    "newsNotFound": "News not found.",
+    "admin": "Admin",
+    "backToNews": "← Back to News",
+    "viewOriginal": "View Original Source ↗"
+  },
+  
+  "events": {
+    "title": "Our Events",
+    "subtitle": "Discover upcoming events and activities organized by our team.",
+    "backToEvents": "← Back to Events",
+    "eventNotFound": "Event not found."
+
+
+  }
+  
+
+
+
+
+}
