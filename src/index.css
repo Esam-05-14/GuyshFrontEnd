@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+
+/* optional: smooth RTL flipping */
+html[dir="rtl"] {
+  direction: rtl;
+}

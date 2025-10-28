@@ -26,6 +26,7 @@ import MyProfile from './pages/MyProfile'
 import CompleteProfileForm from './components/CompleteProfileForm'
 import AirportPickupFormList from './components/AirportPickupFormList'
 import AirportPickupFormEdit from './components/AirportPickupFormEdit'
+import GuidenceForm from './components/GuidenceForm'
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
         <Route path='/membership-form' element={<CompleteProfileForm/>} />
         <Route path="/my-airport-forms" element={<AirportPickupFormList />} />
         <Route path="/my-airport-forms/edit/:id" element={<AirportPickupFormEdit />} />
+        <Route path='/guidence-form' element={<GuidenceForm/>}></Route>
 
         
 

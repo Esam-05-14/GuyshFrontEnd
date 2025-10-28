@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import axios from "axios";
 import { useAuth } from "../data/AuthContext";
 import { updateProfile } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
 export default function MyProfile() {
   const { myProfile, universities } = useAuth();
@@ -9,6 +10,7 @@ export default function MyProfile() {
   const [editing, setEditing] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   // initialize form
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function MyProfile() {
   if (!formData) {
     return (
       <div className="min-h-screen flex justify-center items-center text-gray-600">
-        Loading profile...
+        <h1>Loading profile...</h1>
       </div>
     );
   }

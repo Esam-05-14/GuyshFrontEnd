@@ -1,8 +1,11 @@
 import { useLocation, useParams } from "react-router-dom";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
+
 
 export default function EventDetails() {
   const { id } = useParams();
+  const { t } = useTranslation();
   const location = useLocation();
   const event = location.state?.event;
 
@@ -10,7 +13,7 @@ export default function EventDetails() {
 
   if (!event)
     return (
-      <p className="text-center mt-10 text-gray-500 italic">Event not found.</p>
+      <p className="text-center mt-10 text-gray-500 italic">{t("events.eventNotFound")}</p>
     );
 
   return (
@@ -54,7 +57,7 @@ export default function EventDetails() {
               onClick={() => window.history.back()}
               className="text-[#193042] font-semibold hover:underline"
             >
-              ← Back to Events
+              {t("events.backToEvents")}
             </button>
 
             {event.source && (

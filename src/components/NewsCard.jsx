@@ -20,3 +20,53 @@ function NewsCard({title, content, date, src}) {
 }
 
 export default NewsCard
+
+// import React from "react";
+// import { useTranslation } from "react-i18next";
+
+// function NewsCard({ title, content, date, src }) {
+//   const { t, i18n } = useTranslation();
+
+//   return (
+//     <div
+//       dir={i18n.dir()}
+//       className="flex flex-col sm:flex-row bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 w-full"
+//     >
+//       {/* Image */}
+//       <div className="sm:w-1/3 w-full h-56 sm:h-auto">
+//         <img
+//           src={src}
+//           alt={t("news.image_alt")}
+//           className={`w-full h-full object-cover ${
+//             i18n.dir() === "rtl" ? "rounded-r-2xl" : "rounded-l-2xl"
+//           }`}
+//         />
+//       </div>
+
+//       {/* Content */}
+//       <div className="flex flex-col justify-between sm:w-2/3 w-full p-5">
+//         <div>
+//           <h3 className="text-[#912211] text-2xl font-semibold mb-3">
+//             {title}
+//           </h3>
+//           <p className="text-[#193042] text-sm leading-relaxed line-clamp-4">
+//             {content}
+//           </p>
+//         </div>
+
+//         {/* Footer */}
+//         <div
+//           className={`mt-4 bg-[#193042] text-white text-sm py-2 px-4 ${
+//             i18n.dir() === "rtl"
+//               ? "rounded-tl-lg self-start"
+//               : "rounded-tr-lg self-end"
+//           }`}
+//         >
+//           {date}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default NewsCard;

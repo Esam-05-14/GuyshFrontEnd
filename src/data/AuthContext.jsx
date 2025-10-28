@@ -13,10 +13,21 @@ import {
   getBoardMembers_Admin,
   getMyProfile
 } from "../services/authService";
+import i18n from "../i18n";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+
+  const [language, setLanguage] = useState(localStorage.getItem("lang") || "en");
+
+  
+  useEffect(() => {
+    i18n.changeLanguage(language);
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    localStorage.setItem("lang", language);
+  }, [language]);
+  const changeLanguage = (lang) => setLanguage(lang);
 
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -38,8 +49,10 @@ export function AuthProvider({ children }) {
       try {
         const unis = await getUniversities();
         if (unis) setUniversities(unis);
-        const board = await getBoardMembers();
+        const board = await getBoardMembers(language);
         if (board) setBoardMembers(board);
+        console.log(boardMembers);
+        
         const news = await getPosts();
         if (news) setPosts(news);
       } catch (error) {
@@ -47,7 +60,7 @@ export function AuthProvider({ children }) {
       }
     }
     fetchUnis();
-  }, []);
+  }, [language]);
 
   // Fetch events when logged in
   useEffect(() => {
@@ -142,6 +155,8 @@ export function AuthProvider({ children }) {
         boardMembers_A,
         loading,
         myProfile,
+        language,
+        changeLanguage,
       }}
     >
       {children}

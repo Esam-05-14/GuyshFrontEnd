@@ -151,9 +151,9 @@ export async function getUniversities() {
   // console.log(data);
   return data;
 }
-export async function getBoardMembers() {
+export async function getBoardMembers(language) {
   
-  const response = await fetch("http://localhost:8000/api/users/board-members");
+  const response = await fetch(`http://localhost:8000/api/users/board-members?lang=${language}`);
 
   if (!response.ok) {
     throw new Error("unable to get users");
@@ -398,6 +398,32 @@ export async function airportPickupRequest( body) {
 
   if (!response.ok) {
     throw new Error("Airport Request failed");
+  }
+  console.log("response " + response);
+  
+  const data = await response.json();
+  console.log("data "+data);
+  
+
+  return data;
+}
+
+
+export async function guidenceRequest( body) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch("http://localhost:8000/api/forms/guidance-apply/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json",
+       "Authorization": `JWT ${token}`
+     },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new Error("Guidence Request failed");
   }
   console.log("response " + response);
   

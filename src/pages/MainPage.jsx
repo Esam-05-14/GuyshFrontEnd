@@ -7,7 +7,8 @@ function MainPage() {
     <div className="bg-[#f8f9fa] flex flex-col items-center w-full text-gray-800">
       {/* Hero Section with Slider */}
       <section className="relative w-full flex justify-center mt-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#193042]/30 to-transparent pointer-events-none" />
+        {/* bg-gradient-to-b */}
+        <div className="absolute inset-0  from-[#193042]/30 to-transparent pointer-events-none" />
         <PictureSlider />
       </section>
 
