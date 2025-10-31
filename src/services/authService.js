@@ -378,7 +378,7 @@ export async function getMyProfile() {
 
   // 2️⃣ Get login response (likely contains token)
   const data = await response.json();
-  // console.log(data);
+  console.log(data);
   return data[0];
 }
 

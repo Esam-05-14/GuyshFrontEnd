@@ -73,7 +73,112 @@
     "eventNotFound": "Event not found."
 
 
+  },
+  "airportForm": {
+    "title": "Add Airport Pickup Form",
+    "airportLabel": "Airport:",
+    "selectAirport": "Select airport",
+    "budapestAirport": "Budapest Airport",
+    "debrecenAirport": "Debrecen Airport",
+    "destinationLabel": "Destination:",
+    "destinationPlaceholder": "Enter destination",
+    "arrivalTimeLabel": "Arrival time:",
+    "timeNote": "Note: You are 2 hours ahead of server time.",
+    "inDormitory": "In dormitory",
+    "submitButton": "Submit",
+    "alertSuccess": "Airport pickup request submitted successfully!",
+    "alertError": "Failed to submit airport pickup request. Please try again."
+  },
+  "airportFormEdit": {
+  "loadError": "Failed to load form details.",
+  "updateSuccess": "Form updated successfully!",
+  "createSuccess": "Form submitted successfully!",
+  "submitError": "Submission failed. Try again.",
+  "loading": "Loading...",
+  "editTitle": "Edit Pickup Request",
+  "createTitle": "Create Pickup Request",
+  "readOnly": "This request has been approved and can no longer be modified.",
+  "airportLabel": "Airport",
+  "destinationLabel": "Destination",
+  "arrivalDate": "Arrival Date",
+  "arrivalTime": "Arrival Time",
+  "inDormitory": "Already living in dormitory",
+  "saving": "Saving...",
+  "saveButton": "Save Changes"
+},
+"airport_form": {
+    "list": {
+      "title": "My Airport Pickup Requests",
+      "loading": "Loading your requests...",
+      "load_error": "Failed to load your requests. Please try again later.",
+      "no_requests": "You haven’t made any pickup requests yet.",
+      "create_one": "Create one now",
+      "arrival": "Arrival:",
+      "view_edit": "View / Edit"
+    },
+    "access": {
+      "login_required_title": "Login Required",
+      "login_required_msg": "You need to log in to access the Airport Pickup Request form.",
+      "go_login": "Go to Login",
+      "account_pending_title": "Account Pending Activation",
+      "account_pending_msg": "Your account is not yet active. Once your registration is approved, you can request an airport pickup.",
+      "back_home": "Back to Home",
+      "service_unavailable_title": "Service Not Available",
+      "service_unavailable_msg": "This service is available only for new incoming students who are not yet members.",
+      "go_home": "Go to Home"
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    }
+  },
+  
+  "guidenceForm": {
+    "title": "Guidance Form",
+    "fullNameLabel": "Full Name:",
+    "fullNamePlaceholder": "Enter your full name",
+    "whatsappLabel": "WhatsApp Number:",
+    "whatsappPlaceholder": "+3620*******",
+    "whatsappHint": "Include your country code (e.g., +36 for Hungary)",
+    "emailLabel": "Email:",
+    "emailPlaceholder": "example@email.com",
+    "submitButton": "Submit",
+    "successMessage": "Form submitted successfully! Please check your email.",
+    "errorMessage": "Failed to submit form. Please try again."
+  },
+  "userProfile": {
+    "title": "User Profile Information",
+    "englishName": "English Name:",
+    "arabicName": "Arabic Name:",
+    "phoneNumber": "Phone Number:",
+    "address": "Address:",
+    "rpNumber": "RP Number:",
+    "university": "University:",
+    "notAvailable": "Not available"
+  },
+  "myProfile": {
+    "title": "My Profile",
+    "loading": "Loading profile...",
+    "englishName": "English Name",
+    "arabicName": "Arabic Name",
+    "phoneNumber": "Phone Number",
+    "address": "Address",
+    "rpNumber": "RP Number",
+    "university": "University",
+    "selectUniversity": "Select University",
+    "editButton": "Edit Profile",
+    "saveButton": "Save Changes",
+    "cancelButton": "Cancel",
+    "saving": "Saving...",
+    "updateSuccess": "✅ Profile updated successfully!",
+    "updateFail": "❌ Failed to update profile. Please try again."
   }
+
+
+
+
+
   
 
 

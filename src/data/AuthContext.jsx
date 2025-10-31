@@ -96,6 +96,7 @@ export function AuthProvider({ children }) {
     setIsLoggedIn(true);
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("UserProfile",profile)
 
     // ✅ Only fetch admin data if the logged user is superuser
     if (data.is_superuser) {

@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { airportPickupRequest } from "../services/authService";
-import { useAuth } from "../data/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
 export default function AirportPickupForm() {
-
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
-  
   const [formData, setFormData] = useState({
     status: "pending",
     airport: "",
@@ -16,6 +15,17 @@ export default function AirportPickupForm() {
     time: "",
     in_dormitory: false,
   });
+
+  // 👇 Automatically update document direction when language changes
+  useEffect(() => {
+    if (i18n.language === "ar") {
+      document.body.dir = "rtl";
+      document.body.style.textAlign = "right";
+    } else {
+      document.body.dir = "ltr";
+      document.body.style.textAlign = "left";
+    }
+  }, [i18n.language]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -27,8 +37,6 @@ export default function AirportPickupForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Combine date + time into ISO datetime format expected by backend
     const arrival_time = `${formData.date}T${formData.time}:00Z`;
 
     const requestBody = {
@@ -39,20 +47,15 @@ export default function AirportPickupForm() {
       in_dormitory: formData.in_dormitory,
     };
 
-    console.log("Request Body:", requestBody);
-
     try {
       await airportPickupRequest(requestBody);
-      alert("Airport pickup request submitted successfully!");
+      alert(t("airportForm.alertSuccess"));
       navigate("/my-airport-forms");
     } catch (error) {
       console.error("Error submitting airport pickup request:", error);
-      alert("Failed to submit airport pickup request. Please try again.");
+      alert(t("airportForm.alertError"));
     }
   };
-
-  
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-100">
@@ -61,12 +64,14 @@ export default function AirportPickupForm() {
         className="bg-[#193042] p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
       >
         <h1 className="text-2xl font-semibold text-center mb-4">
-          Add Airport Pickup Form
+          {t("airportForm.title")}
         </h1>
 
         {/* Airport */}
         <div>
-          <label className="block text-sm font-medium mb-2">Airport:</label>
+          <label className="block text-sm font-medium mb-2">
+            {t("airportForm.airportLabel")}
+          </label>
           <select
             name="airport"
             value={formData.airport}
@@ -74,21 +79,23 @@ export default function AirportPickupForm() {
             className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            <option value="">Select airport</option>
-            <option value="BUD">Budapest Airport</option>
-            <option value="DEB">Debrecen Airport</option>
+            <option value="">{t("airportForm.selectAirport")}</option>
+            <option value="BUD">{t("airportForm.budapestAirport")}</option>
+            <option value="DEB">{t("airportForm.debrecenAirport")}</option>
           </select>
         </div>
 
         {/* Destination */}
         <div>
-          <label className="block text-sm font-medium mb-2">Destination:</label>
+          <label className="block text-sm font-medium mb-2">
+            {t("airportForm.destinationLabel")}
+          </label>
           <input
             type="text"
             name="destination"
             value={formData.destination}
             onChange={handleChange}
-            placeholder="Enter destination"
+            placeholder={t("airportForm.destinationPlaceholder")}
             className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
@@ -96,7 +103,9 @@ export default function AirportPickupForm() {
 
         {/* Arrival Time */}
         <div>
-          <label className="block text-sm font-medium mb-2">Arrival time:</label>
+          <label className="block text-sm font-medium mb-2">
+            {t("airportForm.arrivalTimeLabel")}
+          </label>
           <div className="flex gap-3">
             <input
               type="date"
@@ -116,7 +125,7 @@ export default function AirportPickupForm() {
             />
           </div>
           <p className="text-sm text-gray-400 mt-1">
-            Note: You are 2 hours ahead of server time.
+            {t("airportForm.timeNote")}
           </p>
         </div>
 
@@ -129,7 +138,7 @@ export default function AirportPickupForm() {
             onChange={handleChange}
             className="w-4 h-4 accent-blue-500"
           />
-          <label className="text-sm">In dormitory</label>
+          <label className="text-sm">{t("airportForm.inDormitory")}</label>
         </div>
 
         {/* Submit Button */}
@@ -137,12 +146,170 @@ export default function AirportPickupForm() {
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-2 rounded-lg font-medium"
         >
-          Submit
+          {t("airportForm.submitButton")}
         </button>
       </form>
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import { airportPickupRequest } from "../services/authService";
+// import { useAuth } from "../data/AuthContext";
+// import { useNavigate } from "react-router-dom";
+// import { useEffect } from "react";
+// export default function AirportPickupForm() {
+
+//   const navigate = useNavigate();
+
+  
+//   const [formData, setFormData] = useState({
+//     status: "pending",
+//     airport: "",
+//     destination: "",
+//     date: "",
+//     time: "",
+//     in_dormitory: false,
+//   });
+
+//   const handleChange = (e) => {
+//     const { name, value, type, checked } = e.target;
+//     setFormData({
+//       ...formData,
+//       [name]: type === "checkbox" ? checked : value,
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     // Combine date + time into ISO datetime format expected by backend
+//     const arrival_time = `${formData.date}T${formData.time}:00Z`;
+
+//     const requestBody = {
+//       status: formData.status,
+//       airport: formData.airport,
+//       destination: formData.destination,
+//       arrival_time,
+//       in_dormitory: formData.in_dormitory,
+//     };
+
+//     console.log("Request Body:", requestBody);
+
+//     try {
+//       await airportPickupRequest(requestBody);
+//       alert("Airport pickup request submitted successfully!");
+//       navigate("/my-airport-forms");
+//     } catch (error) {
+//       console.error("Error submitting airport pickup request:", error);
+//       alert("Failed to submit airport pickup request. Please try again.");
+//     }
+//   };
+
+  
+
+
+//   return (
+//     <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-100">
+//       <form
+//         onSubmit={handleSubmit}
+//         className="bg-[#193042] p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
+//       >
+//         <h1 className="text-2xl font-semibold text-center mb-4">
+//           Add Airport Pickup Form
+//         </h1>
+
+//         {/* Airport */}
+//         <div>
+//           <label className="block text-sm font-medium mb-2">Airport:</label>
+//           <select
+//             name="airport"
+//             value={formData.airport}
+//             onChange={handleChange}
+//             className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//             required
+//           >
+//             <option value="">Select airport</option>
+//             <option value="BUD">Budapest Airport</option>
+//             <option value="DEB">Debrecen Airport</option>
+//           </select>
+//         </div>
+
+//         {/* Destination */}
+//         <div>
+//           <label className="block text-sm font-medium mb-2">Destination:</label>
+//           <input
+//             type="text"
+//             name="destination"
+//             value={formData.destination}
+//             onChange={handleChange}
+//             placeholder="Enter destination"
+//             className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//             required
+//           />
+//         </div>
+
+//         {/* Arrival Time */}
+//         <div>
+//           <label className="block text-sm font-medium mb-2">Arrival time:</label>
+//           <div className="flex gap-3">
+//             <input
+//               type="date"
+//               name="date"
+//               value={formData.date}
+//               onChange={handleChange}
+//               className="flex-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//               required
+//             />
+//             <input
+//               type="time"
+//               name="time"
+//               value={formData.time}
+//               onChange={handleChange}
+//               className="flex-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//               required
+//             />
+//           </div>
+//           <p className="text-sm text-gray-400 mt-1">
+//             Note: You are 2 hours ahead of server time.
+//           </p>
+//         </div>
+
+//         {/* In Dormitory */}
+//         <div className="flex items-center space-x-2">
+//           <input
+//             type="checkbox"
+//             name="in_dormitory"
+//             checked={formData.in_dormitory}
+//             onChange={handleChange}
+//             className="w-4 h-4 accent-blue-500"
+//           />
+//           <label className="text-sm">In dormitory</label>
+//         </div>
+
+//         {/* Submit Button */}
+//         <button
+//           type="submit"
+//           className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-2 rounded-lg font-medium"
+//         >
+//           Submit
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
 
 
 

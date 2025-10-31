@@ -75,7 +75,112 @@
     "subtitle": "اكتشف الفعاليات والأنشطة القادمة التي ينظمها فريقنا.",
     "eventNotFound": "لم يتم العثور على النشاط.",
     "backToEvents": "← العودة إلى الأنشطة"          
+  },
+  "airportForm": {
+    "title": "إضافة نموذج استقبال في المطار",
+    "airportLabel": "المطار:",
+    "selectAirport": "اختر المطار",
+    "budapestAirport": "مطار بودابست",
+    "debrecenAirport": "مطار ديبريسين",
+    "destinationLabel": "الوجهة:",
+    "destinationPlaceholder": "أدخل الوجهة",
+    "arrivalTimeLabel": "وقت الوصول:",
+    "timeNote": "ملاحظة: أنت متقدم بساعتين عن وقت الخادم.",
+    "inDormitory": "في السكن الجامعي",
+    "submitButton": "إرسال",
+    "alertSuccess": "تم إرسال طلب الاستقبال في المطار بنجاح!",
+    "alertError": "فشل في إرسال الطلب. يرجى المحاولة مرة أخرى."
+  },
+"airportFormEdit": {
+  "loadError": "فشل في تحميل تفاصيل النموذج.",
+  "updateSuccess": "تم تحديث النموذج بنجاح!",
+  "createSuccess": "تم إرسال النموذج بنجاح!",
+  "submitError": "فشل الإرسال. حاول مرة أخرى.",
+  "loading": "جارٍ التحميل...",
+  "editTitle": "تعديل طلب الاستقبال",
+  "createTitle": "إنشاء طلب استقبال",
+  "readOnly": "تمت الموافقة على هذا الطلب ولا يمكن تعديله.",
+  "airportLabel": "المطار",
+  "destinationLabel": "الوجهة",
+  "arrivalDate": "تاريخ الوصول",
+  "arrivalTime": "وقت الوصول",
+  "inDormitory": "يسكن بالفعل في السكن الجامعي",
+  "saving": "جارٍ الحفظ...",
+  "saveButton": "حفظ التغييرات"
+},
+
+  "airport_form": {
+    "list": {
+      "title": "طلبات استلام المطار الخاصة بي",
+      "loading": "جارٍ تحميل طلباتك...",
+      "load_error": "فشل تحميل الطلبات. حاول مرة أخرى لاحقًا.",
+      "no_requests": "لم تقم بتقديم أي طلب استلام بعد.",
+      "create_one": "أنشئ طلبًا الآن",
+      "arrival": "الوصول:",
+      "view_edit": "عرض / تعديل"
+    },
+    "access": {
+      "login_required_title": "تسجيل الدخول مطلوب",
+      "login_required_msg": "يجب تسجيل الدخول للوصول إلى نموذج طلب استلام المطار.",
+      "go_login": "اذهب لتسجيل الدخول",
+      "account_pending_title": "الحساب قيد التفعيل",
+      "account_pending_msg": "حسابك غير مفعل بعد. بعد الموافقة على التسجيل يمكنك طلب استلام من المطار.",
+      "back_home": "العودة إلى الصفحة الرئيسية",
+      "service_unavailable_title": "الخدمة غير متاحة",
+      "service_unavailable_msg": "هذه الخدمة متاحة فقط للطلاب الجدد القادمين الذين ليسوا أعضاء بعد.",
+      "go_home": "العودة إلى الصفحة الرئيسية"
+    },
+    "status": {
+      "pending": "قيد المراجعة",
+      "approved": "مقبول",
+      "rejected": "مرفوض"
+    }
+  },
+  
+  "guidenceForm": {
+    "title": "نموذج الإرشاد",
+    "fullNameLabel": "الاسم الكامل:",
+    "fullNamePlaceholder": "أدخل اسمك الكامل",
+    "whatsappLabel": "رقم الواتساب:",
+    "whatsappPlaceholder": "+3620*******",
+    "whatsappHint": "يرجى تضمين رمز الدولة (مثل +٣٦ للمجر)",
+    "emailLabel": "البريد الإلكتروني:",
+    "emailPlaceholder": "example@email.com",
+    "submitButton": "إرسال",
+    "successMessage": "تم إرسال النموذج بنجاح! يرجى التحقق من بريدك الإلكتروني.",
+    "errorMessage": "فشل في إرسال النموذج. حاول مرة أخرى."
+  },
+  "userProfile": {
+    "title": "معلومات المستخدم",
+    "englishName": "الاسم بالإنجليزية:",
+    "arabicName": "الاسم بالعربية:",
+    "phoneNumber": "رقم الهاتف:",
+    "address": "العنوان:",
+    "rpNumber": "رقم الإقامة:",
+    "university": "الجامعة:",
+    "notAvailable": "غير متوفر"
+  },
+  "myProfile": {
+    "title": "ملفي الشخصي",
+    "loading": "جارٍ تحميل الملف الشخصي...",
+    "englishName": "الاسم بالإنجليزية",
+    "arabicName": "الاسم بالعربية",
+    "phoneNumber": "رقم الهاتف",
+    "address": "العنوان",
+    "rpNumber": "رقم الإقامة",
+    "university": "الجامعة",
+    "selectUniversity": "اختر الجامعة",
+    "editButton": "تعديل الملف",
+    "saveButton": "حفظ التغييرات",
+    "cancelButton": "إلغاء",
+    "saving": "جارٍ الحفظ...",
+    "updateSuccess": "✅ تم تحديث الملف الشخصي بنجاح!",
+    "updateFail": "❌ فشل في تحديث الملف الشخصي. حاول مرة أخرى."
   }
+
+
+
+
 
 
 
