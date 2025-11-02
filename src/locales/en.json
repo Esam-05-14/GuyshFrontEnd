@@ -8,16 +8,20 @@
 
   
   "nav": {
-    "about": "About Us",
-    "services": "Our Services",
-    "universities": "Universities",
-    "news": "News",
-    "events": "Events",
-    "admin": "Admin",
-    "finishProfile": "Fill Membership Form",
-    "login": "Login",
-    "logout": "Logout"
-  },
+  "about": "About",
+  "services": "Services",
+  "universities": "Universities",
+  "news": "News",
+  "events": "Events",
+  "admin": "Admin",
+  "login": "Log In",
+  "logout": "Logout",
+  "finishProfile": "Fill membership form",
+  "viewProfile": "View Profile",
+  "deleteProfile": "Delete Profile",
+  "confirmDelete": "Are you sure you want to delete your profile?",
+  "profileDeleted": "Profile deleted successfully."
+},
   "cities": {
   "budapest": "Budapest",
   "debrecen": "Debrecen",

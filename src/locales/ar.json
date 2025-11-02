@@ -7,17 +7,21 @@
   "no_representatives": "لا يوجد ممثلون بعد.",
   
   "nav": {
-    "about": "من نحن",
-    "services": "خدماتنا",
-    "universities": "الجامعات",
-    "news": "الأخبار",
-    "events": "الفعاليات",
-    "admin": "الإدارة",
-    "finishProfile": "إملاء استمارة العضوية",
-    "login": "تسجيل الدخول",
-    "logout": "تسجيل الخروج"
-  
-},
+  "about": "حول",
+  "services": "الخدمات",
+  "universities": "الجامعات",
+  "news": "الأخبار",
+  "events": "الفعاليات",
+  "admin": "لوحة التحكم",
+  "login": "تسجيل الدخول",
+  "logout": "تسجيل الخروج",
+  "finishProfile": "إملاء استمارة العضوية",
+  "viewProfile": "عرض الملف الشخصي",
+  "deleteProfile": "حذف الحساب",
+  "confirmDelete": "هل أنت متأكد أنك تريد حذف الملف الشخصي؟",
+  "profileDeleted": "تم حذف الملف الشخصي بنجاح."
+}
+,
 
 "cities": {
   "budapest": "بودابست",

@@ -105,7 +105,30 @@ export async function updateProfile(formData) {
   const data = await response.json();
   return { data, status: response.status };
 }
+export async function deleteProfile() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch("http://localhost:8000/api/users/leave-student-union/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`
+     },
+    // body: JSON.stringify(formData),
+  });
 
+  if (!response.ok) {
+    throw new Error("Profile creation failed");
+  }
+  console.log("response " + response);
+  
+  const data = await response.json();
+  console.log("data "+data);
+  
+
+  return data;
+}
 export async function fetchUserRole() {
   const token = localStorage.getItem("token");
   if (!token) {
