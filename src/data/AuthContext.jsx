@@ -51,10 +51,12 @@ export function AuthProvider({ children }) {
         if (unis) setUniversities(unis);
         const board = await getBoardMembers(language);
         if (board) setBoardMembers(board);
-        console.log(boardMembers);
+        // console.log(boardMembers);
         
         const news = await getPosts();
         if (news) setPosts(news);
+        // console.log(news);
+        
       } catch (error) {
         console.error("Failed to fetch universities or board or news:", error.message);
       }
@@ -89,14 +91,14 @@ export function AuthProvider({ children }) {
     const profile = await getMyProfile()
     
     setMyProfile(profile)
-    console.log(profile);
+    
 
     const userData = { email, roles: data };
     setUser(userData);
     setIsLoggedIn(true);
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("UserProfile",profile)
+    localStorage.setItem("UserProfile",JSON.stringify(profile))
 
     // ✅ Only fetch admin data if the logged user is superuser
     if (data.is_superuser) {
@@ -130,11 +132,21 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     const savedLogin = localStorage.getItem("isLoggedIn");
+    const storedProfile = localStorage.getItem("UserProfile");
 
-    if (savedUser && savedLogin === "true") {
+    if ( savedUser && savedLogin === "true") {
       setUser(JSON.parse(savedUser));
       setIsLoggedIn(true);
+      // setMyProfile(storedProfile);
+      if (storedProfile) {
+        try {
+        setMyProfile(JSON.parse(storedProfile));
+        } catch (err) {
+          console.error("Failed to parse stored profile:", err);
+        }
+      }
     }
+
 
     setLoading(false); // ✅ mark that we’ve finished checking
   }, []);
@@ -152,12 +164,15 @@ export function AuthProvider({ children }) {
         isLoggedIn,
         events,
         posts,
+        setPosts,
         profiles,
         boardMembers_A,
         loading,
         myProfile,
+        setMyProfile,
         language,
         changeLanguage,
+        setLoading,
       }}
     >
       {children}

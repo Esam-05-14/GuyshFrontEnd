@@ -14,7 +14,7 @@
     "news": "News",
     "events": "Events",
     "admin": "Admin",
-    "finishProfile": "Finish your Profile",
+    "finishProfile": "Fill Membership Form",
     "login": "Login",
     "logout": "Logout"
   },
@@ -173,7 +173,78 @@
     "saving": "Saving...",
     "updateSuccess": "✅ Profile updated successfully!",
     "updateFail": "❌ Failed to update profile. Please try again."
-  }
+  },
+  "mainPage": {
+    "welcomeTitle": "Welcome to Guysh Hungary",
+    "welcomeText": "We are committed to uniting Yemeni students in Hungary through collaboration, innovation, and community spirit. Explore our initiatives, events, and resources designed to empower students and create a lasting impact.",
+    "servicesTitle": "Our News & Activities",
+    "noNews": "No recent news available."
+  },
+  "cardSmall": {
+    "readMore": "Read more"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "button": "Login",
+    "loading": "Logging in...",
+    "invalid": "Invalid email or password.",
+    "error": "Something went wrong. Please try again.",
+    "noAccount": "Don’t have an account?",
+    "register": "Register here",
+    "forgot": "Forgot your password?",
+    "reset": "Reset here"
+  },
+  "forgot":{
+    "title": "Forgot Password",
+    "sending": "Sending...",
+    "resend": "Send email!",
+    "placeholder":"Enter your email"
+  },
+  "profileForm": {
+    "title": "Complete Your Profile",
+    "englishName": "English Name",
+    "arabicName": "Arabic Name",
+    "phone": "Phone Number",
+    "address": "Address",
+    "rpNumber": "RP Number",
+    "selectUniversity": "Select University",
+    "agreeTo": "I agree to the",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy",
+    "submit": "Submit Profile",
+    "submitting": "Submitting...",
+    "success": "✅ Profile created successfully!",
+    "error": "❌ Failed to create profile. Please try again.",
+    "agreementError": "❌ Please agree to the Terms and Privacy Policy before submitting."
+  },
+  "termsAndConditions": "By creating an account, you agree to:\n1. Provide accurate information.\n2. Use this platform lawfully.\n3. Respect others’ privacy.\n4. Not impersonate another user.\n5. Allow updates to these terms as needed.",
+  "privacyPolicy": "We value your privacy.\n1. We collect minimal data.\n2. We never sell user data.\n3. You can delete your info anytime.\n4. Cookies improve the experience.\n5. By using this site, you agree to our data practices."
+  ,
+  "Admin_AirportRequests":{
+  "Airport Pickup Requests": "Airport Pickup Requests",
+  "Loading airport pickup requests...": "Loading airport pickup requests...",
+  "No requests found.": "No requests found.",
+  "ID": "ID",
+  "User ID": "User ID",
+  "Airport": "Airport",
+  "Destination": "Destination",
+  "Arrival Time": "Arrival Time",
+  "In Dormitory": "In Dormitory",
+  "Status": "Status",
+  "pending": "Pending",
+  "approved": "Approved",
+  "rejected": "Rejected",
+  "Actions": "Actions",
+  "View Details": "View Details",
+  "Request Details": "Request Details",
+  "Created At": "Created At",
+  "Yes": "Yes",
+  "No": "No",
+  "Close": "Close",
+  "Loading details...": "Loading details..."
+}
 
 
 

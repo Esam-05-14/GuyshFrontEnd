@@ -50,6 +50,14 @@ export async function registerRequest(email, password , username) {
   // return { data, status: response.status };
   
 }
+
+export async function changePassword(params) {
+  
+}
+export async function requestPasswordReset(params) {
+  
+}
+
 export async function createProfile(formData) {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -201,6 +209,19 @@ export async function getPosts() {
   // console.log(data);
   return data;
 }
+export async function getPostsById(id) {
+  
+  const response = await fetch(`http://localhost:8000/api/news/posts/${id}`);
+
+  if (!response.ok) {
+    throw new Error("unable to get news");
+  }
+
+  // 2️⃣ Get login response (likely contains token)
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
 
 export async function getUsers() {
   const token = localStorage.getItem("token");
@@ -327,7 +348,7 @@ export async function getAirportPickipRequests_Admin() {
     })
 
   if (!response.ok) {
-    throw new Error("unable to get users");
+    throw new Error("unable to get airport requests");
   }
 
   
@@ -350,13 +371,37 @@ export async function getAirportPickipRequestsById_Admin(id) {
     })
 
   if (!response.ok) {
-    throw new Error("unable to get users");
+    throw new Error(`unable to get airport request for ${id}`);
   }
 
   
   const data = await response.json();
   // console.log(data);
   return data;
+}
+
+export async function updataAirportPickipRequestsById_Admin(id, data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/forms/admin/airport-pickup-forms/${id}/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to get airport request for ${id}`);
+  }
+
+  
+  const d = await response.json();
+  // console.log(data);
+  return d;
 }
 
 export async function getMyProfile() {

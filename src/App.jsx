@@ -27,6 +27,11 @@ import CompleteProfileForm from './components/CompleteProfileForm'
 import AirportPickupFormList from './components/AirportPickupFormList'
 import AirportPickupFormEdit from './components/AirportPickupFormEdit'
 import GuidenceForm from './components/GuidenceForm'
+import ChangePassword from './pages/ChangePassword'
+import ForgotPassword from './pages/ForgotPassword'
+import AdminEvents from "./pages/admin/AdminEvents";
+import AdminAirportPickupRequests from "./pages/admin/AdminAirportPickupRequests";
+
 
 
 function App() {
@@ -56,14 +61,19 @@ function App() {
           <Route path='/admin/profiles' element={<UserProfiles/>} />
           <Route path="/admin/profiles/:id" element={<UserProfilePage />} />
           <Route path="/admin/board-members" element={<UserProfilePage />} />
+          <Route path="/admin/airport-pickup" element={<AdminAirportPickupRequests />} />
         </Route>
         <Route path='/login' element={<Login/>} />
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path='/register' element={<Register/>} />
         <Route path='/membership-form' element={<CompleteProfileForm/>} />
         <Route path="/my-airport-forms" element={<AirportPickupFormList />} />
         <Route path="/my-airport-forms/edit/:id" element={<AirportPickupFormEdit />} />
         <Route path='/guidence-form' element={<GuidenceForm/>}></Route>
 
+
+        <Route path="/events" element={<AdminEvents />} />
         
 
 
