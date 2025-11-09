@@ -245,7 +245,7 @@ export async function getPostsById(id) {
   // console.log(data);
   return data;
 }
-
+//Admin
 export async function getUsers() {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -289,7 +289,27 @@ export async function getUsersProfiles() {
   // console.log(data);
   return data;
 }
+export async function getUsersProfiles_id(id) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://localhost:8000/api/users/admin/profiles/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
 
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
 
 
 export async function getBoardMembers_Admin() {
@@ -427,6 +447,145 @@ export async function updataAirportPickipRequestsById_Admin(id, data) {
   return d;
 }
 
+export async function updataEventId_Admin(id, data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/events/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to update Event ${id}`);
+  }
+
+  
+  const d = await response.json();
+  return d;
+}
+
+export async function deleteEvent_Admin(id) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/events/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to Delete Event ${id}`);
+  }
+
+  
+  if (response.status === 204) {
+    return true;
+  }
+}
+
+export async function createEvent_Admin(data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/events/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to creete Event `);
+  }
+
+  
+  const d = await response.json();
+  return d;
+}
+
+
+export async function updataPostId_Admin(id, data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to update Post ${id}`);
+  }
+
+  
+  const d = await response.json();
+  return d;
+}
+
+export async function deletePost_Admin(id) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/posts/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to Delete Post ${id}`);
+  }
+
+  
+  if (response.status === 204) {
+    return true;
+  }
+}
+
+export async function createPost_Admin(data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/posts/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `JWT ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to creete Post`);
+  }
+
+  
+  const d = await response.json();
+  return d;
+}
+
 export async function getMyProfile() {
   
   const token = localStorage.getItem("token");
@@ -436,7 +595,7 @@ export async function getMyProfile() {
   const response = await fetch(`http://127.0.0.1:8000/api/users/my-profile`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
   })
 

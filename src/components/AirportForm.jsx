@@ -58,10 +58,10 @@ export default function AirportPickupForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-700">
       <form
         onSubmit={handleSubmit}
-        className="bg-[#193042] p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
+        className="bg-gray-50 p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
       >
         <h1 className="text-2xl font-semibold text-center mb-4">
           {t("airportForm.title")}
@@ -76,7 +76,7 @@ export default function AirportPickupForm() {
             name="airport"
             value={formData.airport}
             onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 rounded bg-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
             <option value="">{t("airportForm.selectAirport")}</option>
@@ -96,7 +96,7 @@ export default function AirportPickupForm() {
             value={formData.destination}
             onChange={handleChange}
             placeholder={t("airportForm.destinationPlaceholder")}
-            className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 rounded bg-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
@@ -112,7 +112,7 @@ export default function AirportPickupForm() {
               name="date"
               value={formData.date}
               onChange={handleChange}
-              className="flex-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 p-2 rounded bg-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <input
@@ -120,7 +120,7 @@ export default function AirportPickupForm() {
               name="time"
               value={formData.time}
               onChange={handleChange}
-              className="flex-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 p-2 rounded bg-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>

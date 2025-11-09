@@ -8,6 +8,7 @@
 
   
   "nav": {
+  "language":"language",
   "about": "About",
   "services": "Services",
   "universities": "Universities",
@@ -20,7 +21,10 @@
   "viewProfile": "View Profile",
   "deleteProfile": "Delete Profile",
   "confirmDelete": "Are you sure you want to delete your profile?",
-  "profileDeleted": "Profile deleted successfully."
+  "profileDeleted": "Profile deleted successfully.",
+  "rules-rights" : "Union Rules and Rights",
+  "prpo" : "Privacy Policy",
+  "term-cond" : "Terms and Conditions"
 },
   "cities": {
   "budapest": "Budapest",
@@ -248,7 +252,231 @@
   "No": "No",
   "Close": "Close",
   "Loading details...": "Loading details..."
-}
+},
+  "terms": {
+    "title": "Terms and Conditions",
+    "subtitle": "Please read these terms and conditions carefully before using our services",
+    "lastUpdated": "Last Updated",
+    "updateDate": "November 2024",
+    "section1": {
+      "title": "Acceptance of Terms",
+      "content": "By accessing and using the Guysh Hungary Student Union platform, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use our services."
+    },
+    "section2": {
+      "title": "User Accounts",
+      "content": "To access certain features of our platform, you must register for an account. When creating an account, you agree to:",
+      "items": [
+        "Provide accurate, current, and complete information",
+        "Maintain the security of your password and identification",
+        "Notify us immediately of any unauthorized use of your account",
+        "Be responsible for all activities that occur under your account"
+      ]
+    },
+    "section3": {
+      "title": "User Conduct",
+      "content": "You agree not to use the platform to:",
+      "items": [
+        "Violate any applicable laws or regulations",
+        "Infringe upon the rights of others",
+        "Transmit any harmful or malicious content",
+        "Impersonate any person or entity",
+        "Interfere with or disrupt the platform's functionality"
+      ]
+    },
+    "section4": {
+      "title": "Intellectual Property",
+      "content": "All content on this platform, including text, graphics, logos, and software, is the property of Guysh Hungary Student Union or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, or create derivative works without explicit permission."
+    },
+    "section5": {
+      "title": "Limitation of Liability",
+      "content": "Guysh Hungary Student Union shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the service. We do not guarantee that the service will be uninterrupted, timely, secure, or error-free."
+    },
+    "section6": {
+      "title": "Modifications to Terms",
+      "content": "We reserve the right to modify these terms at any time. We will notify users of any material changes via email or through a notice on our platform. Your continued use of the service after such modifications constitutes your acceptance of the updated terms."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "content": "If you have any questions about these Terms and Conditions, please contact us at:"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "Your privacy is important to us. This policy outlines how we collect, use, and protect your information",
+    "lastUpdated": "Last Updated",
+    "updateDate": "November 2024",
+    "introduction": "Guysh Hungary Student Union is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
+    "section1": {
+      "title": "Information We Collect",
+      "content": "We collect information that you provide directly to us, including:",
+      "items": [
+        "Personal identification information (name, email address, phone number)",
+        "Student information (university, student ID, program of study)",
+        "Profile information and preferences",
+        "Communications and correspondence with us"
+      ]
+    },
+    "section2": {
+      "title": "How We Use Your Information",
+      "content": "We use the information we collect to:",
+      "items": [
+        "Provide, maintain, and improve our services",
+        "Process your registration and manage your account",
+        "Send you updates, newsletters, and event notifications",
+        "Respond to your comments, questions, and requests",
+        "Analyze usage patterns and optimize user experience"
+      ]
+    },
+    "section3": {
+      "title": "Data Security",
+      "content": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security."
+    },
+    "section4": {
+      "title": "Information Sharing",
+      "content": "We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:",
+      "items": [
+        "With your explicit consent",
+        "To comply with legal obligations",
+        "To protect our rights and safety",
+        "With service providers who assist in our operations (under strict confidentiality agreements)"
+      ]
+    },
+    "section5": {
+      "title": "Your Rights",
+      "content": "You have the right to:",
+      "items": [
+        "Access and review your personal information",
+        "Request corrections to your data",
+        "Request deletion of your account and data",
+        "Opt-out of marketing communications",
+        "Withdraw consent for data processing"
+      ]
+    },
+    "section6": {
+      "title": "Changes to This Policy",
+      "content": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the 'Last Updated' date. We encourage you to review this policy periodically."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "content": "If you have any questions about this Privacy Policy, please contact us at:"
+    }
+  },
+  "union": {
+    "title": "Student Union Rules and Rights",
+    "subtitle": "Understanding your rights and responsibilities as a member of Guysh Hungary Student Union",
+    "lastUpdated": "Last Updated",
+    "updateDate": "November 2024",
+    "introduction": "The Guysh Hungary Student Union is dedicated to supporting Yemeni students in Hungary. This document outlines the rights, responsibilities, and rules that govern our union and its members.",
+    "rights": {
+      "title": "Student Rights",
+      "items": [
+        {
+          "title": "Right to Representation",
+          "description": "Every member has the right to fair representation and to have their voice heard in union matters and decisions affecting the student community."
+        },
+        {
+          "title": "Right to Participate",
+          "description": "Members have the right to participate in all union activities, events, and elections, and to vote on important decisions."
+        },
+        {
+          "title": "Right to Support Services",
+          "description": "Access to academic support, career guidance, legal assistance, and welfare services provided by the union."
+        },
+        {
+          "title": "Right to Information",
+          "description": "Members have the right to receive timely information about union activities, policies, and services available to them."
+        },
+        {
+          "title": "Right to Equal Treatment",
+          "description": "All members are entitled to equal treatment regardless of their university, program of study, or personal background."
+        }
+      ]
+    },
+    "responsibilities": {
+      "title": "Student Responsibilities",
+      "items": [
+        {
+          "title": "Respect and Integrity",
+          "description": "Members must treat fellow students, union staff, and the broader community with respect and maintain the highest standards of personal integrity."
+        },
+        {
+          "title": "Active Participation",
+          "description": "Members are encouraged to actively participate in union activities and contribute to the betterment of the student community."
+        },
+        {
+          "title": "Compliance with Rules",
+          "description": "Members must comply with all union rules, policies, and the laws of Hungary and their respective educational institutions."
+        },
+        {
+          "title": "Financial Obligations",
+          "description": "Members should fulfill any financial obligations, including membership fees or event contributions, in a timely manner."
+        },
+        {
+          "title": "Positive Representation",
+          "description": "Members should represent the union and their community positively in all interactions and maintain the union's reputation."
+        }
+      ]
+    },
+    "services": {
+      "title": "Union Services",
+      "items": [
+        {
+          "title": "Airport Pickup Service",
+          "description": "Assistance with arrival and transportation from the airport to accommodation."
+        },
+        {
+          "title": "Academic Support",
+          "description": "Tutoring, study groups, and academic counseling services."
+        },
+        {
+          "title": "Cultural Events",
+          "description": "Organization of cultural celebrations and community gatherings."
+        },
+        {
+          "title": "Legal Assistance",
+          "description": "Guidance on visa matters, housing contracts, and legal rights."
+        },
+        {
+          "title": "Career Development",
+          "description": "Career fairs, workshops, and networking opportunities."
+        },
+        {
+          "title": "Social Integration",
+          "description": "Programs to help students integrate into Hungarian society."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Membership Benefits",
+      "items": [
+        "Access to exclusive events and workshops",
+        "Networking opportunities with fellow Yemeni students",
+        "Priority registration for union services",
+        "Discounts on cultural events and activities",
+        "Access to the union's resource library",
+        "Mentorship programs connecting new and senior students",
+        "Emergency support and assistance when needed",
+        "Voice in union decision-making processes"
+      ]
+    },
+    "conduct": {
+      "title": "Code of Conduct",
+      "content": "All members must adhere to the following code of conduct:",
+      "items": [
+        "Respect the diversity of the student community",
+        "Maintain confidentiality of sensitive information",
+        "Refrain from discriminatory or harassing behavior",
+        "Use union resources responsibly and ethically",
+        "Report any violations of union rules or policies",
+        "Support fellow students in their academic and personal endeavors"
+      ]
+    },
+    "contact": {
+      "title": "Questions or Concerns?",
+      "content": "If you have any questions about these rules and rights, or if you need assistance, please contact us at:"
+    }
+  }
+
 
 
 

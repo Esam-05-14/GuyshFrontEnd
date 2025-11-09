@@ -72,7 +72,7 @@ function News() {
                 title={n.title}
                 content={n.content}
                 date={Date(n.date).toString().slice(0, 15)}
-                src="/guysh2.jpg"
+                src={n.image || "/guysh2.jpg"}
               />
             </Link>
           ))

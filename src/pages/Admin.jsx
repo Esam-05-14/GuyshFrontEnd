@@ -8,8 +8,8 @@ function Admin() {
     { name: "Email Notifications", path: "/admin/email-notifications" },
     { name: "Membership Requests", path: "/admin/membership-requests" },
     { name: "Airport Pickup Requests", path: "/admin/airport-pickup" },
-    { name: "Posts", path: "/news" },
-    { name: "Events", path: "/events" },
+    { name: "Posts", path: "/admin/news" },
+    { name: "Events", path: "/admin/events" },
   ];
 
   return (

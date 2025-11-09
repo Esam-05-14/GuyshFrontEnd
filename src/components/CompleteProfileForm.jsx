@@ -351,6 +351,7 @@ export default function CompleteProfileForm() {
       const { data } = await createProfile(formData);
       setMessage(t("profileForm.success"));
       setFormData(data);
+      localStorage.setItem("UserProfile",JSON.stringify(data))
     } catch (err) {
       console.error("Profile creation failed:", err);
       setMessage(t("profileForm.error"));
@@ -436,7 +437,7 @@ export default function CompleteProfileForm() {
                 {t("profileForm.agreeTo")}{" "}
                 <button
                   type="button"
-                  onClick={() => setShowTerms(true)}
+                  onClick={navigate('/terms-conditions')}
                   className="text-blue-600 underline"
                 >
                   {t("profileForm.terms")}
@@ -455,7 +456,7 @@ export default function CompleteProfileForm() {
                 {t("profileForm.agreeTo")}{" "}
                 <button
                   type="button"
-                  onClick={() => setShowPrivacy(true)}
+                  onClick={navigate('/privacy-policy')}
                   className="text-blue-600 underline"
                 >
                   {t("profileForm.privacy")}

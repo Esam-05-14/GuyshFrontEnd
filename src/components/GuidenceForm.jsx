@@ -35,10 +35,10 @@ export default function GuidenceForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-700">
       <form
         onSubmit={handleSubmit}
-        className="bg-[#193042] p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
+        className="bg-gray-50 p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
       >
         <h1 className="text-2xl font-semibold text-center mb-4">
           {t("guidenceForm.title")}
@@ -55,7 +55,7 @@ export default function GuidenceForm() {
             value={formData.full_name}
             onChange={handleChange}
             placeholder={t("guidenceForm.fullNamePlaceholder")}
-            className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 rounded bg-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
@@ -72,7 +72,7 @@ export default function GuidenceForm() {
             onChange={handleChange}
             placeholder={t("guidenceForm.whatsappPlaceholder")}
             pattern="^\+?[0-9\s-]{7,15}$"
-            className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 rounded bg-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <p className="text-sm text-gray-400 mt-1">
@@ -91,7 +91,7 @@ export default function GuidenceForm() {
             value={formData.email}
             onChange={handleChange}
             placeholder={t("guidenceForm.emailPlaceholder")}
-            className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 rounded bg-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>

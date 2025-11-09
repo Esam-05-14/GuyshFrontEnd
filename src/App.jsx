@@ -14,9 +14,9 @@ import EventDetails from './pages/EventDetails'
 import Layout from './pages/Layout'
 import NewsDetails from './pages/NewsDetails'
 import Admin from './pages/Admin'
-import Users from './pages/Users'
+import Users from './pages/admin/Users'
 import Login from './pages/Login'
-import UserProfiles from './pages/UserProfiles'
+import UserProfiles from './pages/admin/UserProfiles'
 import UserProfilePage from './components/UserProfilePage'
 import AirportPickupForm from './components/AirportForm'
 import MembershipForm from './components/CompleteProfileForm'
@@ -30,7 +30,11 @@ import GuidenceForm from './components/GuidenceForm'
 import ChangePassword from './pages/ChangePassword'
 import ForgotPassword from './pages/ForgotPassword'
 import AdminEvents from "./pages/admin/AdminEvents";
+import AdminPosts from './pages/admin/AdminPosts'
 import AdminAirportPickupRequests from "./pages/admin/AdminAirportPickupRequests";
+import TermsAndConditions from './pages/TermsAndConditions'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import UnionRulesAndRights from './pages/UnionRulesAndRights'
 
 
 
@@ -62,6 +66,8 @@ function App() {
           <Route path="/admin/profiles/:id" element={<UserProfilePage />} />
           <Route path="/admin/board-members" element={<UserProfilePage />} />
           <Route path="/admin/airport-pickup" element={<AdminAirportPickupRequests />} />
+          <Route path="/admin/events" element={<AdminEvents />} />
+          <Route path="/admin/news" element={<AdminPosts />} />
         </Route>
         <Route path='/login' element={<Login/>} />
         <Route path="/change-password" element={<ChangePassword />} />
@@ -71,9 +77,12 @@ function App() {
         <Route path="/my-airport-forms" element={<AirportPickupFormList />} />
         <Route path="/my-airport-forms/edit/:id" element={<AirportPickupFormEdit />} />
         <Route path='/guidence-form' element={<GuidenceForm/>}></Route>
+        <Route path='/terms-conditions' element={<TermsAndConditions/>}></Route>
+        <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
+        <Route path='/rules-rights' element={<UnionRulesAndRights/>}></Route>
 
 
-        <Route path="/events" element={<AdminEvents />} />
+
         
 
 
