@@ -1,9 +1,16 @@
 // src/services/authService.js
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+// Helper to add /api automatically
+function api(path) {
+  return `${API_URL}/api${path}`;
+}
+
 export async function loginRequest(email, password) {
   console.log("Attempt login with "+ email + " "+password);
   
-  const response = await fetch("http://localhost:8000/api/users/login/", {
+  const response = await fetch(api("/users/login/"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -33,7 +40,7 @@ export async function loginRequest(email, password) {
   return token;
 }
 export async function registerRequest(email, password , username) {
-  const response = await fetch("http://localhost:8000/api/users/register/", {
+  const response = await fetch(api("/users/register/"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password , username }),
@@ -63,7 +70,7 @@ export async function createProfile(formData) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/users/create-profile/", {
+  const response = await fetch(api("/users/create-profile/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
         "Authorization": `JWT ${token}`
@@ -110,7 +117,7 @@ export async function deleteProfile() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/users/leave-student-union/", {
+  const response = await fetch(api("/users/leave-student-union/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
         "Authorization": `JWT ${token}`
@@ -134,7 +141,7 @@ export async function fetchUserRole() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/users/user-stat/", {
+  const response = await fetch(api("/users/user-stat/"), {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -154,7 +161,7 @@ export async function fetchUserRole() {
 
 export async function logoutRequest() {
   // 1️⃣ First: send login credentials
-  const response = await fetch("http://localhost:8000/api/users/logout/", {
+  const response = await fetch(api("/users/logout/"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
   });
@@ -171,7 +178,7 @@ export async function logoutRequest() {
 
 export async function getUniversities() {
   
-  const response = await fetch("http://localhost:8000/api/users/universities");
+  const response = await fetch(api("/users/universities"));
 
   if (!response.ok) {
     throw new Error("unable to get users");
@@ -184,7 +191,7 @@ export async function getUniversities() {
 }
 export async function getBoardMembers(language) {
   
-  const response = await fetch(`http://localhost:8000/api/users/board-members?lang=${language}`);
+  const response = await fetch(api(`/users/board-members?lang=${language}`));
 
   if (!response.ok) {
     throw new Error("unable to get users");
@@ -203,7 +210,7 @@ export async function getEvents() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/news/events", {
+  const response = await fetch(api("/news/events"), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -221,7 +228,7 @@ export async function getEvents() {
 }
 export async function getPosts() {
   
-  const response = await fetch("http://localhost:8000/api/news/posts");
+  const response = await fetch(api("/news/posts"));
 
   if (!response.ok) {
     throw new Error("unable to get news");
@@ -234,7 +241,7 @@ export async function getPosts() {
 }
 export async function getPostsById(id) {
   
-  const response = await fetch(`http://localhost:8000/api/news/posts/${id}`);
+  const response = await fetch(api(`/news/posts/${id}`));
 
   if (!response.ok) {
     throw new Error("unable to get news");
@@ -251,7 +258,7 @@ export async function getUsers() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/users/admin/users/", {
+  const response = await fetch(api("/users/admin/users/"), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -273,7 +280,7 @@ export async function getUsersProfiles() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/users/admin/profiles/", {
+  const response = await fetch(api("/users/admin/profiles/"), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -294,7 +301,7 @@ export async function getUsersProfiles_id(id) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://localhost:8000/api/users/admin/profiles/${id}`, {
+  const response = await fetch(api(`/users/admin/profiles/${id}`), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -317,7 +324,7 @@ export async function getBoardMembers_Admin() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/users/admin/board-members/", {
+  const response = await fetch(api("/users/admin/board-members/"), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -340,7 +347,7 @@ export async function getMembershipRequests_Admin() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://127.0.0.1:8000/api/forms/admin/membership-forms/", {
+  const response = await fetch(api("/forms/admin/membership-forms/"), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -361,7 +368,7 @@ export async function getMembershipRequestsById_Admin(id) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/forms/admin/membership-forms/${id}`, {
+  const response = await fetch(api(`/forms/admin/membership-forms/${id}`), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -383,7 +390,7 @@ export async function getAirportPickipRequests_Admin() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://127.0.0.1:8000/api/forms/admin/airport-pickup-forms/", {
+  const response = await fetch(api("/forms/admin/airport-pickup-forms/"), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -406,7 +413,7 @@ export async function getAirportPickipRequestsById_Admin(id) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/forms/admin/airport-pickup-forms/${id}`, {
+  const response = await fetch(api(`/forms/admin/airport-pickup-forms/${id}`), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `JWT ${token}`,
@@ -428,7 +435,7 @@ export async function updataAirportPickipRequestsById_Admin(id, data) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/forms/admin/airport-pickup-forms/${id}/`, {
+  const response = await fetch(api(`/forms/admin/airport-pickup-forms/${id}/`), {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -452,7 +459,7 @@ export async function updataEventId_Admin(id, data) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/events/${id}`, {
+  const response = await fetch(api(`/news/admin/events/${id}`), {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -475,7 +482,7 @@ export async function deleteEvent_Admin(id) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/events/${id}`, {
+  const response = await fetch(api(`/news/admin/events/${id}`), {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -498,7 +505,7 @@ export async function createEvent_Admin(data) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/events/`, {
+  const response = await fetch(api(`/news/admin/events/`), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -522,7 +529,7 @@ export async function updataPostId_Admin(id, data) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/posts/${id}`, {
+  const response = await fetch(api(`/news/admin/posts/${id}`), {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -545,7 +552,7 @@ export async function deletePost_Admin(id) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/posts/${id}`, {
+  const response = await fetch(api(`/news/admin/posts/${id}`), {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -568,7 +575,7 @@ export async function createPost_Admin(data) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/news/admin/posts/`, {
+  const response = await fetch(api(`/news/admin/posts/`), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -592,7 +599,7 @@ export async function getMyProfile() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(`http://127.0.0.1:8000/api/users/my-profile`, {
+  const response = await fetch(api(`/users/my-profile`), {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `bearer ${token}`,
@@ -615,7 +622,7 @@ export async function airportPickupRequest( body) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/forms/my-airport-pickup-forms/", {
+  const response = await fetch(api("/forms/my-airport-pickup-forms/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
        "Authorization": `JWT ${token}`
@@ -641,7 +648,7 @@ export async function guidenceRequest( body) {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch("http://localhost:8000/api/forms/guidance-apply/", {
+  const response = await fetch(api("/forms/guidance-apply/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
        "Authorization": `JWT ${token}`
@@ -670,7 +677,7 @@ function authHeaders() {
 
 // List user's forms
 export async function getMyAirportPickupForms() {
-  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/`, {
+  const res = await fetch(api(`/forms/my-airport-pickup-forms/`), {
     headers: authHeaders(),
   });
   if (!res.ok) throw new Error("Failed to load forms");
@@ -679,7 +686,7 @@ export async function getMyAirportPickupForms() {
 
 // Get one form by id
 export async function getAirportPickupForm(id) {
-  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/${id}/`, {
+  const res = await fetch(api(`forms/my-airport-pickup-forms/${id}/`), {
     headers: authHeaders(),
   });
   if (!res.ok) throw new Error("Failed to load form");
@@ -688,7 +695,7 @@ export async function getAirportPickupForm(id) {
 
 // Create new form
 export async function createAirportPickupForm(data) {
-  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/`, {
+  const res = await fetch(api(`forms/my-airport-pickup-forms/`), {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(data),
@@ -702,7 +709,7 @@ export async function createAirportPickupForm(data) {
 
 // Update (PATCH)
 export async function updateAirportPickupForm(id, data) {
-  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/${id}/`, {
+  const res = await fetch(api(`forms/my-airport-pickup-forms/${id}/`), {
     method: "PATCH",
     headers: authHeaders(),
     body: JSON.stringify(data),
@@ -716,7 +723,7 @@ export async function updateAirportPickupForm(id, data) {
 
 // Delete
 export async function deleteAirportPickupForm(id) {
-  const res = await fetch(`${API_BASE}/my-airport-pickup-forms/${id}/`, {
+  const res = await fetch(api(`forms/my-airport-pickup-forms/${id}/`), {
     method: "DELETE",
     headers: authHeaders(),
   });
