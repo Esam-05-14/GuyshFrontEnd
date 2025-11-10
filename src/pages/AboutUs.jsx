@@ -3,10 +3,25 @@ import { useTranslation } from "react-i18next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useAuth } from "../data/AuthContext";
+import { getBoardMembers } from "../services/authService";
+import { useState, useEffect } from "react";
 
 export default function AboutUs() {
-  const { boardMembers , language } = useAuth();
+  const {  language } = useAuth();
   const { t, i18n } = useTranslation();
+  const [boardMembers, setBoardMembers] = useState([]);
+    
+    useEffect(  () => {
+        const  fetchData = async () =>{ 
+          try{
+            const data = await getBoardMembers(language);
+            setBoardMembers(data);
+          }catch(error){
+            console.log(error);
+          }
+        }
+      fetchData();
+    },[language]);
 
 
   if (!boardMembers || boardMembers.length === 0) {

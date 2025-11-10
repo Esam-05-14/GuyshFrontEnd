@@ -73,7 +73,7 @@ export async function createProfile(formData) {
   const response = await fetch(api("/users/create-profile/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`
+        "Authorization": `bearer ${token}`
      },
     body: JSON.stringify(formData),
   });
@@ -99,7 +99,7 @@ export async function updateProfile(formData) {
     method: "PATCH", 
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `JWT ${token}`,
+      "Authorization": `bearer ${token}`,
     },
     body: JSON.stringify(formData),
   });
@@ -120,7 +120,7 @@ export async function deleteProfile() {
   const response = await fetch(api("/users/leave-student-union/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`
+        "Authorization": `bearer ${token}`
      },
     // body: JSON.stringify(formData),
   });
@@ -145,7 +145,7 @@ export async function fetchUserRole() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `JWT ${token}`,
+      "Authorization": `bearer ${token}`,
     },
   });
 
@@ -213,7 +213,7 @@ export async function getEvents() {
   const response = await fetch(api("/news/events"), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
   })
 
@@ -261,7 +261,7 @@ export async function getUsers() {
   const response = await fetch(api("/users/admin/users/"), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -283,7 +283,7 @@ export async function getUsersProfiles() {
   const response = await fetch(api("/users/admin/profiles/"), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -304,7 +304,7 @@ export async function getUsersProfiles_id(id) {
   const response = await fetch(api(`/users/admin/profiles/${id}`), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -319,15 +319,15 @@ export async function getUsersProfiles_id(id) {
 }
 
 
-export async function getBoardMembers_Admin() {
+export async function getBoardMembers_Admin(language) {
   const token = localStorage.getItem("token");
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(api("/users/admin/board-members/"), {
+  const response = await fetch(api(`/users/admin/board-members?lang=${language}/`), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -341,6 +341,51 @@ export async function getBoardMembers_Admin() {
   return data;
 }
 
+
+export async function getBoardMemberById_Admin(id) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(api(`/users/admin/board-members/${id}`), {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `bearer ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to get membership request with id : ${id}`);
+  }
+
+  
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
+export async function updateBoardMember_Admin(id, data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(api(`/users/admin/board-members/${id}/`), {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to update board-member with id:  ${id}`);
+  }
+
+  
+  const d = await response.json();
+  // console.log(data);
+  return d;
+}
 
 export async function getMembershipRequests_Admin() {
   const token = localStorage.getItem("token");
@@ -350,7 +395,7 @@ export async function getMembershipRequests_Admin() {
   const response = await fetch(api("/forms/admin/membership-forms/"), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -363,6 +408,8 @@ export async function getMembershipRequests_Admin() {
   // console.log(data);
   return data;
 }
+
+
 export async function getMembershipRequestsById_Admin(id) {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -371,18 +418,43 @@ export async function getMembershipRequestsById_Admin(id) {
   const response = await fetch(api(`/forms/admin/membership-forms/${id}`), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
   if (!response.ok) {
-    throw new Error("unable to get users");
+    throw new Error(`unable to get membership request with id : ${id}`);
   }
 
   
   const data = await response.json();
   // console.log(data);
   return data;
+}
+
+
+export async function updataMembershipRequestsById_Admin(id, data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(api(`/forms/admin/membership-forms/${id}/`), {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to get airport request for ${id}`);
+  }
+
+  
+  const d = await response.json();
+  // console.log(data);
+  return d;
 }
 
 export async function getAirportPickipRequests_Admin() {
@@ -393,7 +465,7 @@ export async function getAirportPickipRequests_Admin() {
   const response = await fetch(api("/forms/admin/airport-pickup-forms/"), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -416,7 +488,7 @@ export async function getAirportPickipRequestsById_Admin(id) {
   const response = await fetch(api(`/forms/admin/airport-pickup-forms/${id}`), {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -439,7 +511,7 @@ export async function updataAirportPickipRequestsById_Admin(id, data) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       },
       body: JSON.stringify(data),
     })
@@ -463,7 +535,7 @@ export async function updataEventId_Admin(id, data) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       },
       body: JSON.stringify(data),
     })
@@ -486,7 +558,7 @@ export async function deleteEvent_Admin(id) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -509,7 +581,7 @@ export async function createEvent_Admin(data) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       },
       body: JSON.stringify(data),
     })
@@ -533,7 +605,7 @@ export async function updataPostId_Admin(id, data) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       },
       body: JSON.stringify(data),
     })
@@ -556,7 +628,7 @@ export async function deletePost_Admin(id) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       }
     })
 
@@ -579,13 +651,36 @@ export async function createPost_Admin(data) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `JWT ${token}`,
+        "Authorization": `bearer ${token}`,
       },
       body: JSON.stringify(data),
     })
 
   if (!response.ok) {
     throw new Error(`unable to creete Post`);
+  }
+
+  
+  const d = await response.json();
+  return d;
+}
+
+export async function sendEmail_Admin(data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(api("/users/admin/send-email-notification/"), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to creete Event `);
   }
 
   
@@ -625,7 +720,7 @@ export async function airportPickupRequest( body) {
   const response = await fetch(api("/forms/my-airport-pickup-forms/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
-       "Authorization": `JWT ${token}`
+       "Authorization": `bearer ${token}`
      },
     body: JSON.stringify(body),
   });
@@ -651,7 +746,7 @@ export async function guidenceRequest( body) {
   const response = await fetch(api("/forms/guidance-apply/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
-       "Authorization": `JWT ${token}`
+       "Authorization": `bearer ${token}`
      },
     body: JSON.stringify(body),
   });
@@ -659,7 +754,6 @@ export async function guidenceRequest( body) {
   if (!response.ok) {
     throw new Error("Guidence Request failed");
   }
-  console.log("response " + response);
   
   const data = await response.json();
   console.log("data "+data);
@@ -667,12 +761,26 @@ export async function guidenceRequest( body) {
 
   return data;
 }
+export async function verifyGuidanceEmail(uid, token) {
+  const response = await fetch(
+    api(`/forms/guidance-verify/${uid}/${token}/`),
+    {
+      method: "GET",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Invalid or expired token");
+  }
+
+  return await response.json();
+}
 
 const API_BASE = "http://localhost:8000/api/forms";
 
 function authHeaders() {
   const token = localStorage.getItem("token");
-  return { "Content-Type": "application/json", Authorization: `JWT ${token}` };
+  return { "Content-Type": "application/json", Authorization: `bearer ${token}` };
 }
 
 // List user's forms

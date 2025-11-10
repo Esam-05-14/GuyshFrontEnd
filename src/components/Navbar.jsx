@@ -1527,8 +1527,8 @@ export default function Navbar() {
       <div
         ref={sidebarRef}
         className={`fixed top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 transition-transform duration-300 ease-in-out transform
-          ${isRTL ? "right-0" : "left-0"}
-          ${sidebarOpen ? "translate-x-0" : isRTL ? "translate-x-full" : "-translate-x-full"}
+          ${isRTL ?  "left-0" :"right-0"}
+          ${sidebarOpen ? "translate-x-0" : isRTL ? "-translate-x-full" : "translate-x-full"}
         `}
         style={{ transitionProperty: "transform" }}
       >

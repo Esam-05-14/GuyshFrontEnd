@@ -49,6 +49,7 @@ export function AuthProvider({ children }) {
       try {
         const unis = await getUniversities();
         if (unis) setUniversities(unis);
+        // console.log(unis)
         const board = await getBoardMembers(language);
         if (board) setBoardMembers(board);
         // console.log(boardMembers);
@@ -56,6 +57,7 @@ export function AuthProvider({ children }) {
         const news = await getPosts();
         if (news) setPosts(news);
         // console.log(news);
+        
         
       } catch (error) {
         console.error("Failed to fetch universities or board or news:", error.message);

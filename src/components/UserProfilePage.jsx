@@ -2,14 +2,34 @@ import React from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useAuth } from "../data/AuthContext";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import i18n from "../i18n";
+import { getUsersProfiles_id } from "../services/authService";
 export default function UserProfilePage() {
   const { universities } = useAuth();
   const { id } = useParams();
-  const location = useLocation();
-  const user = location.state?.user;
+
+  const [loading, setLoading] = useState(true);
+
+  
   const { t } = useTranslation();
+  const [user , setUser] = useState(null);
+  useEffect(() => {
+    // Fetch the user data by id
+    const fetchUser = async () => {
+      try {
+        const data = await getUsersProfiles_id(id);
+        setUser(data);
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [id]);
+
 
   useEffect(() => {
       if (i18n.language === "ar") {

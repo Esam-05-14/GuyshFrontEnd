@@ -220,7 +220,7 @@ export default function NewsDetails() {
               alt={news.title}
               className="w-full h-72 object-cover transition-transform duration-500 hover:scale-[1.02]"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 cursor-pointer">
               <h1 className="text-2xl font-bold text-white">{news.title}</h1>
             </div>
           </div>
@@ -229,13 +229,13 @@ export default function NewsDetails() {
         {/* Content */}
         <div className="p-6">
           {/* Meta Info */}
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-4 cursor-pointer">
             <span>🗓️ {news.date || new Date().toLocaleDateString("en-GB")}</span>
             <span>✍️ {news.author || t("news.admin")}</span>
           </div>
 
           {/* Main Text */}
-          <div className="text-gray-800 leading-relaxed space-y-4">
+          <div className="text-gray-800 leading-relaxed space-y-4 cursor-pointer">
             {news.content?.split("\n").map((para, idx) => (
               <p key={idx}>{para}</p>
             ))}

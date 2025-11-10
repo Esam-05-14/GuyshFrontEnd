@@ -35,7 +35,10 @@ import AdminAirportPickupRequests from "./pages/admin/AdminAirportPickupRequests
 import TermsAndConditions from './pages/TermsAndConditions'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import UnionRulesAndRights from './pages/UnionRulesAndRights'
-
+import AdminEmailNotifications from './pages/admin/EmailNotification'
+import GuidanceVerifyPage from './pages/GuidanceVerifyPage'
+import AdminMembershipRequests from './pages/admin/AdminMembershipRequests'
+import AdminBoardMembers from './pages/admin/AdminBoardMembers'
 
 
 function App() {
@@ -64,10 +67,12 @@ function App() {
           <Route path='/admin/users' element={<Users/>} />
           <Route path='/admin/profiles' element={<UserProfiles/>} />
           <Route path="/admin/profiles/:id" element={<UserProfilePage />} />
-          <Route path="/admin/board-members" element={<UserProfilePage />} />
+          <Route path="/admin/board-members" element={<AdminBoardMembers />} />
           <Route path="/admin/airport-pickup" element={<AdminAirportPickupRequests />} />
           <Route path="/admin/events" element={<AdminEvents />} />
           <Route path="/admin/news" element={<AdminPosts />} />
+          <Route path="/admin/email-notifications" element={<AdminEmailNotifications />} />
+          <Route path="/admin/membership-requests" element={<AdminMembershipRequests/>}/>
         </Route>
         <Route path='/login' element={<Login/>} />
         <Route path="/change-password" element={<ChangePassword />} />
@@ -80,6 +85,7 @@ function App() {
         <Route path='/terms-conditions' element={<TermsAndConditions/>}></Route>
         <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
         <Route path='/rules-rights' element={<UnionRulesAndRights/>}></Route>
+        <Route path="/guidance-verify/:uid/:token" element={<GuidanceVerifyPage />} />
 
 
 

@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../data/AuthContext";
-
+import { getUsers } from "../../services/authService";
 function Users() {
   const auth = useAuth();
-  const users = auth.users;
+  const [users, setUsers] = useState([]);
+
+  useEffect(  () => {
+    const  fetchData = async () =>{ 
+      try{
+        const data = await getUsers();
+        setUsers(data);
+      }catch(error){
+        console.log(error);
+      }
+    }
+  fetchData();
+  },[]);
 
   // Track which user's menu is open
   const [openMenu, setOpenMenu] = useState(null);
@@ -23,9 +35,6 @@ function Users() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold text-[#193042]">User Management</h1>
-        <button className="bg-[#193042] text-white py-2 px-6 rounded-md shadow-md hover:bg-[#234b6a] transition-colors">
-          + Create User
-        </button>
       </div>
 
       {/* Users Table */}
@@ -37,7 +46,7 @@ function Users() {
               <th className="py-3 px-5 border-b border-gray-200">Is Superuser</th>
               <th className="py-3 px-5 border-b border-gray-200">Is Active</th>
               <th className="py-3 px-5 border-b border-gray-200">Is Member</th>
-              <th className="py-3 px-5 border-b border-gray-200 text-center">Actions</th>
+              {/* <th className="py-3 px-5 border-b border-gray-200 text-center">Actions</th> */}
             </tr>
           </thead>
           <tbody>
@@ -69,17 +78,17 @@ function Users() {
                       <span className="text-gray-500">No</span>
                     )}
                   </td>
-                  <td className="py-3 px-5 text-center relative">
-                    <button
+                  {/* <td className="py-3 px-5 text-center relative"> */}
+                    {/* <button
                       onClick={() =>
                         setOpenMenu(openMenu === u.username ? null : u.username)
                       }
                       className="bg-[#193042] text-white px-4 py-2 rounded-md hover:bg-[#234b6a] transition"
                     >
                       Options ▾
-                    </button>
+                    </button> */}
 
-                    {/* Dropdown menu */}
+                    {/* Dropdown menu
                     {openMenu === u.username && (
                       <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                         <button
@@ -95,8 +104,8 @@ function Users() {
                           {u.is_active ? '🗑️ Delete' : '✏️ Add'}
                         </button>
                       </div>
-                    )}
-                  </td>
+                    )} */}
+                  {/* </td> */}
                 </tr>
               ))
             ) : (
