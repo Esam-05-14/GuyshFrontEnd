@@ -109,7 +109,7 @@ function Events() {
       {/* Event List */}
       <div className="w-full px-8 md:px-20 flex flex-col sm:flex-row flex-wrap justify-center gap-8 mt-10 mb-20">
         {events.map((event) => {
-          const formattedDate = dayjs(event.timestamp).format("dddd, MMMM D, YYYY h:mm A");
+          const formattedDate = dayjs(event.event_date).format("dddd, MMMM D, YYYY h:mm A");
 
           return (
             <Link 
@@ -119,7 +119,7 @@ function Events() {
               className="max-w-sm w-full transform transition-transform hover:scale-105"
             >
               <EventCard
-                src="/public/guysh1.jpg" // event.image
+                src={event.image ? event.image :'/guysh1.jpg'} // event.image
                 name={event.title}
                 description={event.content}
                 location={event.location}

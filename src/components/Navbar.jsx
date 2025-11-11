@@ -1662,6 +1662,17 @@ export default function Navbar() {
                   <Trash2 size={20} />
                   <span className="text-sm font-medium">{t("nav.deleteProfile")}</span>
                 </button>
+                <button
+                  onClick={() => {
+                    navigate("/change-password");
+                    setSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
+                    isRTL ? "flex-row-reverse text-right" : "text-left"
+                  }`}
+                >
+                  <span className="text-sm font-medium">{t("nav.cpass")}</span>
+                </button>
 
                 <button
                   onClick={() => {

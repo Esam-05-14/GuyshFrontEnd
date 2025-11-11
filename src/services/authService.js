@@ -57,12 +57,57 @@ export async function registerRequest(email, password , username) {
   // return { data, status: response.status };
   
 }
+export async function resetPassword(uid, token, new_password) {
+  const response = await fetch(
+    api(`/users/reset-password/`),
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uid,
+        token,
+        new_password
+      }),
+    }
+  );
 
-export async function changePassword(params) {
-  
+  if (!response.ok) {
+    throw new Error("Invalid or expired token");
+  }
+
+  return await response.json();
 }
-export async function requestPasswordReset(params) {
+export async function changePassword(oldPass , newPass) {
+  const response = await fetch(api("/users/forgot-password/"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({"old_password":oldPass, "new_password":newPass}),
+  });
+
+  if (!response.ok) {
+    throw new Error("Changing password failed");
+  }
+  console.log("response " + response);
   
+  const data = await response.json();
+  console.log("data "+data);
+  return data;
+}
+export async function requestPasswordReset(email) {
+  const response = await fetch(api("/users/forgot-password/"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({email}),
+  });
+
+  if (!response.ok) {
+    throw new Error("Reset password failed");
+  }
+  console.log("response " + response);
+  
+  const data = await response.json();
+  console.log("data "+data);
+  return data;
 }
 
 export async function createProfile(formData) {
@@ -534,10 +579,9 @@ export async function updataEventId_Admin(id, data) {
   const response = await fetch(api(`/news/admin/events/${id}`), {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
         "Authorization": `bearer ${token}`,
       },
-      body: JSON.stringify(data),
+      body: data,
     })
 
   if (!response.ok) {
@@ -580,10 +624,9 @@ export async function createEvent_Admin(data) {
   const response = await fetch(api(`/news/admin/events/`), {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         "Authorization": `bearer ${token}`,
       },
-      body: JSON.stringify(data),
+      body: data,
     })
 
   if (!response.ok) {
@@ -604,10 +647,9 @@ export async function updataPostId_Admin(id, data) {
   const response = await fetch(api(`/news/admin/posts/${id}`), {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
         "Authorization": `bearer ${token}`,
       },
-      body: JSON.stringify(data),
+      body: data,
     })
 
   if (!response.ok) {
@@ -650,10 +692,9 @@ export async function createPost_Admin(data) {
   const response = await fetch(api(`/news/admin/posts/`), {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         "Authorization": `bearer ${token}`,
       },
-      body: JSON.stringify(data),
+      body: data,
     })
 
   if (!response.ok) {

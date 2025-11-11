@@ -7,6 +7,7 @@
   "no_representatives": "لا يوجد ممثلون بعد.",
   
   "nav": {
+  "cpass":"تغيير كلمة المرور",
   "language":"اللغة",
   "about": "حول",
   "services": "الخدمات",
@@ -206,7 +207,9 @@
     "noAccount": "ليس لديك حساب؟",
     "register": "سجّل هنا",
     "forgot": "هل نسيت كلمة المرور؟",
-    "reset": "إعادة التعيين هنا"
+    "reset": "إعادة التعيين هنا",
+    "change":"تغيير كلمة المرور هنا",
+    "want-change":"هل تريد تغيير كلمة المرور"
   },
   "forgot":{
     "title": "نسيت الباسورد",
@@ -623,6 +626,21 @@
     "actions": "الإجراءات",
     "updateSuccess": "تم التحديث بنجاح",
     "updateFailed": "فشل التحديث"
+  },
+  "resetPassword": {
+    "title": "إعادة تعيين كلمة المرور",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "newPasswordPlaceholder": "أدخل كلمة المرور الجديدة",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "button": "إعادة التعيين",
+    "loading": "جاري إعادة التعيين...",
+    "success": "تم تغيير كلمة المرور بنجاح!",
+    "errors": {
+      "required": "جميع الحقول مطلوبة.",
+      "noMatch": "كلمات المرور غير متطابقة.",
+      "invalidLink": "الرابط غير صالح أو منتهي."
+    }
   }
 
 

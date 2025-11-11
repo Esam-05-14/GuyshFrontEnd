@@ -39,6 +39,7 @@ import AdminEmailNotifications from './pages/admin/EmailNotification'
 import GuidanceVerifyPage from './pages/GuidanceVerifyPage'
 import AdminMembershipRequests from './pages/admin/AdminMembershipRequests'
 import AdminBoardMembers from './pages/admin/AdminBoardMembers'
+import ResetPassword from './pages/ResetPassword'
 
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
         <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
         <Route path='/rules-rights' element={<UnionRulesAndRights/>}></Route>
         <Route path="/guidance-verify/:uid/:token" element={<GuidanceVerifyPage />} />
+        <Route path='/reset-password/:uid/:token' element={<ResetPassword/>}/>
 
 
 

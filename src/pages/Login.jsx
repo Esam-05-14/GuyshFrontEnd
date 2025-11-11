@@ -235,6 +235,15 @@ function Login() {
               {t("login.reset")}
             </Link>
           </p>
+          <p>
+            {t("login.want-change")}{" "}
+            <Link
+              to="/change-password"
+              className="text-[#193042] font-medium hover:underline"
+            >
+              {t("login.change")}
+            </Link>
+          </p>
         </div>
       </div>
     </div>

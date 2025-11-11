@@ -8,6 +8,7 @@
 
   
   "nav": {
+  "cpass":"change password",
   "language":"language",
   "about": "About",
   "services": "Services",
@@ -202,7 +203,9 @@
     "noAccount": "Don’t have an account?",
     "register": "Register here",
     "forgot": "Forgot your password?",
-    "reset": "Reset here"
+    "reset": "Reset here",
+    "change":"change password here",
+    "want-change":"Do you want to Change password?"
   },
   "forgot":{
     "title": "Forgot Password",
@@ -616,7 +619,25 @@
     "actions": "Actions",
     "updateSuccess": "Updated successfully",
     "updateFailed": "Update failed"
+  },
+  
+  "resetPassword": {
+    "title": "Reset Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "newPasswordPlaceholder": "Enter new password",
+    "confirmPasswordPlaceholder": "Confirm new password",
+    "button": "Reset Password",
+    "loading": "Resetting...",
+    "success": "Password reset successfully!",
+    "errors": {
+      "required": "Both fields are required.",
+      "noMatch": "Passwords do not match.",
+      "invalidLink": "Invalid or expired link."
+    }
   }
+
+
 
 
 
