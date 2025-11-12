@@ -169,7 +169,7 @@ export async function deleteProfile() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(api("/users/leave-student-union/"), {
+  const response = await fetch(api("/users/delete-my-account/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
         "Authorization": `bearer ${token}`
