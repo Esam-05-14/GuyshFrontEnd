@@ -62,7 +62,7 @@ export default function AboutUs() {
           <div className="flex justify-center mb-16">
             <div className="flex flex-col items-center bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 max-w-sm">
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-[#193042]">
-                <img src={president.image || "/manaf.jpg"} alt="President" className="w-full h-full object-cover" />
+                <img src={president.profile_photo || "/manaf.jpg"} alt="President" className="w-full h-full object-cover" />
               </div>
               <h3 className="mt-5 font-semibold text-[#193042] text-lg">{president.name}</h3>
               <p className="text-sm text-gray-500 mt-1">{president.position}</p>
@@ -74,7 +74,7 @@ export default function AboutUs() {
           {others.map((m) => (
             <div key={m.name} className="flex flex-col items-center bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200">
               <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-[#193042]">
-                <img src={m.image || "/manaf.jpg"} alt={m.position} className="w-full h-full object-cover" />
+                <img src={m.profile_photo || "/manaf.jpg"} alt={m.position} className="w-full h-full object-cover" />
               </div>
               <p className="mt-4 font-medium text-[#193042] text-base">{m.name}</p>
               <p className="text-xs text-gray-500">{m.position}</p>
@@ -108,7 +108,7 @@ function CityCard({ title, members  }) {
           {members.map((m) => (
             <div key={m.name} className="flex flex-col items-center">
               <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-[#193042]">
-                <img src={m.image || "/manaf.jpg"} alt={m.position} className="w-full h-full object-cover" />
+                <img src={m.profile_photo || "/manaf.jpg"} alt={m.position} className="w-full h-full object-cover" />
               </div>
               <p className="mt-3 text-[#193042] text-sm font-medium">{m.name}</p>
               <p className="text-xs text-gray-500">{m.position}</p>

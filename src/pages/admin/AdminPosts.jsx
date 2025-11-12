@@ -414,7 +414,7 @@ import { useAuth } from "../../data/AuthContext";
 export default function AdminPosts() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
-  const {posts, setPosts} = useAuth();
+  const {posts, setPosts, language} = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -439,18 +439,26 @@ export default function AdminPosts() {
 
   // Fetch posts
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getPosts();
-        setPosts(data);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const data = await getPosts();
+      // Ensure translations are parsed into objects
+      const parsed = data.map(post => ({
+        ...post,
+        translations: typeof post.translations === "string"
+          ? JSON.parse(post.translations)
+          : post.translations
+      }));
+      setPosts(parsed);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchData();
+}, []);
+
 
   const filteredPosts = posts.filter(post => {
     const enTitle = post.translations?.en?.title || "";
@@ -553,19 +561,31 @@ export default function AdminPosts() {
     }
   };
 
-  const handleEdit = (post) => {
-    setEditingPost(post);
-    setFormData({
-      translations: post.translations || {
-        en: { title: "", content: "" },
-        ar: { title: "", content: "" }
-      }
-    });
-    setImagePreview(post.image || null);
-    setImageFile(null);
-    setErrors({});
-    setShowModal(true);
-  };
+//   const handleEdit = (post) => {
+//     const parsedTranslations =
+//   typeof post.translations === "string"
+//     ? JSON.parse(post.translations)
+//     : post.translations;
+
+// setFormData({
+//   translations: parsedTranslations || {
+//     en: { title: "", content: "" },
+//     ar: { title: "", content: "" }
+//   }
+// });
+
+//     // setEditingPost(post);
+//     // setFormData({
+//     //   translations: post.translations || {
+//     //     en: { title: "", content: "" },
+//     //     ar: { title: "", content: "" }
+//     //   }
+//     // });
+//     setImagePreview(post.image || null);
+//     setImageFile(null);
+//     setErrors({});
+//     setShowModal(true);
+//   };
 
   const handleAddNew = () => {
     setEditingPost(null);
@@ -594,10 +614,34 @@ export default function AdminPosts() {
     setImageFile(null);
     setErrors({});
   };
+const handleEdit = (post) => {
+  setEditingPost(post);
+  setFormData({
+    translations: post.translations || {
+      en: { title: "", content: "" },
+      ar: { title: "", content: "" }
+    }
+  });
+  setImagePreview(post.image || null);
+  setImageFile(null);
+  setErrors({});
+  setShowModal(true);
+};
 
-  const handleView = (post) => {
-    setViewingPost(post);
-  };
+const handleView = (post) => {
+  setViewingPost(post);
+};
+
+
+//   const handleView = (post) => {
+//   const parsedTranslations =
+//     typeof post.translations === "string"
+//       ? JSON.parse(post.translations)
+//       : post.translations;
+
+//   setViewingPost({ ...post, translations: parsedTranslations });
+// };
+
 
   const handleChange = (lang, field, value) => {
     setFormData(prev => ({
@@ -623,9 +667,18 @@ export default function AdminPosts() {
   };
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
+  if (!dateString) return t("Unknown date");
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return t("Invalid date");
+  return date.toLocaleString(i18n.language === "ar" ? "ar-EG" : "en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
 
   if (loading) {
     return (
@@ -686,7 +739,7 @@ export default function AdminPosts() {
                   <div className="h-48 overflow-hidden">
                     <img 
                       src={post.image} 
-                      alt={post.translations?.[i18n.language]?.title || ""} 
+                      alt={post.translations?.[language]?.title || ""} 
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -694,17 +747,17 @@ export default function AdminPosts() {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <h2 className="text-xl font-bold text-[#193042] line-clamp-2 flex-1">
-                      {post.translations?.[i18n.language]?.title || post.translations?.en?.title || ""}
+                      {post.translations?.[language]?.title || post.translations?.en?.title || ""}
                     </h2>
                   </div>
                   
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                    {post.translations?.[i18n.language]?.content || post.translations?.en?.content || ""}
+                    {post.translations?.[language]?.content || post.translations?.en?.content || ""}
                   </p>
 
                   <div className={`flex items-center gap-2 text-xs text-gray-500 mb-4 ${isRTL ? "flex-row-reverse" : ""}`}>
                     <Clock size={14} />
-                    <span>{formatDate(post.created_at)}</span>
+                    <span>{formatDate(post.timestamp)}</span>
                   </div>
 
                   {/* Actions */}
@@ -950,12 +1003,12 @@ export default function AdminPosts() {
               
               <div>
                 <h3 className="text-2xl font-bold text-[#193042] mb-3">
-                  {viewingPost.translations?.[i18n.language]?.title || viewingPost.translations?.en?.title || ""}
+                  {viewingPost.translations?.[language]?.title || viewingPost.translations?.en?.title || ""}
                 </h3>
                 
                 <div className={`flex items-center gap-2 text-sm text-gray-500 mb-6 ${isRTL ? "flex-row-reverse" : ""}`}>
                   <Clock size={16} />
-                  <span>{formatDate(viewingPost.created_at)}</span>
+                  <span>{formatDate(viewingPost.timestamp)}</span>
                 </div>
                 
                 <div className="prose max-w-none">

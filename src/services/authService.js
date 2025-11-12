@@ -271,9 +271,9 @@ export async function getEvents() {
   // console.log(data);
   return data;
 }
-export async function getPosts() {
+export async function getPosts(language) {
   
-  const response = await fetch(api("/news/posts"));
+  const response = await fetch(api(`/news/posts?lang=${language}`));
 
   if (!response.ok) {
     throw new Error("unable to get news");
@@ -416,10 +416,9 @@ export async function updateBoardMember_Admin(id, data) {
   const response = await fetch(api(`/users/admin/board-members/${id}/`), {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
         "Authorization": `bearer ${token}`,
       },
-      body: JSON.stringify(data),
+      body: data,
     })
 
   if (!response.ok) {
@@ -430,6 +429,51 @@ export async function updateBoardMember_Admin(id, data) {
   const d = await response.json();
   // console.log(data);
   return d;
+}
+export async function createBoardMember_Admin(data) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(api(`/users/admin/board-members/`), {
+      method: "POST",
+      headers: {
+        "Authorization": `bearer ${token}`,
+      },
+      body: data,
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to create board-member `);
+  }
+
+  
+  const d = await response.json();
+  // console.log(data);
+  return d;
+}
+
+export async function deleteBoardMember_Admin(id) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(api(`/users/admin/board-members/${id}/`), {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `bearer ${token}`,
+      }
+    })
+
+  if (!response.ok) {
+    throw new Error(`unable to Delete Event ${id}`);
+  }
+
+  
+  if (response.status === 204) {
+    return true;
+  }
 }
 
 export async function getMembershipRequests_Admin() {

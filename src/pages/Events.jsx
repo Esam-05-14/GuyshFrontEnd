@@ -88,10 +88,27 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../data/AuthContext'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
+import { getEvents } from '../services/authService'
+import { useEffect, useState } from 'react'
 
 function Events() {
-  const events = useAuth().events;
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
   const { t } = useTranslation();
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const data = await getEvents();
+          setEvents(data);
+        } catch (error) {
+          console.error("Error fetching events:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }, []);
 
   return (
     <div className="bg-[#f8f9fa] min-h-screen flex flex-col items-center">

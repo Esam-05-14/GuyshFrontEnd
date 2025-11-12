@@ -42,10 +42,27 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NewsCard from "../components/NewsCard";
 import { useAuth } from "../data/AuthContext";
+import { useEffect } from "react";
+import { getPosts } from "../services/authService";
 
 function News() {
   const { t, i18n } = useTranslation();
-  const { posts: news } = useAuth();
+  const { posts: news , setPosts,language } = useAuth();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const data = await getPosts(language);
+          setPosts(data);
+        } catch (error) {
+          console.error("Error fetching posts:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }, []);
 
   return (
     <div

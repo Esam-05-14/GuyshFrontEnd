@@ -94,15 +94,17 @@
 import React from "react";
 import { FaFacebook, FaYoutube, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../data/AuthContext";
 
 function Footer() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
+  const {language} = useAuth()
 
   const developers = [
     { nameKey: "ui_designer", linkedin: "https://www.linkedin.com/in/example-uiux", name: "" },
-    { nameKey: "backend_dev", linkedin: "https://www.linkedin.com/in/example-backend", name: "Salem Ali" },
-    { nameKey: "frontend_dev", linkedin: "https://www.linkedin.com/in/example-frontend", name: "Esam Al-Shameri" },
+    { nameKey: "backend_dev", linkedin: "https://www.linkedin.com/in/salem-ali-salem-a-582127233/", name: "Salem Ali" },
+    { nameKey: "frontend_dev", linkedin: "https://www.linkedin.com/in/esam-alshameri", name: language === 'ar'? "عصام عبدالجليل الشميري":"Esam Al-Shameri" },
   ];
 
   return (
