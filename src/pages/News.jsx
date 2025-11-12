@@ -62,7 +62,7 @@ function News() {
         }
       };
       fetchData();
-    }, []);
+    }, [language]);
 
   return (
     <div
