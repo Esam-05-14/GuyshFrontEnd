@@ -147,7 +147,7 @@ export async function updateProfile(formData) {
     throw new Error("No token found. User might not be logged in.");
   }
 
-  const response = await fetch("http://localhost:8000/api/users/my-profile/", {
+  const response = await fetch(api("/users/my-profile/"), {
     method: "PATCH", 
     headers: {
       "Content-Type": "application/json",
