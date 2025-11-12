@@ -78,9 +78,16 @@ export async function resetPassword(uid, token, new_password) {
   return await response.json();
 }
 export async function changePassword(oldPass , newPass) {
-  const response = await fetch(api("/users/forgot-password/"), {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(api("/users/change-password/"), {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json",
+      "Authorization": `bearer ${token}`,
+     },
+    
     body: JSON.stringify({"old_password":oldPass, "new_password":newPass}),
   });
 

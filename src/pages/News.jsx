@@ -42,7 +42,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NewsCard from "../components/NewsCard";
 import { useAuth } from "../data/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getPosts } from "../services/authService";
 
 function News() {

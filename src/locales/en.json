@@ -5,6 +5,31 @@
   "city_representatives": "City Representatives",
   "loading": "Loading board members...",
   "no_representatives": "No representatives yet.",
+  "logoMeaning": {
+    "heading": "General Union for Yemeni Academic Students – Hungary",
+    "description": "Each letter in GUYSH represents our vision, values, and unity.",
+    "general": {
+      "title": "General",
+      "text": "Represents unity and inclusiveness among all students."
+    },
+    "union": {
+      "title": "Union",
+      "text": "Symbolizes collaboration, solidarity, and shared goals."
+    },
+    "yemeni": {
+      "title": "Yemeni",
+      "text": "Reflects our national identity, heritage, and pride."
+    },
+    "students": {
+      "title": "Students",
+      "text": "Focuses on the academic and personal growth of every student."
+    },
+    "hungary": {
+      "title": "Hungary",
+      "text": "Acknowledges our host country and the bridge of friendship we share."
+    }
+  },
+  
 
   
   "nav": {
