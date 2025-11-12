@@ -87,7 +87,7 @@ function App() {
         <Route path='/privacy-policy' element={<PrivacyPolicy/>}></Route>
         <Route path='/rules-rights' element={<UnionRulesAndRights/>}></Route>
         <Route path="/guidance-verify/:uid/:token" element={<GuidanceVerifyPage />} />
-        <Route path='/reset-password/:uid/:token' element={<ResetPassword/>}/>
+        <Route path='/reset-password/:uid/:token/' element={<ResetPassword/>}/>
 
 
 
