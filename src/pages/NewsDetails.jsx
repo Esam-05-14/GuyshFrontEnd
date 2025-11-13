@@ -172,24 +172,24 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../data/AuthContext";
 
 export default function NewsDetails() {
-  const { setPosts, setLoading } = useAuth();
+  const {  setLoading, language } = useAuth();
   const { id } = useParams();
-  const location = useLocation();
   const { t } = useTranslation();
 
   // Either use the passed state or start with null
-  const [news, setNews] = useState(location.state?.news || null);
-  const [loading, setLocalLoading] = useState(!location.state?.news);
+  const [news, setNews] = useState(null);
+  const [loading, setLocalLoading] = useState(false);
 
   useEffect(() => {
-    if (!news) {
+
       // Fetch news if not passed through state (direct URL access)
       async function fetchNews() {
         try {
           setLocalLoading(true);
-          const data = await getPostsById(id);
+          const data = await getPostsById(id, language);
+          console.log(data);
+          
           setNews(data);
-          //setPosts(data); // update global context if needed
         } catch (err) {
           console.error("Error loading news:", err);
         } finally {
@@ -198,8 +198,8 @@ export default function NewsDetails() {
         }
       }
       fetchNews();
-    }
-  }, [id, news, setPosts, setLoading]);
+
+  }, [id, setLoading, language]);
 
   if (loading || !news) {
     return (

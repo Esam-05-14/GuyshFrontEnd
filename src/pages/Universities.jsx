@@ -88,26 +88,29 @@ function Universities() {
       <div className="w-full px-6 sm:px-12 lg:px-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 mt-10 mb-16 justify-items-center">
         {unis &&
           unis.map((uni) => (
-            <div
-              key={`${uni.name}-${uni.city}`}
-              className="w-full max-w-sm transform transition duration-300 hover:-translate-y-2 hover:shadow-lg bg-white rounded-xl border border-gray-100"
-            >
-              <div className="p-6 flex flex-col items-center text-center">
-                <img
-                  src={`../assets/logos/${uni.name}.png`}
-                  alt={uni.name}
-                  onError={(e) => {
-                    e.target.src = "../assets/logos/University of Szeged.png";
-                    e.onerror = null;
-                  }}
-                  className="w-32 h-32 object-contain mb-4"
-                />
-                <h3 className="text-lg font-semibold text-[#193042]">
-                  {uni.name}
-                </h3>
-                <p className="text-sm text-gray-500">{uni.city}</p>
+            <a href={uni.link}>
+              <div
+                key={`${uni.name}-${uni.city}`}
+                className="w-full max-w-sm transform transition duration-300 hover:-translate-y-2 hover:shadow-lg bg-white rounded-xl border border-gray-100"
+              >
+                <div className="p-6 flex flex-col items-center text-center">
+                  <img
+                    src={`../assets/logos/${uni.name}.png`}
+                    alt={uni.name}
+                    onError={(e) => {
+                      e.target.src = "../assets/logos/University of Szeged.png";
+                      e.onerror = null;
+                    }}
+                    className="w-32 h-32 object-contain mb-4"
+                  />
+                  <h3 className="text-lg font-semibold text-[#193042]">
+                    {uni.name}
+                  </h3>
+                  <p className="text-sm text-gray-500">{uni.city}</p>
+                </div>
               </div>
-            </div>
+              </a>
+            
           ))}
       </div>
     </div>

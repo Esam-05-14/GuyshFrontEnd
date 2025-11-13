@@ -9,6 +9,8 @@ function Users() {
     const  fetchData = async () =>{ 
       try{
         const data = await getUsers();
+        console.log(data);
+        
         setUsers(data);
       }catch(error){
         console.log(error);
@@ -17,18 +19,6 @@ function Users() {
   fetchData();
   },[]);
 
-  // Track which user's menu is open
-  const [openMenu, setOpenMenu] = useState(null);
-
-  const handleDelete = (user) => {
-    user.is_active = !user.is_active;
-    setOpenMenu(null);
-  };
-
-  const handleEdit = (username) => {
-    alert(`Edit user: ${username}`);
-    setOpenMenu(null);
-  };
 
   return (
     <div className="bg-[#f8f9fa]  min-h-screen px-8 py-10">
@@ -46,7 +36,6 @@ function Users() {
               <th className="py-3 px-5 border-b border-gray-200">Is Superuser</th>
               <th className="py-3 px-5 border-b border-gray-200">Is Active</th>
               <th className="py-3 px-5 border-b border-gray-200">Is Member</th>
-              {/* <th className="py-3 px-5 border-b border-gray-200 text-center">Actions</th> */}
             </tr>
           </thead>
           <tbody>
@@ -78,34 +67,7 @@ function Users() {
                       <span className="text-gray-500">No</span>
                     )}
                   </td>
-                  {/* <td className="py-3 px-5 text-center relative"> */}
-                    {/* <button
-                      onClick={() =>
-                        setOpenMenu(openMenu === u.username ? null : u.username)
-                      }
-                      className="bg-[#193042] text-white px-4 py-2 rounded-md hover:bg-[#234b6a] transition"
-                    >
-                      Options ▾
-                    </button> */}
-
-                    {/* Dropdown menu
-                    {openMenu === u.username && (
-                      <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                        <button
-                          onClick={() => handleEdit(u.username)}
-                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
-                        >
-                          ✏️ Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(u)}
-                          className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
-                        >
-                          {u.is_active ? '🗑️ Delete' : '✏️ Add'}
-                        </button>
-                      </div>
-                    )} */}
-                  {/* </td> */}
+                  
                 </tr>
               ))
             ) : (

@@ -89,7 +89,7 @@
   },
   "universities": {
     "title": "Universities",
-    "description": "Discover Hungary’s top universities where international students thrive in world-class programs under the Stipendium Hungaricum scholarship."
+    "description": "Hungarian top universities under the Stipendium Hungaricum scholarship."
   },
   "news": {
     "title": "News",
@@ -236,7 +236,9 @@
     "title": "Forgot Password",
     "sending": "Sending...",
     "resend": "Send email!",
-    "placeholder":"Enter your email"
+    "placeholder":"Enter your email",
+    "message": "📧 Check your email for a password reset link.",
+    "error":"❌ Could not send reset link. Try again."
   },
   "profileForm": {
     "title": "Complete Your Profile",
@@ -660,7 +662,23 @@
       "noMatch": "Passwords do not match.",
       "invalidLink": "Invalid or expired link."
     }
+  },
+  "changePassword": {
+  "title": "Change Password",
+  "fields": {
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm New Password"
+  },
+  "submit": "Change Password",
+  "loading": "Changing...",
+  "success": "✅ Password changed successfully!",
+  "loginFirst": "Login First",
+  "errors": {
+    "mismatch": "❌ New passwords do not match.",
+    "failed": "❌ Failed to change password. Please check your current one."
   }
+}
 
 
 

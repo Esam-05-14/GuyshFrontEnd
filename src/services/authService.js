@@ -291,9 +291,9 @@ export async function getPosts(language) {
   // console.log(data);
   return data;
 }
-export async function getPostsById(id) {
+export async function getPostsById(id, lang) {
   
-  const response = await fetch(api(`/news/posts/${id}`));
+  const response = await fetch(api(`/news/posts/${id}?lang=${lang}`));
 
   if (!response.ok) {
     throw new Error("unable to get news");

@@ -14,10 +14,10 @@ export default function ForgotPassword() {
     setLoading(true);
     try {
       await requestPasswordReset(email);
-      setMessage("📧 Check your email for a password reset link.");
+      setMessage(t('forgot.message'));
     } catch (err) {
       console.error(err);
-      setMessage("❌ Could not send reset link. Try again.");
+      setMessage(t('forgot.error'));
     } finally {
       setLoading(false);
     }

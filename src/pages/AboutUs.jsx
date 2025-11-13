@@ -37,6 +37,8 @@ export default function AboutUs() {
   const debrecen = boardMembers.filter((m) => m.position?.includes("Debrecen") || m.position?.includes("دبرتسن"));
   const pecs = boardMembers.filter((m) => m.position?.includes("Pécs") || m.position?.includes("بيتش"));
   const others = boardMembers.filter((m) => m!==president && !budapest.includes(m) && !debrecen.includes(m) && !pecs.includes(m));
+  const mems = others.filter((m)=> m.position?.includes("member") || m.position?.includes("عضو") )
+  const heads = others.filter(m => !mems.includes(m))
 // console.log(others);
 
 
@@ -71,7 +73,16 @@ export default function AboutUs() {
         )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-          {others.map((m) => (
+          {heads.map((m) => (
+            <div key={m.name} className="flex flex-col items-center bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200">
+              <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-[#193042]">
+                <img src={m.profile_photo || "/manaf.jpg"} alt={m.position} className="w-full h-full object-cover" />
+              </div>
+              <p className="mt-4 font-medium text-[#193042] text-base">{m.name}</p>
+              <p className="text-xs text-gray-500">{m.position}</p>
+            </div>
+          ))}
+          {mems.map((m) => (
             <div key={m.name} className="flex flex-col items-center bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200">
               <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-[#193042]">
                 <img src={m.profile_photo || "/manaf.jpg"} alt={m.position} className="w-full h-full object-cover" />
