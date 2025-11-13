@@ -50,9 +50,9 @@ export default function AboutUs() {
       <section className="relative w-full bg-gray-100 text-gray-700 py-24 text-center shadow-md overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b  opacity-80"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl font-extrabold mb-8 tracking-wide">{t("about_title")}</h1>
+          <h1 className="text-4xl font-extrabold mb-8 tracking-wide">{t("title")}</h1>
           <p className="text-lg md:text-xl leading-relaxed text-gray-600">
-            {t("about_paragraph")}
+            {t("content")}
           </p>
         </div>
       </section>
