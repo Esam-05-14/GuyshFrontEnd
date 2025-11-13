@@ -265,7 +265,7 @@ export default function AdminMembershipRequests() {
                       </td>
                       <td className="py-4 px-6 text-center">
                         <button
-                          onClick={() => handleViewDetails(req.id)}
+                          onClick={() => handleViewDetails(req.user_profile)}
                           className="inline-flex items-center gap-2 bg-[#193042] text-white px-4 py-2 rounded-lg hover:bg-[#254e6f] transition-colors font-medium"
                         >
                           <Eye size={18} />
