@@ -201,7 +201,6 @@ function MainPage() {
   
 
   // reverse order for Arabic for right-to-left flow
-  if (i18n.language === "ar") logoMeaning.reverse();
 
   return (
     <div className="bg-[#f8f9fa] flex flex-col items-center w-full text-gray-800">
