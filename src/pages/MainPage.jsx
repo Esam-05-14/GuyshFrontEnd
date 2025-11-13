@@ -198,33 +198,7 @@ function MainPage() {
 
   const latestNews = news?.slice(0, 6) || [];
 
-  const logoMeaning = [
-    {
-      letter: "G",
-      word: t("logoMeaning.general.title"),
-      meaning: t("logoMeaning.general.text"),
-    },
-    {
-      letter: "U",
-      word: t("logoMeaning.union.title"),
-      meaning: t("logoMeaning.union.text"),
-    },
-    {
-      letter: "Y",
-      word: t("logoMeaning.yemeni.title"),
-      meaning: t("logoMeaning.yemeni.text"),
-    },
-    {
-      letter: "S",
-      word: t("logoMeaning.students.title"),
-      meaning: t("logoMeaning.students.text"),
-    },
-    {
-      letter: "H",
-      word: t("logoMeaning.hungary.title"),
-      meaning: t("logoMeaning.hungary.text"),
-    },
-  ];
+  
 
   // reverse order for Arabic for right-to-left flow
   if (i18n.language === "ar") logoMeaning.reverse();
@@ -245,22 +219,7 @@ function MainPage() {
           {t("logoMeaning.description")}
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
-          {logoMeaning.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl shadow-md p-5 transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
-            >
-              <h3 className="text-[#a3301e] text-4xl font-extrabold mb-2">
-                {item.letter}
-              </h3>
-              <h4 className="text-lg font-semibold text-[#193042] mb-1">
-                {item.word}
-              </h4>
-              <p className="text-sm text-gray-600">{item.meaning}</p>
-            </div>
-          ))}
-        </div>
+        
       </section>
 
       {/* Hero Section */}
