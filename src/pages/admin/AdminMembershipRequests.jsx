@@ -11,11 +11,12 @@ import {
   Filter
 } from "lucide-react";
 // import { getMembershipRequests, getMembershipRequestById, updateMembershipRequestStatus } from "../../services/authService";
-import { getMembershipRequestsById_Admin, getMembershipRequests_Admin, updataMembershipRequestsById_Admin } from "../../services/authService";
+import { getMembershipRequestsById_Admin, getMembershipRequests_Admin, updataMembershipRequestsById_Admin, getUsersProfiles_id } from "../../services/authService";
 export default function AdminMembershipRequests() {
   const { t, i18n } = useTranslation();
   const [requests, setRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [detailsLoading, setDetailsLoading] = useState(false);
   const [statusUpdate, setStatusUpdate] = useState("");
@@ -58,6 +59,8 @@ export default function AdminMembershipRequests() {
     try {
       const data = await getMembershipRequestsById_Admin(id);
       //const data = requests.find(req => req.id === id);
+      const user = await getUsersProfiles_id(data.user);
+      setSelectedUser(user);
       setSelectedRequest(data);
       setStatusUpdate(data.status);
     } catch (error) {
@@ -358,7 +361,7 @@ export default function AdminMembershipRequests() {
                       </div>
                       <div className={`flex justify-between ${isRTL ? "flex-row-reverse" : ""}`}>
                         <span className="text-gray-600">{t("membershipRequests.username")}:</span>
-                        <span className="font-semibold">{selectedRequest.english_name}</span>
+                        <span className="font-semibold">{selectedUser.english_name}</span>
                       </div>
                       <div className={`flex justify-between ${isRTL ? "flex-row-reverse" : ""}`}>
                         <span className="text-gray-600">{t("membershipRequests.submittedAt")}:</span>

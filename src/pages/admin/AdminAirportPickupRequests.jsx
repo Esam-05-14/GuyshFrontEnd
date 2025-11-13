@@ -181,7 +181,7 @@ export default function AdminAirportPickupRequests() {
                   <strong>{t("Admin_AirportRequests.Request ID")}:</strong> {selectedRequest.id}
                 </p>
                 <p>
-                  <strong>{t("Admin_AirportRequests.User ID")}:</strong> {selectedRequest.id}
+                  <strong>{t("Admin_AirportRequests.name")}:</strong> {selectedRequest.english_name}
                 </p>
                 <p>
                   <strong>{t("Admin_AirportRequests.Airport")}:</strong> {selectedRequest.airport}

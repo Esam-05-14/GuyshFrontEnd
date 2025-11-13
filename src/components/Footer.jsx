@@ -102,8 +102,8 @@ function Footer() {
   const {language} = useAuth()
 
   const developers = [
-    { nameKey: "ui_designer", linkedin: "https://www.linkedin.com/in/example-uiux", name: "" },
-    { nameKey: "backend_dev", linkedin: "https://www.linkedin.com/in/salem-ali-salem-a-582127233/", name: "Salem Ali" },
+    { nameKey: "ui_designer", linkedin: "https://www.linkedin.com/in/aphene/", name: language === 'ar' ? "كارن مرقص" :"Karen Morcos"},
+    { nameKey: "backend_dev", linkedin: "https://www.linkedin.com/in/salem-ali-salem-a-582127233/", name: language === 'ar' ? "سالم عبدالعزيز" :"Salem Abdulaziz" },
     { nameKey: "frontend_dev", linkedin: "https://www.linkedin.com/in/esam-alshameri", name: language === 'ar'? "عصام عبدالجليل الشميري":"Esam Al-Shameri" },
   ];
 

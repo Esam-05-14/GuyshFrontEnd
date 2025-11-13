@@ -240,7 +240,8 @@
     "message": "📧 Check your email for a password reset link.",
     "error":"❌ Could not send reset link. Try again."
   },
-  "profileForm": {
+  
+"profileForm": {
     "title": "Complete Your Profile",
     "englishName": "English Name",
     "arabicName": "Arabic Name",
@@ -251,12 +252,17 @@
     "agreeTo": "I agree to the",
     "terms": "Terms and Conditions",
     "privacy": "Privacy Policy",
+    "unionRegulations": "Union Regulations",
+    "dataProcessing": "Data Processing",
     "submit": "Submit Profile",
     "submitting": "Submitting...",
     "success": "✅ Profile created successfully!",
     "error": "❌ Failed to create profile. Please try again.",
-    "agreementError": "❌ Please agree to the Terms and Privacy Policy before submitting."
+    "agreementError": "❌ Please agree to all required agreements before submitting."
   },
+  "unionRegulationsText": "Union Regulations text goes here.",
+  "dataProcessingText": "By agreeing on that, we can process your data accoring to the agreed regulations.",
+
   "termsAndConditions": "By creating an account, you agree to:\n1. Provide accurate information.\n2. Use this platform lawfully.\n3. Respect others’ privacy.\n4. Not impersonate another user.\n5. Allow updates to these terms as needed.",
   "privacyPolicy": "We value your privacy.\n1. We collect minimal data.\n2. We never sell user data.\n3. You can delete your info anytime.\n4. Cookies improve the experience.\n5. By using this site, you agree to our data practices."
   ,
@@ -266,6 +272,7 @@
   "No requests found.": "No requests found.",
   "ID": "ID",
   "User ID": "User ID",
+  "name":"Name",
   "Airport": "Airport",
   "Destination": "Destination",
   "Arrival Time": "Arrival Time",
