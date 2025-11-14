@@ -40,6 +40,8 @@ import GuidanceVerifyPage from './pages/GuidanceVerifyPage'
 import AdminMembershipRequests from './pages/admin/AdminMembershipRequests'
 import AdminBoardMembers from './pages/admin/AdminBoardMembers'
 import ResetPassword from './pages/ResetPassword'
+import VarifyEmail from './pages/VarifyEmail'
+
 
 
 function App() {
@@ -88,6 +90,8 @@ function App() {
         <Route path='/rules-rights' element={<UnionRulesAndRights/>}></Route>
         <Route path="/guidance-verify/:uid/:token" element={<GuidanceVerifyPage />} />
         <Route path='/reset-password/:uid/:token/' element={<ResetPassword/>}/>
+        <Route path='/varify-email/:uid/:token/' element={<VarifyEmail/>}/>
+
 
 
 

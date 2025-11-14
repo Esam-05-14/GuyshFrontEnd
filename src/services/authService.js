@@ -899,6 +899,20 @@ export async function verifyGuidanceEmail(uid, token) {
 
   return await response.json();
 }
+export async function verifyEmail(uid, token) {
+  const response = await fetch(
+    api(`/forms/verify-email/${uid}/${token}/`),
+    {
+      method: "GET",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Invalid or expired token");
+  }
+
+  return await response.json();
+}
 
 const API_BASE = "http://localhost:8000/api/forms";
 
