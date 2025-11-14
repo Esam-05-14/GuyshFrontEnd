@@ -294,114 +294,222 @@
   "Change Status": "Change Status",
   "Save": "Save"
 },
+  
   "terms": {
-    "title": "Terms and Conditions",
-    "subtitle": "Please read these terms and conditions carefully before using our services",
+    "title": "Terms of Service - GUYSH",
+    "subtitle": "General Union for Yemeni Students in Hungary",
     "lastUpdated": "Last Updated",
-    "updateDate": "November 2024",
-    "section1": {
+    "updateDate": "November 2025",
+    "section_1": {
       "title": "Acceptance of Terms",
-      "content": "By accessing and using the Guysh Hungary Student Union platform, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use our services."
+      "content": "By using this website and creating an account, you agree to be bound by these terms. You must be 18 years or older, or have parental consent. You have the legal capacity to enter this agreement."
     },
-    "section2": {
-      "title": "User Accounts",
-      "content": "To access certain features of our platform, you must register for an account. When creating an account, you agree to:",
-      "items": [
-        "Provide accurate, current, and complete information",
-        "Maintain the security of your password and identification",
-        "Notify us immediately of any unauthorized use of your account",
-        "Be responsible for all activities that occur under your account"
-      ]
+    "section_2": {
+      "title": "Eligibility",
+      "content": "The service is exclusively for Yemeni students studying in Hungary. Users are subject to eligibility verification. The union reserves the right to deny service for any reason.",
+      "items": []
     },
-    "section3": {
+    "section_3": {
+      "title": "Account Registration",
+      "content": "Please provide accurate and up-to-date information when registering. One account per person is allowed. Users are responsible for maintaining password security and not sharing accounts."
+    },
+    "section_4": {
+      "title": "Membership",
+      "content": "Membership duration is six months, renewable. Membership is currently free. Members receive benefits such as airport pickup coordination, guidance services, and event participation. Renewal follows established procedures."
+    },
+    "section_5": {
+      "title": "Services Provided",
+      "content": "Services include airport pickup coordination, guidance, and information sharing. All services are provided on a best-effort basis and are not guaranteed. The union is not liable for service delays or unavailability."
+    },
+    "section_6": {
       "title": "User Conduct",
-      "content": "You agree not to use the platform to:",
+      "content": "Prohibited activities include:",
       "items": [
-        "Violate any applicable laws or regulations",
-        "Infringe upon the rights of others",
-        "Transmit any harmful or malicious content",
-        "Impersonate any person or entity",
-        "Interfere with or disrupt the platform's functionality"
+        "Providing false information.",
+        "Harassment, hate speech, or unauthorized advertising.",
+        "Attempting security breaches or violating others’ privacy.",
+        "Any illegal acts."
       ]
     },
-    "section4": {
+    "section_7": {
       "title": "Intellectual Property",
-      "content": "All content on this platform, including text, graphics, logos, and software, is the property of Guysh Hungary Student Union or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, or create derivative works without explicit permission."
+      "content": "The union owns the content and design of the platform. User-generated content remains the user’s property, but by posting, users grant the union a license to display it. Logos and trademarks are protected."
     },
-    "section5": {
+    "section_8": {
+      "title": "Service Modifications",
+      "content": "The union may modify or discontinue services with notice. These terms may be updated with notification to users."
+    },
+    "section_9": {
+      "title": "Account Termination",
+      "content": "Users may delete their accounts at any time. The union may suspend or terminate accounts violating these terms. Data deletion upon termination follows the Privacy Policy."
+    },
+    "section_10": {
+      "title": "Disclaimers",
+      "content": "Services are provided 'as is' without warranties. The union is not responsible for the accuracy of user-provided information or third-party services such as member-arranged airport pickups."
+    },
+    "section_11": {
       "title": "Limitation of Liability",
-      "content": "Guysh Hungary Student Union shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the service. We do not guarantee that the service will be uninterrupted, timely, secure, or error-free."
+      "content": "Union liability is limited to the extent allowed by Hungarian law. Not liable for indirect, consequential, or incidental damages. The maximum liability is the amount paid for the service (if any)."
     },
-    "section6": {
-      "title": "Modifications to Terms",
-      "content": "We reserve the right to modify these terms at any time. We will notify users of any material changes via email or through a notice on our platform. Your continued use of the service after such modifications constitutes your acceptance of the updated terms."
+    "section_12": {
+      "title": "Indemnification",
+      "content": "Users agree to indemnify the union from claims arising from their violations."
     },
-    "contact": {
-      "title": "Contact Us",
-      "content": "If you have any questions about these Terms and Conditions, please contact us at:"
+    "section_13": {
+      "title": "Dispute Resolution",
+      "content": "These terms are governed by Hungarian law. Disputes fall under the jurisdiction of Hungarian courts. Negotiation with good intent is encouraged before legal action."
+    },
+    "section_14": {
+      "title": "Contact Information",
+      "content": "For questions, contact via email, phone, or the address on the website."
+    },
+    "section_15": {
+      "title": "Severability",
+      "content": "If any provision is found invalid, the remainder of the terms remain in effect."
+    },
+    "section_16": {
+      "title": "Entire Agreement",
+      "content": "These terms constitute the entire agreement between the user and the union regarding use of the site and services."
     }
   },
+  
+  
   "privacy": {
     "title": "Privacy Policy",
-    "subtitle": "Your privacy is important to us. This policy outlines how we collect, use, and protect your information",
+    "subtitle": "GUYSH – General Union for Yemeni Students in Hungary",
     "lastUpdated": "Last Updated",
-    "updateDate": "November 2024",
-    "introduction": "Guysh Hungary Student Union is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
-    "section1": {
-      "title": "Information We Collect",
-      "content": "We collect information that you provide directly to us, including:",
+    "updateDate": "November 2025",
+    "legalDetails": {
+      "title": "Official Organization Details",
+      "orgName": "Official Organization Name",
+      "legalStatus": "Legal Status",
+      "legalStatusValue": "Non-profit Student Organization",
+      "address": "Address in Hungary",
+      "contactEmail": "Contact Email",
+      "dpo": "Data Protection Officer",
+      "dpoValue": "A board member"
+    },
+    "dataCollected": {
+      "title": "Data Collected",
+      "content": "We collect the following types of personal data to provide our services and manage your membership:",
       "items": [
-        "Personal identification information (name, email address, phone number)",
-        "Student information (university, student ID, program of study)",
-        "Profile information and preferences",
-        "Communications and correspondence with us"
+        "Personal Identifiers: name, residence permit number",
+        "Contact Information: email, phone, address",
+        "Account Data: username, password hash, login history",
+        "Service Requests: airport pickup details, guidance services",
+        "User-Generated Content: profile information"
       ]
     },
-    "section2": {
-      "title": "How We Use Your Information",
-      "content": "We use the information we collect to:",
+    "legalBasis": {
+      "title": "Legal Basis for Processing",
+      "content": "We process your data based on the following legal grounds under GDPR:",
       "items": [
-        "Provide, maintain, and improve our services",
-        "Process your registration and manage your account",
-        "Send you updates, newsletters, and event notifications",
-        "Respond to your comments, questions, and requests",
-        "Analyze usage patterns and optimize user experience"
+        "Contract Performance: to provide membership and requested services",
+        "Legitimate Interest: to operate and improve the platform and prevent fraud",
+        "Consent: for communications and updates",
+        "Legal Obligation: compliance with Hungarian and EU laws"
       ]
     },
-    "section3": {
+    "purpose": {
+      "title": "Purpose of Data Collection",
+      "content": "Your data is collected and used strictly for the following purposes:",
+      "items": [
+        "Membership management and verification",
+        "Service delivery (e.g., airport pickup and guidance)",
+        "Communication about union activities and events",
+        "Platform security and fraud prevention",
+        "Legal compliance"
+      ]
+    },
+    "dataSharing": {
+      "title": "Data Sharing",
+      "content": "We do NOT sell or share data for marketing purposes. Data is only shared with necessary third-party processors to operate the service:",
+      "items": [
+        "Email Service Provider: Gmail",
+        "Hosting Provider: Hetzner Online GmbH (Germany) – GDPR compliant",
+        "CDN Provider: Cloudflare Inc. – Privacy Shield certified"
+      ]
+    },
+    "dataRetention": {
+      "title": "Data Retention",
+      "content": "We retain data only as long as necessary for the purpose it was collected:",
+      "items": [
+        "Active members: Data retained during active membership",
+        "Inactive members: Data deleted 2 years after last activity or upon request",
+        "Service requests: Deleted 30 days after completion",
+        "Backups: Retained up to 7 weeks",
+        "Audit logs: Retained 1 year for security"
+      ]
+    },
+    "yourRights": {
+      "title": "Your Rights under GDPR",
+      "content": "You have the right to exercise the following rights regarding your personal data:",
+      "items": [
+        "Right to Access: request copies of all your data",
+        "Right to Rectification: correct inaccurate data",
+        "Right to Erasure: delete your account and data",
+        "Right to Restrict Processing: limit data usage",
+        "Right to Data Portability: receive data in machine-readable format",
+        "Right to Object: object to certain processing",
+        "Right to Withdraw Consent: for consent-based processing"
+      ],
+      "additionalContent": "How to Exercise Rights: via email yemitehad.hungary@gmail.com or through the web page. Response Time: within 30 days."
+    },
+    "dataSecurity": {
       "title": "Data Security",
-      "content": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security."
-    },
-    "section4": {
-      "title": "Information Sharing",
-      "content": "We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:",
+      "content": "We maintain robust security measures to protect your data, including:",
       "items": [
-        "With your explicit consent",
-        "To comply with legal obligations",
-        "To protect our rights and safety",
-        "With service providers who assist in our operations (under strict confidentiality agreements)"
+        "Data encrypted in transit (HTTPS/TLS)",
+        "Sensitive fields encrypted (phone numbers, residence permit numbers, addresses)",
+        "Secure authentication (hashed passwords)",
+        "Access controls and permissions",
+        "Regular security updates",
+        "Secure backups",
+        "Staff training on data protection",
+        "Incident response plan"
       ]
     },
-    "section5": {
-      "title": "Your Rights",
-      "content": "You have the right to:",
-      "items": [
-        "Access and review your personal information",
-        "Request corrections to your data",
-        "Request deletion of your account and data",
-        "Opt-out of marketing communications",
-        "Withdraw consent for data processing"
-      ]
+    "internationalTransfers": {
+      "title": "International Data Transfers",
+      "content": "Data is hosted in Germany (EU) via Hetzner, meaning there are no transfers outside the EU. Non-EU services have adequate safeguards under Privacy Shield or Standard Contractual Clauses."
     },
-    "section6": {
-      "title": "Changes to This Policy",
-      "content": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the 'Last Updated' date. We encourage you to review this policy periodically."
+    "cookiesTracking": {
+      "title": "Cookies & Tracking",
+      "content": "No cookies or other tracking technologies are used on this platform."
+    },
+    "childrenPrivacy": {
+      "title": "Children’s Privacy",
+      "content": "The service is intended for university students (typically 18+). Parental consent is required in some EU countries under age 18. We do not knowingly collect data from children under 16 without parental consent."
+    },
+    "dataBreach": {
+      "title": "Data Breach Notification",
+      "content": "In the event of a data breach, we will notify affected users within 72 hours and notify the Hungarian Data Protection Authority (NAIH) as required by law.",
+      "additionalContent": "Security contact: yemitehad.hungary@gmail.com"
+    },
+    "policyChanges": {
+      "title": "Policy Changes",
+      "content": "Significant changes will be notified by email or platform notification. Continued use after updates means acceptance. The Last updated date is displayed clearly."
+    },
+    "rightToComplain": {
+      "title": "Right to Complain",
+      "content": "You have the right to file complaints with the Hungarian Data Protection Authority (NAIH).",
+      "items": [
+        "Address: 1055 Budapest, Falk Miksa Street 9–11",
+        "Website: https://naih.hu",
+        "Email: ugyfelszolgalat@naih.hu"
+      ],
+      "additionalContent": "Please contact us first to resolve any concerns before escalating to NAIH."
+    },
+    "automatedDecision": {
+      "title": "Automated Decision Making",
+      "content": "No automated decision-making or profiling is used on this platform."
     },
     "contact": {
-      "title": "Contact Us",
-      "content": "If you have any questions about this Privacy Policy, please contact us at:"
+      "title": "Contact Information",
+      "content": "For any questions or concerns regarding this policy, please contact us."
     }
   },
+  
   "union": {
     "title": "Student Union Rules and Rights",
     "subtitle": "Understanding your rights and responsibilities as a member of Guysh Hungary Student Union",
