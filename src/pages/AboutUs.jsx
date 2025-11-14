@@ -32,13 +32,49 @@ export default function AboutUs() {
     );
   }
 
-  const president = boardMembers.filter((m) => m.position === "President" || m.position === "رئيس الاتحاد")[0];
-  const budapest = boardMembers.filter((m) => m.position?.includes("Budapest") || m.position?.includes("بودابست"));
-  const debrecen = boardMembers.filter((m) => m.position?.includes("Debrecen") || m.position?.includes("دبرتسن"));
-  const pecs = boardMembers.filter((m) => m.position?.includes("Pécs") || m.position?.includes("بيتش"));
-  const others = boardMembers.filter((m) => m!==president && !budapest.includes(m) && !debrecen.includes(m) && !pecs.includes(m));
-  const mems = others.filter((m)=> m.position?.includes("member") || m.position?.includes("عضو") )
-  const heads = others.filter(m => !mems.includes(m))
+  // const president = boardMembers.filter((m) => m.position === "President" || m.position === "رئيس الاتحاد")[0];
+  // const budapest = boardMembers.filter((m) => m.position?.includes("Budapest") || m.position?.includes("بودابست"));
+  // const debrecen = boardMembers.filter((m) => m.position?.includes("Debrecen") || m.position?.includes("دبرتسن"));
+  // const pecs = boardMembers.filter((m) => m.position?.includes("Pécs") || m.position?.includes("بيتش"));
+  // const others = boardMembers.filter((m) => m!==president && !budapest.includes(m) && !debrecen.includes(m) && !pecs.includes(m));
+  // const mems = others.filter((m)=> m.position?.includes("member") || m.position?.includes("عضو") )
+  // const heads = others.filter(m => !mems.includes(m))
+  const position = (m) => m.position?.toLowerCase() || "";
+
+// --- President ---
+const president = boardMembers.find(
+  (m) =>
+    position(m) === "president" ||
+    position(m) === "رئيس الاتحاد"
+);
+
+// --- City Representatives ---
+const budapest = boardMembers.filter(
+  (m) => position(m).includes("budapest") || position(m).includes("بودابست")
+);
+
+const debrecen = boardMembers.filter(
+  (m) => position(m).includes("debrecen") || position(m).includes("دبرتسن")
+);
+
+const pecs = boardMembers.filter(
+  (m) => position(m).includes("pécs") || position(m).includes("بيتش")
+);
+
+// --- Remaining (everyone not above) ---
+const cityAndPresident = new Set([president, ...budapest, ...debrecen, ...pecs]);
+const others = boardMembers.filter((m) => !cityAndPresident.has(m));
+
+// --- Members ---
+const mems = others.filter(
+  (m) => 
+    position(m).includes("member") || 
+    position(m).includes("عضو")
+);
+
+// --- Heads / Committee Leaders / Non-members ---
+const heads = others.filter((m) => !mems.includes(m));
+
 // console.log(others);
 
 
@@ -48,14 +84,23 @@ export default function AboutUs() {
 
       {/* Hero Section */}
       <section className="relative w-full bg-gray-100 text-gray-700 py-24 text-center shadow-md overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b  opacity-80"></div>
+        <div className="absolute inset-0 bg-gradient-to-b opacity-80"></div>
+
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl font-extrabold mb-8 tracking-wide">{t("title")}</h1>
-          <p className="text-lg md:text-xl leading-relaxed text-gray-600">
+          <h1 className="text-4xl font-extrabold mb-8 tracking-wide">
+            {t("title")}
+          </h1>
+
+          <p
+            className="text-lg md:text-xl leading-relaxed text-gray-600 
+                      max-w-4xl mx-auto px-4 
+                      text-justify tracking-wide whitespace-pre-line"
+          >
             {t("content")}
           </p>
         </div>
       </section>
+
 
       {/* Board Members */}
       <section className="w-full max-w-6xl py-16 px-6 text-center">

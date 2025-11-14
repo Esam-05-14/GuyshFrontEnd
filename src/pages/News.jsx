@@ -115,6 +115,16 @@ function News() {
   const [loading, setLoading] = useState(true);
   const [news , setNews] = useState([])
 
+  const formatDate = (dateString) => {
+    if (!dateString) return new Date().toLocaleDateString();
+    const date = new Date(dateString);
+    return date.toLocaleDateString(i18n.language === "ar" ? "ar-EG" : "en-GB", {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
 
 
   // 🔹 Refetch posts when language changes
@@ -160,7 +170,7 @@ function News() {
               <NewsCard
                 title={n.title}
                 content={n.content}
-                date={new Date(n.date).toDateString()}
+                date={formatDate(n.date)}
                 src={n.image || "/guysh2.jpg"}
               />
             </Link>

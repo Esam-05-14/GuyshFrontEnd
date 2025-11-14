@@ -229,28 +229,6 @@ function UserProfiles() {
                     </span>
                   </div>
 
-                  {/* Info
-                  <div className="space-y-2 mb-4">
-                    {profile.email && (
-                      <div className={`flex items-center gap-2 text-sm text-gray-600 ${isRTL ? "flex-row-reverse" : ""}`}>
-                        <Mail size={16} className="text-gray-400" />
-                        <span className="truncate">{profile.email}</span>
-                      </div>
-                    )}
-                    {profile.phone && (
-                      <div className={`flex items-center gap-2 text-sm text-gray-600 ${isRTL ? "flex-row-reverse" : ""}`}>
-                        <Phone size={16} className="text-gray-400" />
-                        <span>{profile.phone}</span>
-                      </div>
-                    )}
-                    {profile.university && (
-                      <div className={`flex items-center gap-2 text-sm text-gray-600 ${isRTL ? "flex-row-reverse" : ""}`}>
-                        <GraduationCap size={16} className="text-gray-400" />
-                        <span className="truncate">{profile.university}</span>
-                      </div>
-                    )}
-                  </div> */}
-
                   {/* Action Button */}
                   <Link
                     to={`/admin/profiles/${profile.id}`}
@@ -279,15 +257,6 @@ function UserProfiles() {
                 <th className={`py-4 px-6 font-semibold ${isRTL ? "text-right" : "text-left"}`}>
                   {t("userProfiles.name")}
                 </th>
-                {/* <th className={`py-4 px-6 font-semibold ${isRTL ? "text-right" : "text-left"}`}>
-                  {t("userProfiles.email")}
-                </th>
-                <th className={`py-4 px-6 font-semibold ${isRTL ? "text-right" : "text-left"}`}>
-                  {t("userProfiles.phone")}
-                </th>
-                <th className={`py-4 px-6 font-semibold ${isRTL ? "text-right" : "text-left"}`}>
-                  {t("userProfiles.university")}
-                </th> */}
                 <th className="py-4 px-6 font-semibold text-center">
                   {t("userProfiles.status")}
                 </th>
