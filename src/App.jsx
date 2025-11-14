@@ -90,7 +90,7 @@ function App() {
         <Route path='/rules-rights' element={<UnionRulesAndRights/>}></Route>
         <Route path="/guidance-verify/:uid/:token" element={<GuidanceVerifyPage />} />
         <Route path='/reset-password/:uid/:token/' element={<ResetPassword/>}/>
-        <Route path='/varify-email/:uid/:token/' element={<VarifyEmail/>}/>
+        <Route path='/verify-email/:uid/:token/' element={<VarifyEmail/>}/>
 
 
 
