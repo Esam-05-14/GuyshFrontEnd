@@ -670,7 +670,7 @@
     "loadingMessage": "Please wait while we verify your email address...",
     "success": "Email Verified Successfully!",
     "message": "Your email has been verified successfully.",
-    "thankYou": "Thank you for confirming your email address. You can now access all features.",
+    "thankYou": "Thank you for confirming your email address. We wil contact you soon.",
     "error": "Verification Failed",
     "invalid": "The verification link is invalid or has expired.",
     "errorMessage": "We couldn't verify your email address. Please try again or contact support.",

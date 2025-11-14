@@ -191,7 +191,7 @@ import { useNavigate } from "react-router-dom";
 
 function MainPage() {
   const { t, i18n } = useTranslation();
-  const { posts: news , language} = useAuth();
+  const { posts: news , language, isLoggedIn} = useAuth();
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -222,6 +222,7 @@ function MainPage() {
 
         {/* --- NEW JOIN BUTTON --- */}
         {/* Replace the 'href="/register"' with a proper Link component if using react-router-dom */}
+        { !isLoggedIn &&
         <button
           onClick={() => navigate('/register')} 
           className="inline-block px-8 py-3 text-lg font-semibold text-white bg-[#a3301e] rounded-full shadow-lg 
@@ -229,6 +230,7 @@ function MainPage() {
         >
           {language === "ar" ? "انضم للاتحاد":"Join the union"}
         </button>
+        }
         
 
         

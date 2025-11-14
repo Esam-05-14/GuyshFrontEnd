@@ -7,6 +7,26 @@ function api(path) {
   return `${API_URL}/api${path}`;
 }
 
+// Add this new function to your authService.js
+export async function checkTokenValidity() {
+  // This request should be made with the existing JWT in the header
+  const response = await fetch(api("/users/chk-tkn/"), {
+    method: 'GET',
+    headers: {
+      'Authorization': `bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    // If the response is not OK (e.g., 401 Unauthorized), the token is invalid
+    return 0; 
+  }
+
+  const data = await response.json();
+  return data.remaining_seconds || 0;
+}
+
 export async function loginRequest(email, password) {
   console.log("Attempt login with "+ email + " "+password);
   
