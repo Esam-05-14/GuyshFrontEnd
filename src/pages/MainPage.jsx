@@ -194,9 +194,9 @@ function MainPage() {
   const { posts: news , language, isLoggedIn} = useAuth();
   const navigate = useNavigate()
 
-  useEffect(() => {
-    document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  // }, [i18n.language]);
 
   const latestNews = news?.slice(0, 6) || [];
 
