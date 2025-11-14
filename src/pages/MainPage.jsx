@@ -216,9 +216,9 @@ function MainPage() {
         <h2 className="text-3xl font-bold text-[#193042] mb-4">
           {t("logoMeaning.heading")}
         </h2>
-        <p className="text-gray-600 text-base sm:text-lg mb-10">
+        {/* <p className="text-gray-600 text-base sm:text-lg mb-10">
           {t("logoMeaning.description")}
-        </p>
+        </p> */}
 
         {/* --- NEW JOIN BUTTON --- */}
         {/* Replace the 'href="/register"' with a proper Link component if using react-router-dom */}

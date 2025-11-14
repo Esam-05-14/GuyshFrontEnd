@@ -6,6 +6,41 @@ import { useTranslation } from "react-i18next";
 export default function GuidenceForm() {
   const { t } = useTranslation();
 
+  const navigate = useNavigate();
+  
+    if (!isLoggedIn) {
+      return (
+        <AccessMessage
+          title={t("airport_form.access.login_required_title")}
+          message={t("airport_form.access.login_required_msg")}
+          buttonText={t("airport_form.access.go_login")}
+          onButtonClick={() => navigate("/login")}
+        />
+      );
+    }
+  
+    if (!user.roles?.is_active) {
+      return (
+        <AccessMessage
+          title={t("airport_form.access.account_pending_title")}
+          message={t("airport_form.access.account_pending_msg")}
+          buttonText={t("airport_form.access.back_home")}
+          onButtonClick={() => navigate("/")}
+        />
+      );
+    }
+  
+    if (user.roles?.is_member) {
+      return (
+        <AccessMessage
+          title={t("airport_form.access.service_unavailable_title")}
+          message={t("airport_form.access.service_unavailable_msg")}
+          buttonText={t("airport_form.access.go_home")}
+          onButtonClick={() => navigate("/")}
+        />
+      );
+    }
+
   const [formData, setFormData] = useState({
     full_name: "",
     whatsapp_number: "",
@@ -212,3 +247,19 @@ export default function GuidenceForm() {
 //     </div>
 //   );
 // }
+function AccessMessage({ title, message, buttonText, onButtonClick }) {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-800 px-4">
+      <div className="bg-white shadow-md rounded-xl p-8 text-center max-w-md">
+        <h2 className="text-2xl font-bold text-[#193042] mb-3">{title}</h2>
+        <p className="text-gray-600 mb-6">{message}</p>
+        <button
+          onClick={onButtonClick}
+          className="bg-[#193042] text-white px-6 py-2 rounded-lg hover:bg-[#102130] transition"
+        >
+          {buttonText}
+        </button>
+      </div>
+    </div>
+  );
+}
