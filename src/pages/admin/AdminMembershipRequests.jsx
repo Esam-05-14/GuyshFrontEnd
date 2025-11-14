@@ -59,7 +59,7 @@ export default function AdminMembershipRequests() {
     try {
       const data = await getMembershipRequestsById_Admin(id);
       //const data = requests.find(req => req.id === id);
-      const user = await getUsersProfiles_id(data.user);
+      const user = await getUsersProfiles_id(data.user_profile);
       setSelectedUser(user);
       setSelectedRequest(data);
       setStatusUpdate(data.status);
