@@ -921,7 +921,7 @@ export async function verifyGuidanceEmail(uid, token) {
 }
 export async function verifyEmail(uid, token) {
   const response = await fetch(
-    api(`/forms/verify-email/${uid}/${token}/`),
+    api(`/users/verify-email/${uid}/${token}/`),
     {
       method: "GET",
     }
