@@ -230,7 +230,7 @@ export async function logoutRequest() {
 
 export async function getUniversities() {
   
-  const response = await fetch(api("/users/universities"));
+  const response = await fetch(api("/users/universities/"));
 
   if (!response.ok) {
     throw new Error("unable to get users");
