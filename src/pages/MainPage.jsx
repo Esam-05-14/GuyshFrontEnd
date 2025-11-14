@@ -187,10 +187,12 @@ import CardSmall from "../components/CardSmall";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../data/AuthContext";
 import logo from "/logo.png"; // works in Vite or CRA if logo.png is in public/
+import { useNavigate } from "react-router-dom";
 
 function MainPage() {
   const { t, i18n } = useTranslation();
-  const { posts: news } = useAuth();
+  const { posts: news , language} = useAuth();
+  const navigate = useNavigate()
 
   useEffect(() => {
     document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
@@ -217,6 +219,17 @@ function MainPage() {
         <p className="text-gray-600 text-base sm:text-lg mb-10">
           {t("logoMeaning.description")}
         </p>
+
+        {/* --- NEW JOIN BUTTON --- */}
+        {/* Replace the 'href="/register"' with a proper Link component if using react-router-dom */}
+        <button
+          onClick={() => navigate('/register')} 
+          className="inline-block px-8 py-3 text-lg font-semibold text-white bg-[#a3301e] rounded-full shadow-lg 
+                     hover:bg-[#882819] transition duration-300 ease-in-out transform hover:scale-105 mb-10"
+        >
+          {language === "ar" ? "انضم للاتحاد":"Join the union"}
+        </button>
+        
 
         
       </section>
