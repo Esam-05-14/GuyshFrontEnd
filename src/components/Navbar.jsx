@@ -1306,7 +1306,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../data/AuthContext";
 import UserAvatar from "./UserAvatar";
 import { useTranslation } from "react-i18next";
-import { deleteProfile } from "../services/authService";
+import { deleteProfile, downloadRules } from "../services/authService";
 import { 
   User, 
   Trash2, 
@@ -1379,6 +1379,14 @@ export default function Navbar() {
       }
     }
   };
+  const handleDownload = async () =>{
+    try{
+      await downloadRules()
+    }catch(err){
+      console.log(err);
+      
+    }
+  }
 
   const navItems = [
     { path: "/about", label: t("nav.about"), icon: Info },
@@ -1693,7 +1701,7 @@ export default function Navbar() {
             {/* Legal & Information Links - Always visible */}
             <div className="mt-6 pt-6 border-t border-gray-100 space-y-1">
               <button
-                onClick={() => handleNavigation("/rules-rights")}
+                onClick={handleDownload}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
                   isRTL ? "flex-row-reverse text-right" : "text-left"
                 }`}

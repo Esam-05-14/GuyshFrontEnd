@@ -226,7 +226,19 @@ export async function logoutRequest() {
     
   }
 }
+export async function downloadRules() {
+  
+  const response = await fetch(api("/legal/regulations"));
 
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  // 2️⃣ Get login response (likely contains token)
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
 
 export async function getUniversities() {
   
