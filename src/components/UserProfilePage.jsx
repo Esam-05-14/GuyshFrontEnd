@@ -31,15 +31,15 @@ export default function UserProfilePage() {
   }, [id]);
 
 
-  useEffect(() => {
-      if (i18n.language === "ar") {
-        document.body.dir = "rtl";
-        document.body.style.textAlign = "right";
-      } else {
-        document.body.dir = "ltr";
-        document.body.style.textAlign = "left";
-      }
-    }, [i18n.language]);
+  // useEffect(() => {
+  //     if (i18n.language === "ar") {
+  //       document.body.dir = "rtl";
+  //       document.body.style.textAlign = "right";
+  //     } else {
+  //       document.body.dir = "ltr";
+  //       document.body.style.textAlign = "left";
+  //     }
+  //   }, [i18n.language]);
 
   const universityName =
     user?.university?.name ||

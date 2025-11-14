@@ -131,9 +131,9 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  // }, [i18n.language]);
 
   useEffect(() => {
     if (isLoggedIn) navigate("/");

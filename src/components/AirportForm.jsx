@@ -17,15 +17,15 @@ export default function AirportPickupForm() {
   });
 
   // 👇 Automatically update document direction when language changes
-  useEffect(() => {
-    if (i18n.language === "ar") {
-      document.body.dir = "rtl";
-      document.body.style.textAlign = "right";
-    } else {
-      document.body.dir = "ltr";
-      document.body.style.textAlign = "left";
-    }
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   if (i18n.language === "ar") {
+  //     document.body.dir = "rtl";
+  //     document.body.style.textAlign = "right";
+  //   } else {
+  //     document.body.dir = "ltr";
+  //     document.body.style.textAlign = "left";
+  //   }
+  // }, [i18n.language]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

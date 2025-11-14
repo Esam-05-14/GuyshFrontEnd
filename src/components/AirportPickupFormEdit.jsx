@@ -35,15 +35,15 @@ export default function AirportPickupFormEdit() {
   const readOnly = form.status === "approved";
 
   // 👇 Apply RTL/LTR layout automatically
-  useEffect(() => {
-    if (i18n.language === "ar") {
-      document.body.dir = "rtl";
-      document.body.style.textAlign = "right";
-    } else {
-      document.body.dir = "ltr";
-      document.body.style.textAlign = "left";
-    }
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   if (i18n.language === "ar") {
+  //     document.body.dir = "rtl";
+  //     document.body.style.textAlign = "right";
+  //   } else {
+  //     document.body.dir = "ltr";
+  //     document.body.style.textAlign = "left";
+  //   }
+  // }, [i18n.language]);
 
   useEffect(() => {
     if (id && !existingForm) {
