@@ -13,7 +13,7 @@ export default function AirportPickupFormList() {
   const { user, isLoggedIn, activeAirport } = useAuth();
 
   const navigate = useNavigate();
-  if(!activeAirport){
+  if(activeAirport === false){
     return (
       <AccessMessage
         title={t("airport_form.not_available")}

@@ -412,6 +412,8 @@ export function AuthProvider({ children }) {
           getActivateVersions()
         ]);
         const data = await getAvailableService();
+        console.log(data);
+        
         if (data){
           setActiveAirport(data.airport_pickup_service);
           setActiveGuidence(data.guidance_service);

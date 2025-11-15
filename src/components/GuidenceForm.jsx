@@ -9,7 +9,7 @@ export default function GuidenceForm() {
   const {activeGuidence} = useAuth();
 
   const navigate = useNavigate();
-  if(!activeGuidence){
+  if(activeGuidence === false){
     return (
       <AccessMessage
         title={t("airport_form.not_available")}
