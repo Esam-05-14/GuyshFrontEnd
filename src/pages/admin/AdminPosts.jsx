@@ -684,7 +684,9 @@ import {
 import {
   updataPostId_Admin, 
   createPost_Admin, 
-  deletePost_Admin, 
+  deletePost_Admin,
+  getPosts,
+  getPosts_Admin, 
 } from "../../services/authService";
 import { useAuth } from "../../data/AuthContext";
 
@@ -694,7 +696,9 @@ export default function AdminPosts() {
   
   // 1. Consume global state. It's already the correct data!
   // Renamed global 'posts' to 'globalPosts' for clarity in this component.
-  const { posts: globalPosts, setPosts: setGlobalPosts, language } = useAuth(); 
+  const { language } = useAuth(); 
+
+  const [globalPosts, setGlobalPosts] = useState([]);
 
   // 2. Local UI state
   const [loading, setLoading] = useState(true);
@@ -715,6 +719,8 @@ export default function AdminPosts() {
 
   // 3. Update loading state based on 'globalPosts'
   useEffect(() => {
+    const data = getPosts_Admin()
+    setGlobalPosts(data);
     console.log(globalPosts);
     
     if (globalPosts) {
@@ -968,12 +974,12 @@ export default function AdminPosts() {
                 )}
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
-                    <h2 className="text-xl font-bold text-[#193042] line-clamp-2 flex-1">
+                    <h2 className="text-xl font-bold text-[#193042]  flex-1">
                       {post.translations?.[i18n.language]?.title || post.translations?.en?.title || t("Untitled")}
                     </h2>
                   </div>
                   
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                  <p className="text-gray-600 text-sm mb-4 ">
                     {post.translations?.[i18n.language]?.content || post.translations?.en?.content || t("No content available.")}
                   </p>
 

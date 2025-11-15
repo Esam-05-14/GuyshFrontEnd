@@ -356,6 +356,19 @@ export async function getPosts(language) {
   // console.log(data);
   return data;
 }
+export async function getPosts_Admin() {
+  
+  const response = await fetch(api(`/news/admin/posts/`));
+
+  if (!response.ok) {
+    throw new Error("unable to get news");
+  }
+
+  // 2️⃣ Get login response (likely contains token)
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
 export async function getPostsById(id, lang) {
   
   const response = await fetch(api(`/news/posts/${id}?lang=${lang}`));
