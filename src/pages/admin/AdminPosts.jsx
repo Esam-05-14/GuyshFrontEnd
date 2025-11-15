@@ -1263,7 +1263,7 @@ const handleEdit = (post) => {
               
               <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
                 <h3 className="text-2xl font-bold text-[#193042] mb-3">
-                  {viewingPost.translations?.[language]?.title || viewingPost.translations?.en?.title || t("Untitled")}
+                  {viewingPost && (viewingPost.translations?.[language]?.title || viewingPost.translations?.en?.title || t("Untitled"))}
                 </h3>
                 
                 <div className={`flex items-center gap-2 text-sm text-gray-500 mb-6 ${isRTL ? "flex-row-reverse" : ""}`}>
@@ -1273,7 +1273,7 @@ const handleEdit = (post) => {
                 
                 <div className="prose max-w-none">
                   <p className={`text-gray-700 leading-relaxed whitespace-pre-wrap ${i18n.language === 'ar' ? 'text-right' : ''}`}>
-                    {viewingPost.translations?.[i18n.language]?.content || viewingPost.translations?.en?.content || t("No content available.")}
+                    {viewingPost && (viewingPost.translations?.[i18n.language]?.content || viewingPost.translations?.en?.content || t("No content available."))}
                   </p>
                 </div>
               </div>
