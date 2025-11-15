@@ -715,6 +715,8 @@ export default function AdminPosts() {
 
   // 3. Update loading state based on 'globalPosts'
   useEffect(() => {
+    console.log(globalPosts);
+    
     if (globalPosts) {
       setLoading(false);
     } else {
