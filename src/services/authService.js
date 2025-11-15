@@ -357,8 +357,17 @@ export async function getPosts(language) {
   return data;
 }
 export async function getPosts_Admin() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
   
-  const response = await fetch(api(`/news/admin/posts/`));
+  const response = await fetch(api("/news/admin/posts"), {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `bearer ${token}`,
+      }
+  })
 
   if (!response.ok) {
     throw new Error("unable to get news");
