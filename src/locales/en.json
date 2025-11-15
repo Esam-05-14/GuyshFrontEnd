@@ -143,6 +143,7 @@
   "saveButton": "Save Changes"
 },
 "airport_form": {
+  "not_available": "Not Available!",
     "list": {
       "title": "My Airport Pickup Requests",
       "loading": "Loading your requests...",
@@ -161,7 +162,8 @@
       "back_home": "Back to Home",
       "service_unavailable_title": "Service Not Available",
       "service_unavailable_msg": "This service is available only for new incoming students who are not yet members.",
-      "go_home": "Go to Home"
+      "go_home": "Go to Home",
+      "not_available": "Serivce not available at the moment"
     },
     "status": {
       "pending": "Pending",

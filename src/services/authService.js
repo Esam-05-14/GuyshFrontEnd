@@ -31,6 +31,8 @@ export async function checkTokenValidity() {
   return data.remaining_seconds || 0;
 }
 
+
+
 export async function loginRequest(email, password) {
   console.log("Attempt login with "+ email + " "+password);
   
@@ -287,6 +289,18 @@ export async function downloadRules() {
 export async function getActivateVersions() {
   
   const response = await fetch(api("/legal-active-versions/"));
+
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  const data = await response.json();
+  
+  return data;
+}
+export async function getAvailableService() {
+  
+  const response = await fetch(api("/available-services/"));
 
   if (!response.ok) {
     throw new Error("unable to get users");

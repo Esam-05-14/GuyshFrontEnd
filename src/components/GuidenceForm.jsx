@@ -2,11 +2,23 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { guidenceRequest } from "../services/authService";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../data/AuthContext";
 
 export default function GuidenceForm() {
   const { t } = useTranslation();
+  const {activeGuidence} = useAuth();
 
   const navigate = useNavigate();
+  if(!activeGuidence){
+    return (
+      <AccessMessage
+        title={t("airport_form.not_available")}
+        message={t("airport_form.access.not_available")}
+        buttonText={t("airport_form.access.go_home")}
+        onButtonClick={() => navigate("/")}
+      />
+    );
+  }
   
     if (!isLoggedIn) {
       return (

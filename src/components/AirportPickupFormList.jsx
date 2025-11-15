@@ -10,9 +10,19 @@ export default function AirportPickupFormList() {
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { user, isLoggedIn } = useAuth();
+  const { user, isLoggedIn, activeAirport } = useAuth();
 
   const navigate = useNavigate();
+  if(!activeAirport){
+    return (
+      <AccessMessage
+        title={t("airport_form.not_available")}
+        message={t("airport_form.access.not_available")}
+        buttonText={t("airport_form.access.go_home")}
+        onButtonClick={() => navigate("/")}
+      />
+    );
+  }
 
   if (!isLoggedIn) {
     return (

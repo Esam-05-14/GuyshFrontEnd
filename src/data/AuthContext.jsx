@@ -235,7 +235,8 @@ import {
   getMyProfile,
   // ✅ New import for token check
   checkTokenValidity, 
-  getActivateVersions
+  getActivateVersions,
+  getAvailableService
 } from "../services/authService"; // Ensure checkTokenValidity is available
 import i18n from "../i18n";
 
@@ -257,6 +258,11 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [myProfile, setMyProfile] = useState(null);
+  
+  // service Availbility
+  const [activeAirport, setActiveAirport] = useState(false);
+  const [activeGuidence, setActiveGuidence] = useState(false);
+
 
   // --- APPLICATION DATA STATE (Public & Private) ---
   const [universities, setUniversities] = useState([]);
@@ -358,7 +364,7 @@ export function AuthProvider({ children }) {
       const storedToken = localStorage.getItem("token"); // Use stored token
 
       // Check if we have persistent login data
-      if (savedUser && savedLogin === "true" && storedToken) {
+      if ((savedUser && savedLogin === "true") || storedToken) {
         try {
           // A. Check token validity
           const remainingSeconds = await checkTokenValidity();
@@ -405,6 +411,11 @@ export function AuthProvider({ children }) {
           getPosts(),
           getActivateVersions()
         ]);
+        const data = await getAvailableService();
+        if (data){
+          setActiveAirport(data.airport-pickup-service);
+          setActiveGuidence(data.guidance-service);
+        }
 
         if (unis) setUniversities(unis);
         if (board) setBoardMembers(board);
@@ -483,6 +494,8 @@ export function AuthProvider({ children }) {
         profiles,
         boardMembers_A,
         versions,
+        activeAirport,
+        activeGuidence,
 
         // LANGUAGE
         language,
