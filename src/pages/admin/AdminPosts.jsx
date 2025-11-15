@@ -730,7 +730,7 @@ export default function AdminPosts() {
         setGlobalPosts(data || []); // Use the data, fallback to []
         
         // 4. Log the *data* you received, not the state variable
-        console.log("Data from API:", data); 
+        // console.log("Data from API:", data); 
 
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -989,12 +989,12 @@ export default function AdminPosts() {
                 )}
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
-                    <h2 className="text-xl font-bold text-[#193042]  flex-1">
+                    <h2 className="text-xl font-bold text-[#193042]  flex-1 line-clamp-2">
                       {post.translations?.[i18n.language]?.title || post.translations?.en?.title || t("Untitled")}
                     </h2>
                   </div>
                   
-                  <p className="text-gray-600 text-sm mb-4 ">
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                     {post.translations?.[i18n.language]?.content || post.translations?.en?.content || t("No content available.")}
                   </p>
 

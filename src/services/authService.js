@@ -10,10 +10,14 @@ function api(path) {
 // Add this new function to your authService.js
 export async function checkTokenValidity() {
   // This request should be made with the existing JWT in the header
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
   const response = await fetch(api("/users/chk-tkn/"), {
     method: 'GET',
     headers: {
-      'Authorization': `bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+      'Authorization': `bearer ${token}`,
       'Content-Type': 'application/json',
     },
   });

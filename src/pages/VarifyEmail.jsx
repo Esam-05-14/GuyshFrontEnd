@@ -72,7 +72,7 @@ export default function VarifyEmail() {
               {t("guidanceVerify.message")}
             </p>
             <p className="text-gray-600 mb-8">
-              {t("guidanceVerify.thankYou")}
+              {language === "ar" ? "يمكنك تسجيل الدخول الان!": "You can log in now!"}
             </p>
             
             {/* Success Icon Animation */}
