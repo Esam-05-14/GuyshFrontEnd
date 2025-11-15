@@ -286,7 +286,7 @@ export function AuthProvider({ children }) {
     }
     
     // Clear all client-side state
-    setToken(null);
+    // setToken(null);
     setUser(null);
     setIsLoggedIn(false);
     setMyProfile(null);
@@ -296,7 +296,7 @@ export function AuthProvider({ children }) {
     setBoardMembers_A([]);
 
     // Clear local storage
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("UserProfile");

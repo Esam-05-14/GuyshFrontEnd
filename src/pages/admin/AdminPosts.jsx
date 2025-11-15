@@ -716,53 +716,62 @@ export default function AdminPosts() {
   const [errors, setErrors] = useState({});
 
   // 3. UseEffect to parse global posts into local state
-  useEffect(() => {
-    setLoading(true);
-    
-    // Check if global data is available
-    if (!globalPosts) {
-      setLoading(false);
-      return;
+  // 3. UseEffect to parse global posts into local state
+useEffect(() => {
+  setLoading(true);
+  
+  if (!globalPosts) {
+    setParsedPosts([]); // Ensure it's an array
+    setLoading(false);
+    return;
+  }
+
+  const parsed = globalPosts.map(post => {
+    let translationsObject;
+
+    if (typeof post.translations === "string") {
+      try {
+        translationsObject = JSON.parse(post.translations);
+      } catch (e) {
+        console.error("Error parsing translations for post:", post.id, e);
+        translationsObject = null; // Set to null on parse error
+      }
+    } else {
+      translationsObject = post.translations; // Assign whatever it is (object, null, undefined)
     }
 
-    // Parse the global posts array (which might have string translations)
-    const parsed = globalPosts.map(post => {
-      let translationsObject = post.translations;
-      if (typeof post.translations === "string") {
-        try {
-          translationsObject = JSON.parse(post.translations);
-        } catch (e) {
-          console.error("Error parsing translations for post:", post.id, e);
-          translationsObject = { en: {}, ar: {} }; // Fallback
-        }
+    // --- THIS IS THE FIX ---
+    // Ensure translationsObject is an object, or default to an empty one.
+    const safeTranslations = translationsObject || {};
+    // -----------------------
+
+    return { 
+      ...post, 
+      translations: {
+        // Now safely access from safeTranslations
+        en: safeTranslations.en || { title: '', content: '' }, 
+        ar: safeTranslations.ar || { title: '', content: '' }
       }
-      
-      // Ensure the full data structure exists to prevent errors
-      return { 
-        ...post, 
-        translations: {
-          en: translationsObject.en || { title: '', content: '' },
-          ar: translationsObject.ar || { title: '', content: '' }
-        }
-      };
-    });
-
-    setParsedPosts(parsed);
-    setLoading(false);
-  }, [globalPosts]); // This effect runs only when the globalPosts array changes
-
-  // 4. Filter against the local parsedPosts
-  const filteredPosts = parsedPosts.filter(post => {
-    const enTitle = post.translations.en.title || "";
-    const arTitle = post.translations.ar.title || "";
-    const enContent = post.translations.en.content || "";
-    const arContent = post.translations.ar.content || "";
-    
-    return enTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           arTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           enContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           arContent.toLowerCase().includes(searchQuery.toLowerCase());
+    };
   });
+
+  setParsedPosts(parsed);
+  setLoading(false);
+}, [globalPosts]);
+
+// 4. Filter against the local parsedPosts
+const filteredPosts = parsedPosts.filter(post => {
+  // Use optional chaining (?.) for safety
+  const enTitle = post.translations?.en?.title || "";
+  const arTitle = post.translations?.ar?.title || "";
+  const enContent = post.translations?.en?.content || "";
+  const arContent = post.translations?.ar?.content || "";
+  
+  return enTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         arTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         enContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         arContent.toLowerCase().includes(searchQuery.toLowerCase());
+});
 
   const validateForm = () => {
     const newErrors = {};
@@ -840,29 +849,29 @@ export default function AdminPosts() {
   };
 
   // 6. Refined handleEdit (No API call)
-  const handleEdit = (post) => {
-    // 'post' is the full, parsed object from local state
-    setEditingPost(post);
-    
-    // We can trust 'post' has the full structure defined in the parse effect
-    setFormData({
-      translations: {
-        en: {
-          title: post.translations.en.title,
-          content: post.translations.en.content
-        },
-        ar: {
-          title: post.translations.ar.title,
-          content: post.translations.ar.content
-        }
+  // 6. Refined handleEdit (No API call)
+const handleEdit = (post) => {
+  setEditingPost(post);
+  
+  // Use optional chaining (?.) to safely populate the form
+  setFormData({
+    translations: {
+      en: {
+        title: post.translations?.en?.title || "",
+        content: post.translations?.en?.content || ""
+      },
+      ar: {
+        title: post.translations?.ar?.title || "",
+        content: post.translations?.ar?.content || ""
       }
-    });
-    
-    setImagePreview(post.image || null);
-    setImageFile(null);
-    setErrors({});
-    setShowModal(true);
-  };
+    }
+  });
+  
+  setImagePreview(post.image || null);
+  setImageFile(null);
+  setErrors({});
+  setShowModal(true);
+};
 
   const handleAddNew = () => {
     setEditingPost(null);
