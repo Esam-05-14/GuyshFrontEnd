@@ -6,7 +6,7 @@ import { useAuth } from "../data/AuthContext";
 
 export default function GuidenceForm() {
   const { t } = useTranslation();
-  const {activeGuidence} = useAuth();
+  const {activeGuidence, user, isLoggedIn,} = useAuth();
 
   const navigate = useNavigate();
   if(activeGuidence === false){
