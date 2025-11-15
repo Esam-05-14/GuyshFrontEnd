@@ -9,412 +9,17 @@
 //   Search,
 //   X,
 //   Save,
-//   Clock
-// } from "lucide-react";
-// // import { getPosts, deletePost, createPost, updatePost } from "../../api/posts";
-// import {getPosts,updataPostId_Admin, createPost_Admin , deletePost_Admin} from "../../services/authService";
-// import { useAuth } from "../../data/AuthContext";
-// export default function AdminPosts() {
-//   const { t, i18n } = useTranslation();
-//   const isRTL = i18n.language === "ar";
-//   const {posts , setPosts} = useAuth();
-
-//   const [loading, setLoading] = useState(true);
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const [showModal, setShowModal] = useState(false);
-//   const [editingPost, setEditingPost] = useState(null);
-//   const [viewingPost, setViewingPost] = useState(null);
-//   const [formData, setFormData] = useState({
-//     title: "",
-//     content: ""
-//   });
-//   const [errors, setErrors] = useState({});
-
-//   // Fetch posts
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const data = await getPosts();
-        
-//         setPosts(data);
-//       } catch (error) {
-//         console.error("Error fetching posts:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-//     fetchData();
-//   }, []);
-
-//   const filteredPosts = posts.filter(post => {
-//     return post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//            post.content.toLowerCase().includes(searchQuery.toLowerCase());
-//   });
-
-//   const validateForm = () => {
-//     const newErrors = {};
-//     if (!formData.title.trim()) newErrors.title = t("This field is required.");
-//     if (!formData.content.trim()) newErrors.content = t("This field is required.");
-    
-//     setErrors(newErrors);
-//     return Object.keys(newErrors).length === 0;
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-    
-//     if (!validateForm()) return;
-
-//     try {
-//       if (editingPost) {
-//         await updataPostId_Admin(editingPost.id, formData);
-//         setPosts(posts.map(post => 
-//           post.id === editingPost.id 
-//             ? { ...post, ...formData, updated_at: new Date().toISOString() } 
-//             : post
-//         ));
-//         alert(t("Post updated successfully!"));
-//       } else {
-//         const newPost = await createPost_Admin(formData);
-        
-//         setPosts([newPost, ...posts]);
-//         alert(t("Post created successfully!"));
-//       }
-      
-//       handleCloseModal();
-//     } catch (error) {
-//       console.error("Error saving post:", error);
-//       alert(t("Error saving post. Please try again."));
-//     }
-//   };
-
-//   const handleDelete = async (id) => {
-//     if (window.confirm(t("Are you sure you want to delete this post?"))) {
-//       try {
-//         await deletePost_Admin(id);
-//         setPosts(posts.filter((p) => p.id !== id));
-//         alert(t("Post deleted successfully!"));
-//       } catch (error) {
-//         console.error("Error deleting post:", error);
-//       }
-//     }
-//   };
-
-//   const handleEdit = (post) => {
-//     setEditingPost(post);
-//     setFormData({
-//       title: post.title,
-//       content: post.content
-//     });
-//     setErrors({});
-//     setShowModal(true);
-//   };
-
-//   const handleAddNew = () => {
-//     setEditingPost(null);
-//     setFormData({
-//       title: "",
-//       content: ""
-//     });
-//     setErrors({});
-//     setShowModal(true);
-//   };
-
-//   const handleCloseModal = () => {
-//     setShowModal(false);
-//     setEditingPost(null);
-//     setFormData({
-//       title: "",
-//       content: ""
-//     });
-//     setErrors({});
-//   };
-
-//   const handleView = (post) => {
-//     setViewingPost(post);
-//   };
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData(prev => ({ ...prev, [name]: value }));
-//     // Clear error when user starts typing
-//     if (errors[name]) {
-//       setErrors(prev => ({ ...prev, [name]: "" }));
-//     }
-//   };
-
-//   const formatDate = (dateString) => {
-//     const date = new Date(dateString);
-//     return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-//   };
-
-//   if (loading) {
-//     return (
-//       <div className="flex justify-center items-center h-screen">
-//         <div className="text-center">
-//           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#193042] mx-auto"></div>
-//           <p className="mt-4 text-gray-600">{t("Loading posts...")}</p>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8" dir={isRTL ? "rtl" : "ltr"}>
-//       <div className="max-w-7xl mx-auto">
-//         {/* Header */}
-//         <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
-//           <h1 className="text-3xl font-bold text-[#193042]">
-//             {t("Posts Management")}
-//           </h1>
-//           <button
-//             onClick={handleAddNew}
-//             className={`flex items-center gap-2 bg-gradient-to-r from-[#193042] to-[#254e6f] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 ${isRTL ? "flex-row-reverse" : ""}`}
-//           >
-//             <Plus size={20} />
-//             <span>{t("Add New Post")}</span>
-//           </button>
-//         </div>
-
-//         {/* Search */}
-//         <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
-//           <div className="relative">
-//             <Search className={`absolute top-1/2 -translate-y-1/2 text-gray-400 ${isRTL ? "right-3" : "left-3"}`} size={20} />
-//             <input
-//               type="text"
-//               placeholder={t("Search posts...")}
-//               value={searchQuery}
-//               onChange={(e) => setSearchQuery(e.target.value)}
-//               className={`w-full border border-gray-300 rounded-lg py-3 focus:ring-2 focus:ring-[#193042] focus:border-transparent outline-none ${isRTL ? "pr-10 text-right" : "pl-10"}`}
-//             />
-//           </div>
-//         </div>
-
-//         {/* Posts Grid */}
-//         {filteredPosts.length === 0 ? (
-//           <div className="bg-white rounded-xl shadow-sm p-12 text-center">
-//             <FileText className="mx-auto text-gray-300 mb-4" size={64} />
-//             <p className="text-gray-500 text-lg">{t("No posts found.")}</p>
-//           </div>
-//         ) : (
-//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//             {filteredPosts.map((post) => (
-//               <div
-//                 key={post.id}
-//                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border-t-4 border-[#193042]"
-//               >
-//                 <div className="p-6">
-//                   <div className="flex items-start justify-between mb-3">
-//                     <h2 className="text-xl font-bold text-[#193042] line-clamp-2 flex-1">
-//                       {post.title}
-//                     </h2>
-//                   </div>
-                  
-//                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-//                     {post.content}
-//                   </p>
-
-//                   <div className={`flex items-center gap-2 text-xs text-gray-500 mb-4 ${isRTL ? "flex-row-reverse" : ""}`}>
-//                     <Clock size={14} />
-//                     <span>{formatDate(post.created_at)}</span>
-//                   </div>
-
-//                   {/* Actions */}
-//                   <div className={`flex gap-2 pt-4 border-t border-gray-100 ${isRTL ? "flex-row-reverse" : ""}`}>
-//                     <button
-//                       onClick={() => handleView(post)}
-//                       className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-//                     >
-//                       <Eye size={16} />
-//                       <span className="text-sm font-medium">{t("View")}</span>
-//                     </button>
-//                     <button
-//                       onClick={() => handleEdit(post)}
-//                       className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
-//                     >
-//                       <Edit size={16} />
-//                       <span className="text-sm font-medium">{t("Edit")}</span>
-//                     </button>
-//                     <button
-//                       onClick={() => handleDelete(post.id)}
-//                       className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors"
-//                     >
-//                       <Trash2 size={16} />
-//                       <span className="text-sm font-medium">{t("Delete")}</span>
-//                     </button>
-//                   </div>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         )}
-//       </div>
-
-//       {/* Create/Edit Modal */}
-//       {showModal && (
-//         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-//           <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-//             {/* Modal Header */}
-//             <div className={`flex items-center justify-between p-6 border-b border-gray-200 ${isRTL ? "flex-row-reverse" : ""}`}>
-//               <h2 className="text-2xl font-bold text-[#193042]">
-//                 {editingPost ? t("Edit Post") : t("Create New Post")}
-//               </h2>
-//               <button
-//                 onClick={handleCloseModal}
-//                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-//               >
-//                 <X size={24} />
-//               </button>
-//             </div>
-
-//             {/* Modal Form */}
-//             <form onSubmit={handleSubmit} className="p-6 space-y-5">
-//               {/* Title */}
-//               <div>
-//                 <label className={`block text-sm font-semibold text-gray-700 mb-2 ${isRTL ? "text-right" : ""}`}>
-//                   {t("Post Title")} <span className="text-red-500">*</span>
-//                 </label>
-//                 <input
-//                   type="text"
-//                   name="title"
-//                   value={formData.title}
-//                   onChange={handleChange}
-//                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#193042] focus:border-transparent outline-none transition-all ${
-//                     errors.title ? "border-red-500" : "border-gray-300"
-//                   } ${isRTL ? "text-right" : ""}`}
-//                   placeholder={t("Enter post title")}
-//                 />
-//                 {errors.title && (
-//                   <p className={`text-red-500 text-sm mt-1 ${isRTL ? "text-right" : ""}`}>{errors.title}</p>
-//                 )}
-//               </div>
-
-//               {/* Content */}
-//               <div>
-//                 <label className={`block text-sm font-semibold text-gray-700 mb-2 ${isRTL ? "text-right" : ""}`}>
-//                   {t("Post Content")} <span className="text-red-500">*</span>
-//                 </label>
-//                 <textarea
-//                   name="content"
-//                   value={formData.content}
-//                   onChange={handleChange}
-//                   rows="10"
-//                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#193042] focus:border-transparent outline-none transition-all resize-none ${
-//                     errors.content ? "border-red-500" : "border-gray-300"
-//                   } ${isRTL ? "text-right" : ""}`}
-//                   placeholder={t("Enter post content")}
-//                 />
-//                 {errors.content && (
-//                   <p className={`text-red-500 text-sm mt-1 ${isRTL ? "text-right" : ""}`}>{errors.content}</p>
-//                 )}
-//               </div>
-
-//               {/* Action Buttons */}
-//               <div className={`flex gap-3 pt-4 ${isRTL ? "flex-row-reverse" : ""}`}>
-//                 <button
-//                   type="button"
-//                   onClick={handleCloseModal}
-//                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-//                 >
-//                   {t("Cancel")}
-//                 </button>
-//                 <button
-//                   type="submit"
-//                   className={`flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-[#193042] to-[#254e6f] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 ${isRTL ? "flex-row-reverse" : ""}`}
-//                 >
-//                   <Save size={20} />
-//                   <span>{editingPost ? t("Update Post") : t("Create Post")}</span>
-//                 </button>
-//               </div>
-//             </form>
-//           </div>
-//         </div>
-//       )}
-
-//       {/* View Post Modal */}
-//       {viewingPost && (
-//         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-//           <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-//             {/* Modal Header */}
-//             <div className={`flex items-center justify-between p-6 border-b border-gray-200 ${isRTL ? "flex-row-reverse" : ""}`}>
-//               <h2 className="text-2xl font-bold text-[#193042]">
-//                 {t("Post Details")}
-//               </h2>
-//               <button
-//                 onClick={() => setViewingPost(null)}
-//                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-//               >
-//                 <X size={24} />
-//               </button>
-//             </div>
-
-//             {/* Modal Content */}
-//             <div className="p-6 space-y-6">
-//               <div>
-//                 <h3 className="text-2xl font-bold text-[#193042] mb-3">
-//                   {viewingPost.title}
-//                 </h3>
-                
-//                 <div className={`flex items-center gap-2 text-sm text-gray-500 mb-6 ${isRTL ? "flex-row-reverse" : ""}`}>
-//                   <Clock size={16} />
-//                   <span>{formatDate(viewingPost.created_at)}</span>
-//                 </div>
-                
-//                 <div className="prose max-w-none">
-//                   <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-//                     {viewingPost.content}
-//                   </p>
-//                 </div>
-//               </div>
-
-//               <div className={`flex gap-3 pt-4 border-t border-gray-100 ${isRTL ? "flex-row-reverse" : ""}`}>
-//                 <button
-//                   onClick={() => {
-//                     setViewingPost(null);
-//                     handleEdit(viewingPost);
-//                   }}
-//                   className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-50 text-blue-600 rounded-lg font-semibold hover:bg-blue-100 transition-colors"
-//                 >
-//                   <Edit size={20} />
-//                   <span>{t("Edit Post")}</span>
-//                 </button>
-//                 <button
-//                   onClick={() => setViewingPost(null)}
-//                   className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-//                 >
-//                   {t("Close")}
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// import { useEffect, useState } from "react";
-// import { useTranslation } from "react-i18next";
-// import { 
-//   FileText, 
-//   Edit, 
-//   Trash2, 
-//   Eye, 
-//   Plus,
-//   Search,
-//   X,
-//   Save,
 //   Clock,
 //   Upload,
 //   Image as ImageIcon
 // } from "lucide-react";
-// import {getPosts, updataPostId_Admin, createPost_Admin, deletePost_Admin} from "../../services/authService";
+// import {getPosts, updataPostId_Admin, createPost_Admin, deletePost_Admin, getPostsById} from "../../services/authService";
 // import { useAuth } from "../../data/AuthContext";
 
 // export default function AdminPosts() {
 //   const { t, i18n } = useTranslation();
 //   const isRTL = i18n.language === "ar";
-//   const {posts, setPosts, language} = useAuth();
+//   const {posts, setPosts, language} = useAuth(); 
 
 //   const [loading, setLoading] = useState(true);
 //   const [searchQuery, setSearchQuery] = useState("");
@@ -423,6 +28,8 @@
 //   const [viewingPost, setViewingPost] = useState(null);
 //   const [imageFile, setImageFile] = useState(null);
 //   const [imagePreview, setImagePreview] = useState(null);
+  
+//   // Initialize with the full nested structure to prevent errors when accessing fields
 //   const [formData, setFormData] = useState({
 //     translations: {
 //       en: {
@@ -437,18 +44,24 @@
 //   });
 //   const [errors, setErrors] = useState({});
 
-//   // Fetch posts
+//   // Fetch posts and parse translations
 //   useEffect(() => {
 //   const fetchData = async () => {
 //     try {
 //       const data = await getPosts();
 //       // Ensure translations are parsed into objects
-//       const parsed = data.map(post => ({
-//         ...post,
-//         translations: typeof post.translations === "string"
-//           ? JSON.parse(post.translations)
-//           : post.translations
-//       }));
+//       const parsed = data.map(post => {
+//         let translationsObject = post.translations;
+//         if (typeof post.translations === "string") {
+//             try {
+//                 translationsObject = JSON.parse(post.translations);
+//             } catch (e) {
+//                 console.error("Error parsing translations for post:", post.id, e);
+//                 translationsObject = { en: {}, ar: {} }; // Fallback to empty structure
+//             }
+//         }
+//         return { ...post, translations: translationsObject };
+//       });
 //       setPosts(parsed);
 //     } catch (error) {
 //       console.error("Error fetching posts:", error);
@@ -457,7 +70,7 @@
 //     }
 //   };
 //   fetchData();
-// }, []);
+// }, [setPosts]);
 
 
 //   const filteredPosts = posts.filter(post => {
@@ -467,9 +80,9 @@
 //     const arContent = post.translations?.ar?.content || "";
     
 //     return enTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//            arTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//            enContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//            arContent.toLowerCase().includes(searchQuery.toLowerCase());
+//               arTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+//               enContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
+//               arContent.toLowerCase().includes(searchQuery.toLowerCase());
 //   });
 
 //   const validateForm = () => {
@@ -521,13 +134,15 @@
 
 //       if (editingPost) {
 //         await updataPostId_Admin(editingPost.id, formDataToSend);
-//         // Update local state
+        
+//         // Update local state and reflect the new image URL if uploaded
 //         const updatedPosts = posts.map(post => 
 //           post.id === editingPost.id 
 //             ? { 
 //                 ...post, 
 //                 translations: formData.translations,
-//                 image: imageFile ? URL.createObjectURL(imageFile) : post.image,
+//                 // Use URL.createObjectURL for immediate preview, or fall back to existing
+//                 image: imageFile ? URL.createObjectURL(imageFile) : post.image, 
 //                 updated_at: new Date().toISOString() 
 //               } 
 //             : post
@@ -535,10 +150,13 @@
 //         setPosts(updatedPosts);
 //         alert(t("Post updated successfully!"));
 //       } else {
-//         console.log(formDataToSend);
-        
 //         const newPost = await createPost_Admin(formDataToSend);
-//         setPosts([newPost, ...posts]);
+//         // Ensure new post's translations are stored as objects in local state
+//         let newTranslations = newPost.translations;
+//         if (typeof newTranslations === 'string') {
+//             try { newTranslations = JSON.parse(newTranslations); } catch(e) { /* silent fail */ }
+//         }
+//         setPosts([{ ...newPost, translations: newTranslations }, ...posts]);
 //         alert(t("Post created successfully!"));
 //       }
       
@@ -561,6 +179,46 @@
 //     }
 //   };
 
+//   // const handleEdit = (event) => {
+//   //   setEditingEvent(event);
+//   //   setFormData({
+//   //     title: event.title,
+//   //     content: event.content,
+//   //     event_date: event.event_date,
+//   //     location: event.location
+//   //   });
+//   //   setImagePreview(event.image || null);
+//   //   setImageFile(null);
+//   //   setErrors({});
+//   //   setShowModal(true);
+//   // };
+
+//   // FIX 1: Explicitly set nested properties for pre-population
+//   const handleEdit = async (post) => {
+//     const data = await getPostsById(post.id);
+//     // console.log(data);
+    
+//     setEditingPost(post);
+    
+//     // Explicitly set the nested translation properties from the post object
+//     setFormData({
+//       translations: {
+//         en: {
+//           title: data?.translations?.en.title ,
+//           content: data?.translations?.en.content 
+//         },
+//         ar: {
+//           title: data?.translations?.ar.title ,
+//           content: data?.translations?.ar.content
+//         }
+//       }
+//     });
+    
+//     setImagePreview(data.image || null);
+//     setImageFile(null);
+//     setErrors({});
+//     setShowModal(true);
+//   };
 
 //   const handleAddNew = () => {
 //     setEditingPost(null);
@@ -589,51 +247,11 @@
 //     setImageFile(null);
 //     setErrors({});
 //   };
-// const handleEdit = (post) => {
-//   setEditingPost(post);
-//   setFormData({
-//     translations: post.translations || {
-//       en: { title: "", content: "" },
-//       ar: { title: "", content: "" }
-//     }
-//   });
-//   setImagePreview(post.image || null);
-//   setImageFile(null);
-//   setErrors({});
-//   setShowModal(true);
-// };
 
-// const handleViewDetails = async (id) => {
-//   setDetailsLoading(true);
-//   try {
-//     const data = await getPostById_Admin(id);
-//     setSelected(data);
-
-//     setFormData({
-//       title_en: data.translations?.en?.title || "",
-//       title_ar: data.translations?.ar?.title || "",
-//       content_en: data.translations?.en?.content || "",
-//       content_ar: data.translations?.ar?.content || "",
-//     });
-
-//     setImagePreview(data.image || null);
-//     setImageFile(null);
-//   } catch (error) {
-//     console.error(error);
-//   } finally {
-//     setDetailsLoading(false);
-//   }
-// };
-
-
-// //   const handleView = (post) => {
-// //   const parsedTranslations =
-// //     typeof post.translations === "string"
-// //       ? JSON.parse(post.translations)
-// //       : post.translations;
-
-// //   setViewingPost({ ...post, translations: parsedTranslations });
-// // };
+//   const handleView = (post) => {
+//     // Post should already be parsed in useEffect, so we set it directly
+//     setViewingPost(post);
+//   };
 
 
 //   const handleChange = (lang, field, value) => {
@@ -660,17 +278,17 @@
 //   };
 
 //   const formatDate = (dateString) => {
-//   if (!dateString) return t("Unknown date");
-//   const date = new Date(dateString);
-//   if (isNaN(date.getTime())) return t("Invalid date");
-//   return date.toLocaleString(i18n.language === "ar" ? "ar-EG" : "en-US", {
-//     year: "numeric",
-//     month: "short",
-//     day: "numeric",
-//     hour: "2-digit",
-//     minute: "2-digit",
-//   });
-// };
+//     if (!dateString) return t("Unknown date");
+//     const date = new Date(dateString);
+//     if (isNaN(date.getTime())) return t("Invalid date");
+//     return date.toLocaleString(i18n.language === "ar" ? "ar-EG" : "en-US", {
+//       year: "numeric",
+//       month: "short",
+//       day: "numeric",
+//       hour: "2-digit",
+//       minute: "2-digit",
+//     });
+//   };
 
 
 //   if (loading) {
@@ -687,7 +305,8 @@
 //   return (
 //     <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8" dir={isRTL ? "rtl" : "ltr"}>
 //       <div className="max-w-7xl mx-auto">
-//         {/* Header */}
+//         {/* Header and Search (omitted for brevity) */}
+        
 //         <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
 //           <h1 className="text-3xl font-bold text-[#193042]">
 //             {t("Posts Management")}
@@ -734,18 +353,23 @@
 //                       src={post.image} 
 //                       alt={post.translations?.[language]?.title || ""} 
 //                       className="w-full h-full object-cover"
+//                       // FIX 2: Added onerror fallback for images
+//                       onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x300/e5e7eb/7b8393?text=No+Image'; }}
 //                     />
 //                   </div>
 //                 )}
 //                 <div className="p-6">
 //                   <div className="flex items-start justify-between mb-3">
 //                     <h2 className="text-xl font-bold text-[#193042] line-clamp-2 flex-1">
-//                       {post.translations?.ar?.title || post.translations?.en?.title || ""}
+//                       {/* FIX 2: Use optional chaining to safely access title */}
+                      
+//                       {post.translations?.[language]?.title || post.translations?.en?.title || t("Untitled")}
 //                     </h2>
 //                   </div>
                   
 //                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-//                     {language === 'ar' ? post?.translations?.ar.content : post?.translations?.en.content }
+//                     {/* FIX 2: Use optional chaining to safely access content */}
+//                     {/* {post.translations?.[language]?.content || post.translations?.en?.content || t("No content available.")} */}
 //                   </p>
 
 //                   <div className={`flex items-center gap-2 text-xs text-gray-500 mb-4 ${isRTL ? "flex-row-reverse" : ""}`}>
@@ -756,7 +380,7 @@
 //                   {/* Actions */}
 //                   <div className={`flex gap-2 pt-4 border-t border-gray-100 ${isRTL ? "flex-row-reverse" : ""}`}>
 //                     <button
-//                       onClick={() => handleViewDetails(post)}
+//                       onClick={() => handleView(post)}
 //                       className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
 //                     >
 //                       <Eye size={16} />
@@ -866,6 +490,7 @@
 //                     </label>
 //                     <input
 //                       type="text"
+//                       // FIX 1: Access value from formData.translations.en.title
 //                       value={formData.translations.en.title}
 //                       onChange={(e) => handleChange('en', 'title', e.target.value)}
 //                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all ${
@@ -883,6 +508,7 @@
 //                       {t("Content (English)")} <span className="text-red-500">*</span>
 //                     </label>
 //                     <textarea
+//                       // FIX 1: Access value from formData.translations.en.content
 //                       value={formData.translations.en.content}
 //                       onChange={(e) => handleChange('en', 'content', e.target.value)}
 //                       rows="6"
@@ -911,6 +537,7 @@
 //                     </label>
 //                     <input
 //                       type="text"
+//                       // FIX 1: Access value from formData.translations.ar.title
 //                       value={formData.translations.ar.title}
 //                       onChange={(e) => handleChange('ar', 'title', e.target.value)}
 //                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all text-right ${
@@ -928,6 +555,7 @@
 //                       {t("Content (Arabic)")} <span className="text-red-500">*</span>
 //                     </label>
 //                     <textarea
+//                       // FIX 1: Access value from formData.translations.ar.content
 //                       value={formData.translations.ar.content}
 //                       onChange={(e) => handleChange('ar', 'content', e.target.value)}
 //                       rows="6"
@@ -994,9 +622,10 @@
 //                 </div>
 //               )}
               
-//               <div>
+//               <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
 //                 <h3 className="text-2xl font-bold text-[#193042] mb-3">
-//                   {viewingPost.translations?.[language]?.title || viewingPost.translations?.en?.title || ""}
+//                   {/* FIX 2: Use optional chaining to safely access title in view modal */}
+//                   {viewingPost.translations?.[language]?.title || viewingPost.translations?.en?.title || t("Untitled")}
 //                 </h3>
                 
 //                 <div className={`flex items-center gap-2 text-sm text-gray-500 mb-6 ${isRTL ? "flex-row-reverse" : ""}`}>
@@ -1005,8 +634,9 @@
 //                 </div>
                 
 //                 <div className="prose max-w-none">
-//                   <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-//                     {viewingPost.translations?.[i18n.language]?.content || viewingPost.translations?.en?.content || ""}
+//                   <p className={`text-gray-700 leading-relaxed whitespace-pre-wrap ${i18n.language === 'ar' ? 'text-right' : ''}`}>
+//                     {/* FIX 2: Use optional chaining to safely access content in view modal */}
+//                     {viewingPost.translations?.[i18n.language]?.content || viewingPost.translations?.en?.content || t("No content available.")}
 //                   </p>
 //                 </div>
 //               </div>
@@ -1052,15 +682,24 @@ import {
   Upload,
   Image as ImageIcon
 } from "lucide-react";
-import {getPosts, updataPostId_Admin, createPost_Admin, deletePost_Admin, getPostsById} from "../../services/authService";
+import {
+  updataPostId_Admin, 
+  createPost_Admin, 
+  deletePost_Admin, 
+} from "../../services/authService";
 import { useAuth } from "../../data/AuthContext";
 
 export default function AdminPosts() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
-  const {posts, setPosts, language} = useAuth(); 
+  
+  // 1. Consume global state from AuthContext
+  const { posts: globalPosts, setPosts: setGlobalPosts, language } = useAuth(); 
 
+  // 2. Create local state for parsed posts and loading
+  const [parsedPosts, setParsedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [editingPost, setEditingPost] = useState(null);
@@ -1068,76 +707,69 @@ export default function AdminPosts() {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   
-  // Initialize with the full nested structure to prevent errors when accessing fields
   const [formData, setFormData] = useState({
     translations: {
-      en: {
-        title: "",
-        content: ""
-      },
-      ar: {
-        title: "",
-        content: ""
-      }
+      en: { title: "", content: "" },
+      ar: { title: "", content: "" }
     }
   });
   const [errors, setErrors] = useState({});
 
-  // Fetch posts and parse translations
+  // 3. UseEffect to parse global posts into local state
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const data = await getPosts();
-      // Ensure translations are parsed into objects
-      const parsed = data.map(post => {
-        let translationsObject = post.translations;
-        if (typeof post.translations === "string") {
-            try {
-                translationsObject = JSON.parse(post.translations);
-            } catch (e) {
-                console.error("Error parsing translations for post:", post.id, e);
-                translationsObject = { en: {}, ar: {} }; // Fallback to empty structure
-            }
-        }
-        return { ...post, translations: translationsObject };
-      });
-      setPosts(parsed);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    } finally {
+    setLoading(true);
+    
+    // Check if global data is available
+    if (!globalPosts) {
       setLoading(false);
+      return;
     }
-  };
-  fetchData();
-}, [setPosts]);
 
+    // Parse the global posts array (which might have string translations)
+    const parsed = globalPosts.map(post => {
+      let translationsObject = post.translations;
+      if (typeof post.translations === "string") {
+        try {
+          translationsObject = JSON.parse(post.translations);
+        } catch (e) {
+          console.error("Error parsing translations for post:", post.id, e);
+          translationsObject = { en: {}, ar: {} }; // Fallback
+        }
+      }
+      
+      // Ensure the full data structure exists to prevent errors
+      return { 
+        ...post, 
+        translations: {
+          en: translationsObject.en || { title: '', content: '' },
+          ar: translationsObject.ar || { title: '', content: '' }
+        }
+      };
+    });
 
-  const filteredPosts = posts.filter(post => {
-    const enTitle = post.translations?.en?.title || "";
-    const arTitle = post.translations?.ar?.title || "";
-    const enContent = post.translations?.en?.content || "";
-    const arContent = post.translations?.ar?.content || "";
+    setParsedPosts(parsed);
+    setLoading(false);
+  }, [globalPosts]); // This effect runs only when the globalPosts array changes
+
+  // 4. Filter against the local parsedPosts
+  const filteredPosts = parsedPosts.filter(post => {
+    const enTitle = post.translations.en.title || "";
+    const arTitle = post.translations.ar.title || "";
+    const enContent = post.translations.en.content || "";
+    const arContent = post.translations.ar.content || "";
     
     return enTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              arTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              enContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              arContent.toLowerCase().includes(searchQuery.toLowerCase());
+           arTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           enContent.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           arContent.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.translations.en.title.trim()) {
-      newErrors.enTitle = t("This field is required.");
-    }
-    if (!formData.translations.en.content.trim()) {
-      newErrors.enContent = t("This field is required.");
-    }
-    if (!formData.translations.ar.title.trim()) {
-      newErrors.arTitle = t("This field is required.");
-    }
-    if (!formData.translations.ar.content.trim()) {
-      newErrors.arContent = t("This field is required.");
-    }
+    if (!formData.translations.en.title.trim()) newErrors.enTitle = t("This field is required.");
+    if (!formData.translations.en.content.trim()) newErrors.enContent = t("This field is required.");
+    if (!formData.translations.ar.title.trim()) newErrors.arTitle = t("This field is required.");
+    if (!formData.translations.ar.content.trim()) newErrors.arContent = t("This field is required.");
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -1148,55 +780,43 @@ export default function AdminPosts() {
     if (file) {
       setImageFile(file);
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-      };
+      reader.onloadend = () => setImagePreview(reader.result);
       reader.readAsDataURL(file);
     }
   };
 
+  // 5. Refined handleSubmit (Data Integrity)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
 
     try {
       const formDataToSend = new FormData();
-      
-      // Add translations as JSON string
       formDataToSend.append('translations', JSON.stringify(formData.translations));
-      
-      // Add image if selected
       if (imageFile) {
         formDataToSend.append('image', imageFile);
       }
 
+      let newOrUpdatedPost; // This will hold the result from the API
+
       if (editingPost) {
-        await updataPostId_Admin(editingPost.id, formDataToSend);
-        
-        // Update local state and reflect the new image URL if uploaded
-        const updatedPosts = posts.map(post => 
-          post.id === editingPost.id 
-            ? { 
-                ...post, 
-                translations: formData.translations,
-                // Use URL.createObjectURL for immediate preview, or fall back to existing
-                image: imageFile ? URL.createObjectURL(imageFile) : post.image, 
-                updated_at: new Date().toISOString() 
-              } 
-            : post
-        );
-        setPosts(updatedPosts);
+        // Assume API returns the full, updated post object (with new image URL)
+        newOrUpdatedPost = await updataPostId_Admin(editingPost.id, formDataToSend);
         alert(t("Post updated successfully!"));
       } else {
-        const newPost = await createPost_Admin(formDataToSend);
-        // Ensure new post's translations are stored as objects in local state
-        let newTranslations = newPost.translations;
-        if (typeof newTranslations === 'string') {
-            try { newTranslations = JSON.parse(newTranslations); } catch(e) { /* silent fail */ }
-        }
-        setPosts([{ ...newPost, translations: newTranslations }, ...posts]);
+        // Assume API returns the full, created post object
+        newOrUpdatedPost = await createPost_Admin(formDataToSend);
         alert(t("Post created successfully!"));
+      }
+      
+      // Update the *global* state. 
+      // The local 'parsedPosts' will update automatically via its useEffect.
+      if (editingPost) {
+        setGlobalPosts(globalPosts.map(p => 
+          p.id === newOrUpdatedPost.id ? newOrUpdatedPost : p
+        ));
+      } else {
+        setGlobalPosts([newOrUpdatedPost, ...globalPosts]);
       }
       
       handleCloseModal();
@@ -1210,7 +830,8 @@ export default function AdminPosts() {
     if (window.confirm(t("Are you sure you want to delete this post?"))) {
       try {
         await deletePost_Admin(id);
-        setPosts(posts.filter((p) => p.id !== id));
+        // Update global state, which will trigger local re-parse
+        setGlobalPosts(globalPosts.filter((p) => p.id !== id));
         alert(t("Post deleted successfully!"));
       } catch (error) {
         console.error("Error deleting post:", error);
@@ -1218,42 +839,26 @@ export default function AdminPosts() {
     }
   };
 
-  // const handleEdit = (event) => {
-  //   setEditingEvent(event);
-  //   setFormData({
-  //     title: event.title,
-  //     content: event.content,
-  //     event_date: event.event_date,
-  //     location: event.location
-  //   });
-  //   setImagePreview(event.image || null);
-  //   setImageFile(null);
-  //   setErrors({});
-  //   setShowModal(true);
-  // };
-
-  // FIX 1: Explicitly set nested properties for pre-population
-  const handleEdit = async (post) => {
-    const data = await getPostsById(post.id);
-    // console.log(data);
-    
+  // 6. Refined handleEdit (No API call)
+  const handleEdit = (post) => {
+    // 'post' is the full, parsed object from local state
     setEditingPost(post);
     
-    // Explicitly set the nested translation properties from the post object
+    // We can trust 'post' has the full structure defined in the parse effect
     setFormData({
       translations: {
         en: {
-          title: data?.translations?.en.title ,
-          content: data?.translations?.en.content 
+          title: post.translations.en.title,
+          content: post.translations.en.content
         },
         ar: {
-          title: data?.translations?.ar.title ,
-          content: data?.translations?.ar.content
+          title: post.translations.ar.title,
+          content: post.translations.ar.content
         }
       }
     });
     
-    setImagePreview(data.image || null);
+    setImagePreview(post.image || null);
     setImageFile(null);
     setErrors({});
     setShowModal(true);
@@ -1276,6 +881,7 @@ export default function AdminPosts() {
   const handleCloseModal = () => {
     setShowModal(false);
     setEditingPost(null);
+    // Reset form data
     setFormData({
       translations: {
         en: { title: "", content: "" },
@@ -1288,10 +894,8 @@ export default function AdminPosts() {
   };
 
   const handleView = (post) => {
-    // Post should already be parsed in useEffect, so we set it directly
     setViewingPost(post);
   };
-
 
   const handleChange = (lang, field, value) => {
     setFormData(prev => ({
@@ -1305,7 +909,6 @@ export default function AdminPosts() {
       }
     }));
     
-    // Clear error when user starts typing
     const errorKey = `${lang}${field.charAt(0).toUpperCase() + field.slice(1)}`;
     if (errors[errorKey]) {
       setErrors(prev => {
@@ -1329,7 +932,6 @@ export default function AdminPosts() {
     });
   };
 
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -1344,8 +946,8 @@ export default function AdminPosts() {
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8" dir={isRTL ? "rtl" : "ltr"}>
       <div className="max-w-7xl mx-auto">
-        {/* Header and Search (omitted for brevity) */}
         
+        {/* Header and Add Button */}
         <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
           <h1 className="text-3xl font-bold text-[#193042]">
             {t("Posts Management")}
@@ -1392,7 +994,6 @@ export default function AdminPosts() {
                       src={post.image} 
                       alt={post.translations?.[language]?.title || ""} 
                       className="w-full h-full object-cover"
-                      // FIX 2: Added onerror fallback for images
                       onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x300/e5e7eb/7b8393?text=No+Image'; }}
                     />
                   </div>
@@ -1400,15 +1001,13 @@ export default function AdminPosts() {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <h2 className="text-xl font-bold text-[#193042] line-clamp-2 flex-1">
-                      {/* FIX 2: Use optional chaining to safely access title */}
-                      
                       {post.translations?.[language]?.title || post.translations?.en?.title || t("Untitled")}
                     </h2>
                   </div>
                   
+                  {/* 7. UI FIX: Uncommented content */}
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                    {/* FIX 2: Use optional chaining to safely access content */}
-                    {/* {post.translations?.[language]?.content || post.translations?.en?.content || t("No content available.")} */}
+                    {post.translations?.[language]?.content || post.translations?.en?.content || t("No content available.")}
                   </p>
 
                   <div className={`flex items-center gap-2 text-xs text-gray-500 mb-4 ${isRTL ? "flex-row-reverse" : ""}`}>
@@ -1521,7 +1120,6 @@ export default function AdminPosts() {
                 <h3 className="text-lg font-bold text-blue-900 mb-4">
                   {t("English Content")}
                 </h3>
-                
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -1529,7 +1127,6 @@ export default function AdminPosts() {
                     </label>
                     <input
                       type="text"
-                      // FIX 1: Access value from formData.translations.en.title
                       value={formData.translations.en.title}
                       onChange={(e) => handleChange('en', 'title', e.target.value)}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all ${
@@ -1541,13 +1138,11 @@ export default function AdminPosts() {
                       <p className="text-red-500 text-sm mt-1">{errors.enTitle}</p>
                     )}
                   </div>
-
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       {t("Content (English)")} <span className="text-red-500">*</span>
                     </label>
                     <textarea
-                      // FIX 1: Access value from formData.translations.en.content
                       value={formData.translations.en.content}
                       onChange={(e) => handleChange('en', 'content', e.target.value)}
                       rows="6"
@@ -1568,7 +1163,6 @@ export default function AdminPosts() {
                 <h3 className="text-lg font-bold text-green-900 mb-4" dir="rtl">
                   {t("Arabic Content")}
                 </h3>
-                
                 <div className="space-y-4" dir="rtl">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2 text-right">
@@ -1576,7 +1170,6 @@ export default function AdminPosts() {
                     </label>
                     <input
                       type="text"
-                      // FIX 1: Access value from formData.translations.ar.title
                       value={formData.translations.ar.title}
                       onChange={(e) => handleChange('ar', 'title', e.target.value)}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all text-right ${
@@ -1588,13 +1181,11 @@ export default function AdminPosts() {
                       <p className="text-red-500 text-sm mt-1 text-right">{errors.arTitle}</p>
                     )}
                   </div>
-
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2 text-right">
                       {t("Content (Arabic)")} <span className="text-red-500">*</span>
                     </label>
                     <textarea
-                      // FIX 1: Access value from formData.translations.ar.content
                       value={formData.translations.ar.content}
                       onChange={(e) => handleChange('ar', 'content', e.target.value)}
                       rows="6"
@@ -1663,7 +1254,6 @@ export default function AdminPosts() {
               
               <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
                 <h3 className="text-2xl font-bold text-[#193042] mb-3">
-                  {/* FIX 2: Use optional chaining to safely access title in view modal */}
                   {viewingPost.translations?.[language]?.title || viewingPost.translations?.en?.title || t("Untitled")}
                 </h3>
                 
@@ -1674,7 +1264,6 @@ export default function AdminPosts() {
                 
                 <div className="prose max-w-none">
                   <p className={`text-gray-700 leading-relaxed whitespace-pre-wrap ${i18n.language === 'ar' ? 'text-right' : ''}`}>
-                    {/* FIX 2: Use optional chaining to safely access content in view modal */}
                     {viewingPost.translations?.[i18n.language]?.content || viewingPost.translations?.en?.content || t("No content available.")}
                   </p>
                 </div>
