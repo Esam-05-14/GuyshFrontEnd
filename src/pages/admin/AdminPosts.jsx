@@ -717,18 +717,33 @@ export default function AdminPosts() {
   });
   const [errors, setErrors] = useState({});
 
-  // 3. Update loading state based on 'globalPosts'
+  // 3. Fetch data on component mount
   useEffect(() => {
-    const data = getPosts_Admin()
-    setGlobalPosts(data);
-    console.log(globalPosts);
-    
-    if (globalPosts) {
-      setLoading(false);
-    } else {
-      setLoading(true);
-    }
-  }, [globalPosts]); // This effect runs only when the global posts array changes
+    // We define an async function *inside* the effect
+    const fetchData = async () => {
+      setLoading(true); // 1. Set loading to true *before* fetching
+      try {
+        // 2. Await the promise to get the actual data
+        const data = await getPosts_Admin(); 
+        
+        // 3. Set the data to state
+        setGlobalPosts(data || []); // Use the data, fallback to []
+        
+        // 4. Log the *data* you received, not the state variable
+        console.log("Data from API:", data); 
+
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        setGlobalPosts([]); // Set empty array on error
+      } finally {
+        // 5. Set loading to false *after* the try/catch is done
+        setLoading(false); 
+      }
+    };
+
+    fetchData(); // 6. Call the async function
+
+  }, []); // 7. Use an empty dependency array [] to run *only once* on mount 
 
   // 4. Filter *directly* on the 'globalPosts' from useAuth()
   //    Add optional chaining (?.) for safety.
