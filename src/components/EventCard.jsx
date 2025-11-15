@@ -54,7 +54,7 @@ export default function EventCard({ name, description, location, date, src }) {
         {/* Event Details */}
         <div className="flex-1">
           <h2 className="text-xl font-semibold text-red-700">{name}</h2>
-          <p className="text-sm text-gray-700 mt-1 leading-relaxed">
+          <p className="text-sm text-gray-700 mt-1 leading-relaxed line-clamp-3">
             {description || t('events.default_description')}
           </p>
         </div>

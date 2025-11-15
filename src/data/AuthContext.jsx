@@ -413,8 +413,8 @@ export function AuthProvider({ children }) {
         ]);
         const data = await getAvailableService();
         if (data){
-          setActiveAirport(data.airport-pickup-service);
-          setActiveGuidence(data.guidance-service);
+          setActiveAirport(data.airport_pickup_service);
+          setActiveGuidence(data.guidance_service);
         }
 
         if (unis) setUniversities(unis);
