@@ -587,11 +587,11 @@ export default function CompleteProfileForm() {
       ...formData,
       // Consent fields
       consent_privacy_policy: agreePrivacy,
-      consent_privacy_policy_version: CONSENT_VERSION,
+      consent_privacy_policy_version: versions.privacy_policy_version,
       consent_terms_and_conditions: agreeTerms,
-      consent_terms_and_conditions_version: CONSENT_VERSION,
+      consent_terms_and_conditions_version: versions.terms_of_service_version,
       consent_union_regulations: agreeUnion,
-      consent_union_regulations_version: CONSENT_VERSION,
+      consent_union_regulations_version: versions.regulations_version,
       consent_data_processing: agreeData,
       // Automatic fields
       consent_data_processing_version: CONSENT_VERSION,
