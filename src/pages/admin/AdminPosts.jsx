@@ -1058,7 +1058,6 @@ import { useAuth } from "../../data/AuthContext";
 export default function AdminPosts() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
-  // Assuming 'posts' state comes from useAuth, but using local state for modifications
   const {posts, setPosts, language} = useAuth(); 
 
   const [loading, setLoading] = useState(true);

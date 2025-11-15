@@ -320,8 +320,8 @@ export function AuthProvider({ children }) {
       const roles = await fetchUserRole();
       const profile = await getMyProfile();
 
-      if (!roles || !profile) {
-        console.error("Login failed: User roles or profile not found.");
+      if (!roles ) {
+        console.error("Login failed: User roles  not found.");
         logout(); // Cleanup if data fetch fails after getting token
         return false;
       }
