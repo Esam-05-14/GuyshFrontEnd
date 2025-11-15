@@ -997,7 +997,7 @@ const handleEdit = (post) => {
                 key={post.id}
                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border-t-4 border-[#193042]"
               >
-                {post.image && (
+                {post && post.image && (
                   <div className="h-48 overflow-hidden">
                     <img 
                       src={post.image} 
@@ -1010,13 +1010,13 @@ const handleEdit = (post) => {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <h2 className="text-xl font-bold text-[#193042] line-clamp-2 flex-1">
-                      {post.translations?.[language]?.title || post.translations?.en?.title || t("Untitled")}
+                      {post && (post.translations?.[language]?.title || post.translations?.en?.title || t("Untitled"))}
                     </h2>
                   </div>
                   
                   {/* 7. UI FIX: Uncommented content */}
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                    {post.translations?.[language]?.content || post.translations?.en?.content || t("No content available.")}
+                    {post && (post.translations?.[language]?.content || post.translations?.en?.content || t("No content available."))}
                   </p>
 
                   <div className={`flex items-center gap-2 text-xs text-gray-500 mb-4 ${isRTL ? "flex-row-reverse" : ""}`}>
@@ -1263,7 +1263,7 @@ const handleEdit = (post) => {
               
               <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
                 <h3 className="text-2xl font-bold text-[#193042] mb-3">
-                  {viewingPost && (viewingPost.translations?.[language]?.title || viewingPost.translations?.en?.title || t("Untitled"))}
+                  {viewingPost && (viewingPost.translations?.ar?.title || viewingPost.translations?.en?.title || t("Untitled"))}
                 </h3>
                 
                 <div className={`flex items-center gap-2 text-sm text-gray-500 mb-6 ${isRTL ? "flex-row-reverse" : ""}`}>
@@ -1273,7 +1273,7 @@ const handleEdit = (post) => {
                 
                 <div className="prose max-w-none">
                   <p className={`text-gray-700 leading-relaxed whitespace-pre-wrap ${i18n.language === 'ar' ? 'text-right' : ''}`}>
-                    {viewingPost && (viewingPost.translations?.[i18n.language]?.content || viewingPost.translations?.en?.content || t("No content available."))}
+                    {viewingPost && (viewingPost.translations?.ar?.content || viewingPost.translations?.en?.content || t("No content available."))}
                   </p>
                 </div>
               </div>

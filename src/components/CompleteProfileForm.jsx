@@ -512,11 +512,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../data/AuthContext";
-import { createProfile } from "../services/authService";
+import { createProfile, getActivateVersions } from "../services/authService";
 import { useTranslation } from "react-i18next";
 
 // --- New Version Constant ---
 const CONSENT_VERSION = "1.0";
+
 const UNION_REGULATIONS_PDF_URL = "/public/assets/guysh_regulations_1.0.pdf";
 
 
@@ -532,7 +533,7 @@ const getFormattedConsentDate = () => {
 export default function CompleteProfileForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { universities } = useAuth();
+  const { universities, versions } = useAuth();
 
   const [formData, setFormData] = useState({
     english_name: "",
@@ -559,19 +560,6 @@ export default function CompleteProfileForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // const handleDownloadRegulations = () => {
-  //   // 1. Create a temporary anchor element
-  //   const link = document.createElement('a');
-  //   // 2. Set the URL of the PDF file
-  //   link.href = UNION_REGULATIONS_PDF_URL;
-  //   // 3. Set the download attribute to force download instead of just navigation
-  //   //    (You can specify a file name here)
-  //   link.download = 'Union_Regulations.pdf'; 
-  //   // 4. Append to the body, click it, and remove it
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // };
   const handleOpenRegulations = (e) => {
     e.preventDefault(); // Prevents default button behavior if any
     window.open(UNION_REGULATIONS_PDF_URL, '_blank');

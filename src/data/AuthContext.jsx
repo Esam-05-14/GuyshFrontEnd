@@ -234,7 +234,8 @@ import {
   getBoardMembers_Admin,
   getMyProfile,
   // ✅ New import for token check
-  checkTokenValidity 
+  checkTokenValidity, 
+  getActivateVersions
 } from "../services/authService"; // Ensure checkTokenValidity is available
 import i18n from "../i18n";
 
@@ -260,6 +261,7 @@ export function AuthProvider({ children }) {
   // --- APPLICATION DATA STATE (Public & Private) ---
   const [universities, setUniversities] = useState([]);
   const [boardMembers, setBoardMembers] = useState([]); // Public
+  const [versions , setVersions] = useState({})
   const [events, setEvents] = useState([]); // Member
   const [posts, setPosts] = useState([]); // Public/News
   const [users, setUsers] = useState([]); // Admin
@@ -397,15 +399,19 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const fetchPublicData = async () => {
       try {
-        const [unis, board, news] = await Promise.all([
+        const [unis, board, news, versions] = await Promise.all([
           getUniversities(),
           getBoardMembers(language),
           getPosts(),
+          getActivateVersions()
         ]);
 
         if (unis) setUniversities(unis);
         if (board) setBoardMembers(board);
         if (news) setPosts(news);
+        if (versions) setVersions(versions);
+        console.log(versions);
+
       } catch (error) {
         console.error("Failed to fetch public data:", error.message);
       }
@@ -476,6 +482,7 @@ export function AuthProvider({ children }) {
         users,
         profiles,
         boardMembers_A,
+        versions,
 
         // LANGUAGE
         language,

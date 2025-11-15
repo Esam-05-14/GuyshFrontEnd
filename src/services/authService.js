@@ -280,6 +280,19 @@ export async function downloadRules() {
   window.URL.revokeObjectURL(url);
 }
 
+export async function getActivateVersions() {
+  
+  const response = await fetch(api("/legal-active-versions/"));
+
+  if (!response.ok) {
+    throw new Error("unable to get users");
+  }
+
+  const data = await response.json();
+  
+  return data;
+}
+
 export async function getUniversities() {
   
   const response = await fetch(api("/users/universities/"));
