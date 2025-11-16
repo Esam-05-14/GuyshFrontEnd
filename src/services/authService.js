@@ -17,7 +17,7 @@ export async function checkTokenValidity() {
   const response = await fetch(api("/users/chk-tkn/"), {
     method: 'GET',
     headers: {
-      'Authorization': `bearer ${token}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
   });

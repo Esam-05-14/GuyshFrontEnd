@@ -11,7 +11,17 @@ export default function MyProfile() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const formatDate = (dateString) => {
+    if (!dateString) return new Date().toLocaleDateString();
+    const date = new Date(dateString);
+    return date.toLocaleDateString(i18n.language === "ar" ? "ar-EG" : "en-GB", {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
 
   // initialize form
   useEffect(() => {
@@ -82,7 +92,6 @@ export default function MyProfile() {
               name="english_name"
               value={formData.english_name}
               className="w-full border rounded p-2 bg-gray-100"
-              readOnly
             />
           </div>
 
@@ -96,7 +105,7 @@ export default function MyProfile() {
               name="arabic_name"
               value={formData.arabic_name}
               className="w-full border rounded p-2 bg-gray-100"
-              readOnly
+              
               dir="rtl"
             />
           </div>
@@ -151,6 +160,7 @@ export default function MyProfile() {
               }`}
             />
           </div>
+          
 
           {/* University */}
           <div>
@@ -173,6 +183,15 @@ export default function MyProfile() {
                 </option>
               ))}
             </select>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-500 mb-1">
+              Consent Date: <span>{formatDate(myProfile.consent_date)}</span>
+            </label>
+            <label className="block text-sm font-semibold text-gray-500 mb-1">
+              Last Update: <span>{formatDate(myProfile.profile_last_updated)}</span>
+            </label>
+            
           </div>
 
           {/* Action buttons */}

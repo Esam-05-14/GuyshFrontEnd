@@ -111,12 +111,12 @@ function UserProfiles() {
       profile.arabic_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       profile.email?.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const matchesStatus = 
-      statusFilter === "all" ? true :
-      statusFilter === "member" ? profile.is_member :
-      statusFilter === "non-member" ? !profile.is_member : true;
+    // const matchesStatus = 
+    //   statusFilter === "all" ? true :
+    //   statusFilter === "member" ? profile.is_member :
+    //   statusFilter === "non-member" ? !profile.is_member : true;
     
-    return matchesSearch && matchesStatus;
+    return matchesSearch ;
   });
   const [user , setUser] = useState(null);
     // Fetch the user data by id
@@ -162,7 +162,7 @@ function UserProfiles() {
             />
           </div>
 
-          {/* Status Filter */}
+          {/* Status Filter
           <div className={`flex gap-2 ${isRTL ? "flex-row-reverse" : ""}`}>
             <button
               onClick={() => setStatusFilter("all")}
@@ -196,7 +196,7 @@ function UserProfiles() {
               <UserX size={18} />
               <span className="hidden sm:inline">{t("userProfiles.nonMembers")}</span>
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Users Cards - Mobile/Tablet View */}
@@ -210,6 +210,7 @@ function UserProfiles() {
                 <div className="p-5">
                   {/* Name and Status */}
                   <div className={`flex items-start justify-between mb-4 ${isRTL ? "flex-row-reverse" : ""}`}>
+                    <span>ID: {profile.user_id}</span>
                     <div className={isRTL ? "text-right" : "text-left"}>
                       <h3 className="text-lg font-bold text-[#193042] mb-1">
                         {profile.english_name || t("userProfiles.noName")}
@@ -220,13 +221,14 @@ function UserProfiles() {
                         </p>
                       )}
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+
+                    {/* <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                       profile.is_member
                         ? "bg-green-100 text-green-700"
                         : "bg-orange-100 text-orange-700"
                     }`}>
                       {profile.is_member ? t("userProfiles.member") : t("userProfiles.nonMember")}
-                    </span>
+                    </span> */}
                   </div>
 
                   {/* Action Button */}
@@ -254,12 +256,15 @@ function UserProfiles() {
           <table className="min-w-full">
             <thead className="bg-gradient-to-r from-[#193042] to-[#254e6f] text-white">
               <tr>
+                <th className={`py-4 px-6 font-semibold text-center`}>
+                  ID
+                </th>
                 <th className={`py-4 px-6 font-semibold ${isRTL ? "text-right" : "text-left"}`}>
                   {t("userProfiles.name")}
                 </th>
-                <th className="py-4 px-6 font-semibold text-center">
+                {/* <th className="py-4 px-6 font-semibold text-center">
                   {t("userProfiles.status")}
-                </th>
+                </th> */}
                 <th className="py-4 px-6 font-semibold text-center">
                   {t("userProfiles.actions")}
                 </th>
@@ -272,6 +277,9 @@ function UserProfiles() {
                     key={profile.id}
                     className="hover:bg-gray-50 transition-colors border-b last:border-0"
                   >
+                    <td className={`py-4 px-6 text-center`}>
+                      {profile.user_id}
+                    </td>
                     <td className={`py-4 px-6 ${isRTL ? "text-right" : "text-left"}`}>
                       <div>
                         <p className="font-semibold text-gray-900">
@@ -300,7 +308,7 @@ function UserProfiles() {
                         <span className="truncate max-w-[180px]">{profile.university || "-"}</span>
                       </div>
                     </td> */}
-                    <td className="py-4 px-6 text-center">
+                    {/* <td className="py-4 px-6 text-center">
                       <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
                         profile.is_member
                           ? "bg-green-100 text-green-700"
@@ -308,7 +316,7 @@ function UserProfiles() {
                       }`}>
                         {profile.is_member ? t("userProfiles.member") : t("userProfiles.nonMember")}
                       </span>
-                    </td>
+                    </td> */}
                     <td className="py-4 px-6 text-center">
                       <Link
                         to={`/admin/profiles/${profile.id}`}

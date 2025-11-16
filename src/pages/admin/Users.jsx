@@ -100,7 +100,7 @@ function Users() {
   const [searchQuery, setSearchQuery] = useState("");
 
   // New Filters
-  const [statusFilter, setStatusFilter] = useState("all"); // all | active | inactive
+  const [staffFilter, setStaffFilter] = useState("all"); // all | active | inactive
   const [memberFilter, setMemberFilter] = useState("all"); // all | yes | no
 
   useEffect(() => {
@@ -119,13 +119,16 @@ function Users() {
   const filteredUsers = users.filter((user) => {
     const matchesSearch =
       user.username?.toLowerCase().includes(searchQuery.toLowerCase());
+    // const matchesId =
+    //   user.id === searchQuery;
+    
 
     const matchesStatus =
-      statusFilter === "all"
+      staffFilter === "all"
         ? true
-        : statusFilter === "active"
-        ? user.is_active === true
-        : user.is_active === false;
+        : staffFilter === "yes"
+        ? user.is_staff === true
+        : user.is_staff === false;
 
     const matchesMember =
       memberFilter === "all"
@@ -134,13 +137,13 @@ function Users() {
         ? user.is_member === true
         : user.is_member === false;
 
-    return matchesSearch && matchesStatus && matchesMember;
+    return matchesSearch &&  matchesStatus && matchesMember;
   });
 
   // RESET FILTERS
   const resetFilters = () => {
-    setStatusFilter("all");
     setMemberFilter("all");
+    setStaffFilter("all");
     setSearchQuery("");
   };
 
@@ -180,13 +183,13 @@ function Users() {
 
             {/* STATUS FILTER */}
             <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              value={staffFilter}
+              onChange={(e) => setStaffFilter(e.target.value)}
               className="border border-gray-300 rounded-lg py-2 px-3 focus:ring-2 focus:ring-[#193042]"
             >
-              <option value="all">All Statuses</option>
-              <option value="active">Active Users</option>
-              <option value="inactive">Inactive Users</option>
+              <option value="all">All Users</option>
+              <option value="yes">Staff Users</option>
+              <option value="no">UnStaff Users</option>
             </select>
 
             {/* MEMBER FILTER */}
@@ -220,18 +223,14 @@ function Users() {
               >
                 <div className="p-5">
                   <h3 className="text-lg font-bold text-[#193042] mb-2">
+                    ID: {u.id}
+                  </h3>
+                  <h3 className="text-lg font-bold text-[#193042] mb-2">
                     {u.username}
                   </h3>
 
                   <div className="space-y-2 text-gray-700">
-                    <p>
-                      <strong>Status:</strong>{" "}
-                      {u.is_active ? (
-                        <span className="text-green-600 font-semibold">Active</span>
-                      ) : (
-                        <span className="text-red-500 font-semibold">Inactive</span>
-                      )}
-                    </p>
+                    
                     <p>
                       <strong>Member:</strong>{" "}
                       {u.is_member ? (
@@ -241,8 +240,8 @@ function Users() {
                       )}
                     </p>
                     <p>
-                      <strong>Superuser:</strong>{" "}
-                      {u.is_superuser ? (
+                      <strong>Staff:</strong>{" "}
+                      {u.is_staff ? (
                         <span className="text-green-600 font-semibold">Yes</span>
                       ) : (
                         <span className="text-gray-500">No</span>
@@ -265,27 +264,19 @@ function Users() {
           <table className="min-w-full">
             <thead className="bg-gradient-to-r from-[#193042] to-[#254e6f] text-white">
               <tr>
-                <th className="py-4 px-6 font-semibold text-left">Username</th>
-                <th className="py-4 px-6 font-semibold text-center">Status</th>
-                <th className="py-4 px-6 font-semibold text-center">Member</th>
-                <th className="py-4 px-6 font-semibold text-center">Superuser</th>
+                <th className="py-3 px-10 font-semibold text-center">Id</th>
+                <th className="py-3 px-10 font-semibold text-center">Username</th>
+                <th className="py-3 px-10 font-semibold text-center">Member</th>
+                <th className="py-3 px-10 font-semibold text-center">Staff</th>
               </tr>
             </thead>
             <tbody>
               {filteredUsers.length > 0 ? (
                 filteredUsers.map((u, idx) => (
                   <tr key={idx} className="hover:bg-gray-50 transition-colors border-b last:border-0">
-                    <td className="py-4 px-6 font-medium">{u.username}</td>
-
-                    <td className="py-4 px-6 text-center">
-                      {u.is_active ? (
-                        <span className="text-green-600 font-semibold">Active</span>
-                      ) : (
-                        <span className="text-red-500 font-semibold">Inactive</span>
-                      )}
-                    </td>
-
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-3 px-6 font-medium">{u.id}</td>
+                    <td className="py-3 px-6 font-medium">{u.username}</td>
+                    <td className="py-3 px-6 text-center">
                       {u.is_member ? (
                         <span className="text-green-600 font-semibold">Yes</span>
                       ) : (
@@ -293,7 +284,7 @@ function Users() {
                       )}
                     </td>
 
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-3 px-6 text-center">
                       {u.is_superuser ? (
                         <span className="text-green-600 font-semibold">Yes</span>
                       ) : (

@@ -8,7 +8,7 @@
   "loading": "Loading board members...",
   "no_representatives": "No representatives yet.",
   "logoMeaning": {
-    "heading": "General Union for Yemeni Academic Students Hungary",
+    "heading": "General Union for Yemeni Students in Hungary",
     "description": "Each letter in GUYSH represents our vision, values, and unity.",
     "general": {
       "title": "General",
@@ -60,7 +60,7 @@
   "pecs": "Pécs"
 },
 "footer": {
-    "about_text": "Guysh Hungary — connecting and supporting Yemeni students in Hungary through community, events, and guidance.",
+    "about_text": "GUYSH Hungary — connecting and supporting Yemeni students in Hungary through community, events, and guidance.",
     "contact_us": "Contact Us",
     "follow_us": "Follow Us",
     "services": "Our Services",
@@ -223,7 +223,7 @@
     "updateFail": "❌ Failed to update profile. Please try again."
   },
   "mainPage": {
-    "welcomeTitle": "Welcome to Guysh Hungary",
+    "welcomeTitle": "Welcome to GUYSH Hungary",
     "welcomeText": "We are committed to uniting Yemeni students in Hungary through collaboration, innovation, and community spirit. Explore our initiatives, events, and resources designed to empower students and create a lasting impact.",
     "servicesTitle": "Our News & Activities",
     "noNews": "No recent news available."
@@ -535,10 +535,10 @@
   
   "union": {
     "title": "Student Union Rules and Rights",
-    "subtitle": "Understanding your rights and responsibilities as a member of Guysh Hungary Student Union",
+    "subtitle": "Understanding your rights and responsibilities as a member of GUYSH Hungary Student Union",
     "lastUpdated": "Last Updated",
     "updateDate": "November 2024",
-    "introduction": "The Guysh Hungary Student Union is dedicated to supporting Yemeni students in Hungary. This document outlines the rights, responsibilities, and rules that govern our union and its members.",
+    "introduction": "The GUYSH Hungary Student Union is dedicated to supporting Yemeni students in Hungary. This document outlines the rights, responsibilities, and rules that govern our union and its members.",
     "rights": {
       "title": "Student Rights",
       "items": [
@@ -703,7 +703,7 @@
     "reason3": "The link is invalid or malformed",
     "goHome": "Go to Home",
     "contactSupport": "Contact Support",
-    "footer": "Guysh Hungary Student Union"
+    "footer": "GUYSH Hungary Student Union"
   },
   "Posts Management": "Posts Management",
   "Add New Post": "Add New Post",

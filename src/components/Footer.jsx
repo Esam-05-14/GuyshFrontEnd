@@ -121,7 +121,7 @@ function Footer() {
                 alt="Guysh Logo" 
                 className="h-14 w-14 rounded-full border-2 border-gray-500 hover:border-yellow-400 transition-all duration-300 shadow-lg" 
               />
-              <span className="text-xl font-bold text-gray-100">Guysh</span>
+              <span className="text-xl font-bold text-gray-100">GUYSH</span>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
               {t("footer.about_text")}
