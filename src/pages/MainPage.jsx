@@ -267,7 +267,7 @@ function MainPage() {
               >
                 <CardSmall
                   title={item.title}
-                  image="/guysh1.jpg"
+                  image={item.image || "/guysh1.jpg"}
                   date={item.date}
                   content={item.content}
                   link={`/news/${item.id}`}

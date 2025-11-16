@@ -9,6 +9,7 @@ import {
   Home,
   Mail
 } from "lucide-react";
+import { useAuth } from "../data/AuthContext";
 
 export default function VarifyEmail() {
   const { t, i18n } = useTranslation();
@@ -16,6 +17,7 @@ export default function VarifyEmail() {
   const { uid, token } = useParams();
   const navigate = useNavigate();
   const [status, setStatus] = useState("loading");
+  const {language} = useAuth();
 
   useEffect(() => {
     async function verify() {

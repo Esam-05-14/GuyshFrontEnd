@@ -94,7 +94,7 @@ const heads = others.filter((m) => !mems.includes(m));
           <p
             className="text-lg md:text-xl leading-relaxed text-gray-600 
                       max-w-4xl mx-auto px-4 
-                      text-justify tracking-wide whitespace-pre-line"
+                      text-justify tracking-wide whitespace-pre-line rtl:text-right"
           >
             {t("content")}
           </p>

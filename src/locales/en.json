@@ -246,6 +246,17 @@
     "change":"change password here",
     "want-change":"Do you want to Change password?"
   },
+  "register": {
+    "title": "Join the Union",
+    "errorUserExists": "Username or email already exists. Please try another.",
+    "alertSuccess": "A verification email has been sent to your inbox.",
+    "errorFailed": "Registration failed. Please try again.",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "registering": "Registering...",
+    "registerButton": "Register"
+  },
   "forgot":{
     "title": "Forgot Password",
     "sending": "Sending...",
@@ -639,8 +650,8 @@
   },
   "emailNotification": {
     "title": "Send Email Notification",
-    "subtitle": "Send important updates and announcements to all registered users",
-    "allUsers": "This notification will be sent to all registered users",
+    "subtitle": "Send important updates and announcements to all members",
+    "allUsers": "This notification will be sent to all all members",
     "ensureMessage": "Please ensure your message is clear and professional before sending",
     "emailSubject": "Email Subject",
     "emailMessage": "Email Message",
