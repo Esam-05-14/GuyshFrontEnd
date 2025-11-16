@@ -186,10 +186,10 @@ export default function MyProfile() {
           </div>
           <div>
             <label className="block text-sm font-semibold text-gray-500 mb-1">
-              Consent Date: <span>{formatDate(myProfile.consent_date)}</span>
+              {language === 'ar' ? "تاريخ الموافقة: ": 'Consent Date:' }<span>{formatDate(myProfile.consent_date)}</span>
             </label>
             <label className="block text-sm font-semibold text-gray-500 mb-1">
-              Last Update: <span>{formatDate(myProfile.profile_last_updated)}</span>
+              {language === 'ar' ? " موعد اخر تحديث: ": 'Last update: ' } <span>{formatDate(myProfile.profile_last_updated)}</span>
             </label>
             
           </div>
