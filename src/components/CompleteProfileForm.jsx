@@ -533,7 +533,7 @@ const getFormattedConsentDate = () => {
 export default function CompleteProfileForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { universities, versions } = useAuth();
+  const { universities, versions, setMyProfile } = useAuth();
 
   const [formData, setFormData] = useState({
     english_name: "",
@@ -603,9 +603,10 @@ export default function CompleteProfileForm() {
       setMessage(t("profileForm.success"));
       // NOTE: You are overwriting formData with API response data. This might be intentional.
       // setFormData(data); 
-      localStorage.setItem("UserProfile",JSON.stringify(data))
+      localStorage.setItem("UserProfile",JSON.stringify(data));
+      setMyProfile(data);
       // Optionally navigate away after success
-      // navigate('/dashboard'); 
+      navigate('/my-profile'); 
     } catch (err) {
       console.error("Profile creation failed:", err);
       // You should check err.response.data for specific server errors if possible

@@ -183,7 +183,17 @@
     "emailPlaceholder": "example@email.com",
     "submitButton": "Submit",
     "successMessage": "Form submitted successfully! Please check your email.",
-    "errorMessage": "Failed to submit form. Please try again."
+    "errorMessage": "Failed to submit form. Please try again.",
+    "access": {
+      "account_pending_title": "Account Pending Activation",
+      "account_pending_msg": "Your account is not yet active. Once your registration is approved, you can request an airport pickup.",
+      "back_home": "Back to Home",
+      "service_unavailable_title": "Service Not Available",
+      "service_unavailable_msg": "This service is available only for new incoming students who are not yet members.",
+      "go_home": "Go to Home",
+      "not_available": "Serivce not available at the moment"
+    }
+    
   },
   "userProfile": {
     "title": "User Profile Information",
