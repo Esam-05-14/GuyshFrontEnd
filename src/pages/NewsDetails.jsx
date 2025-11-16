@@ -308,7 +308,7 @@ export default function NewsDetails() {
           url: window.location.href,
         });
       } catch (err) {
-        console.log('Share cancelled');
+        // console.log('Share cancelled');
       }
     } else {
       // Fallback: copy to clipboard

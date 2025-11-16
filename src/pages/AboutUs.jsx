@@ -17,7 +17,7 @@ export default function AboutUs() {
             const data = await getBoardMembers(language);
             setBoardMembers(data);
           }catch(error){
-            console.log(error);
+            // console.log(error);
           }
         }
       fetchData();

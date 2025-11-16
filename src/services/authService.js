@@ -34,7 +34,7 @@ export async function checkTokenValidity() {
 
 
 export async function loginRequest(email, password) {
-  console.log("Attempt login with "+ email + " "+password);
+  // console.log("Attempt login with "+ email + " "+password);
   
   const response = await fetch(api("/users/login/"), {
     method: "POST",
@@ -75,10 +75,10 @@ export async function registerRequest(email, password , username) {
   if (!response.ok) {
     throw new Error("Login failed");
   }
-  console.log("response " + response);
+  // console.log("response " + response);
   
   const data = await response.json();
-  console.log("data "+data);
+  // console.log("data "+data);
   return data;
   // return { data, status: response.status };
   
@@ -120,10 +120,10 @@ export async function changePassword(oldPass , newPass) {
   if (!response.ok) {
     throw new Error("Changing password failed");
   }
-  console.log("response " + response);
+  // console.log("response " + response);
   
   const data = await response.json();
-  console.log("data "+data);
+  // console.log("data "+data);
   return data;
 }
 export async function requestPasswordReset(email) {
@@ -136,10 +136,10 @@ export async function requestPasswordReset(email) {
   if (!response.ok) {
     throw new Error("Reset password failed");
   }
-  console.log("response " + response);
+  // console.log("response " + response);
   
   const data = await response.json();
-  console.log("data "+data);
+  // console.log("data "+data);
   return data;
 }
 
@@ -159,10 +159,10 @@ export async function createProfile(formData) {
   if (!response.ok) {
     throw new Error("Profile creation failed");
   }
-  console.log("response " + response);
+  // console.log("response " + response);
   
   const data = await response.json();
-  console.log("data "+data);
+  // console.log("data "+data);
   
 
   return data;
@@ -206,10 +206,10 @@ export async function deleteProfile() {
   if (!response.ok) {
     throw new Error("Profile creation failed");
   }
-  console.log("response " + response);
+  // console.log("response " + response);
   
   const data = await response.json();
-  console.log("data "+data);
+  // console.log("data "+data);
   
 
   return data;
@@ -248,7 +248,7 @@ export async function logoutRequest() {
     throw new Error("Logout failed");
   }else{
     const res = await response.json()
-    console.log(res.value);
+    // console.log(res.value);
     
   }
 }
@@ -904,7 +904,7 @@ export async function getMyProfile() {
 
   // 2️⃣ Get login response (likely contains token)
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data[0];
 }
 
@@ -925,10 +925,10 @@ export async function airportPickupRequest( body) {
   if (!response.ok) {
     throw new Error("Airport Request failed");
   }
-  console.log("response " + response);
+  // console.log("response " + response);
   
   const data = await response.json();
-  console.log("data "+data);
+  // console.log("data "+data);
   
 
   return data;
@@ -953,7 +953,7 @@ export async function guidenceRequest( body) {
   }
   
   const data = await response.json();
-  console.log("data "+data);
+  // console.log("data "+data);
   
 
   return data;

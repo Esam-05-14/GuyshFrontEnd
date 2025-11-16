@@ -1824,7 +1824,7 @@ export default function Navbar() {
         logout();
         navigate("/");
       } catch (err) {
-        console.log("Cannot delete profile");
+        // console.log("Cannot delete profile");
       }
     }
   };
@@ -1832,7 +1832,7 @@ export default function Navbar() {
     try{
       await downloadRules()
     }catch(err){
-      console.log(err);
+      // console.log(err);
       
     }
   }

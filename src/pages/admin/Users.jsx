@@ -109,7 +109,7 @@ function Users() {
         const data = await getUsers();
         setUsers(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchData();
