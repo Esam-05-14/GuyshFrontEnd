@@ -85,15 +85,11 @@ export async function registerRequest(email, password , username) {
 }
 export async function resetPassword(uid, token, new_password) {
   const response = await fetch(
-    api(`/users/reset-password/`),
+    api(`/users/reset-password/${uid}/${token}`),
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        uid,
-        token,
-        new_password
-      }),
+      body: JSON.stringify({new_password}),
     }
   );
 
