@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function MyProfile() {
-  const { myProfile, universities, setMyProfile} = useAuth();
+  const { myProfile, universities, setMyProfile, language} = useAuth();
   const [formData, setFormData] = useState(null);
   const [editing, setEditing] = useState(false);
   const [message, setMessage] = useState("");
