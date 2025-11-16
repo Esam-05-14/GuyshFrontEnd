@@ -560,10 +560,10 @@ export default function CompleteProfileForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleOpenRegulations = (e) => {
-    e.preventDefault(); // Prevents default button behavior if any
-    window.open(UNION_REGULATIONS_PDF_URL, '_blank');
-  };
+  // const handleOpenRegulations = (e) => {
+  //   e.preventDefault(); // Prevents default button behavior if any
+  //   window.open(UNION_REGULATIONS_PDF_URL, '_blank');
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -595,7 +595,7 @@ export default function CompleteProfileForm() {
       consent_data_processing: agreeData,
       // Automatic fields
       consent_data_processing_version: CONSENT_VERSION,
-      consent_date: getFormattedConsentDate(), // Submits current date/time
+      //consent_date: getFormattedConsentDate(), // Submits current date/time
     };
 
     try {

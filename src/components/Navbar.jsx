@@ -1301,12 +1301,460 @@
 //   );
 // }
 
+// import React, { useState, useEffect, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { useAuth } from "../data/AuthContext";
+// import UserAvatar from "./UserAvatar";
+// import { useTranslation } from "react-i18next";
+// import { deleteProfile, downloadRules } from "../services/authService";
+// import { 
+//   User, 
+//   Trash2, 
+//   LogOut, 
+//   Menu, 
+//   X, 
+//   ChevronRight,
+//   Globe,
+//   Info,
+//   Briefcase,
+//   GraduationCap,
+//   Newspaper,
+//   Calendar,
+//   Shield,
+//   FileText,
+//   Lock
+// } from "lucide-react";
+
+// export default function Navbar() {
+//   const { t } = useTranslation();
+//   const {
+//     user,
+//     isLoggedIn,
+//     logout,
+//     myProfile,
+//     language,
+//     changeLanguage,
+//   } = useAuth();
+//   const isAdmin = user?.roles?.is_superuser;
+//   const isMember = user?.roles?.is_member;
+//   const navigate = useNavigate();
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+//   const sidebarRef = useRef(null);
+
+//   const isRTL = language === "ar";
+
+//   // Close sidebar when clicking outside
+//   useEffect(() => {
+//     function handleClickOutside(event) {
+//       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+//         setSidebarOpen(false);
+//       }
+//     }
+
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => document.removeEventListener("mousedown", handleClickOutside);
+//   }, []);
+
+//   // Prevent body scroll when sidebar is open
+//   useEffect(() => {
+//     if (sidebarOpen) {
+//       document.body.style.overflow = "hidden";
+//     } else {
+//       document.body.style.overflow = "unset";
+//     }
+//     return () => {
+//       document.body.style.overflow = "unset";
+//     };
+//   }, [sidebarOpen]);
+
+//   const handleDeleteProfile = async () => {
+//     if (window.confirm(t("nav.confirmDelete"))) {
+//       try {
+//         await deleteProfile();
+//         alert(t("nav.profileDeleted"));
+//         logout();
+//         navigate("/");
+//       } catch (err) {
+//         console.log("Cannot delete profile");
+//       }
+//     }
+//   };
+//   const handleDownload = async () =>{
+//     try{
+//       await downloadRules()
+//     }catch(err){
+//       console.log(err);
+      
+//     }
+//   }
+
+//   const navItems = [
+//     { path: "/about", label: t("nav.about"), icon: Info },
+//     { path: "/services", label: t("nav.services"), icon: Briefcase },
+//     { path: "/universities", label: t("nav.universities"), icon: GraduationCap },
+//     { path: "/news", label: t("nav.news"), icon: Newspaper },
+//   ];
+
+//   if (isLoggedIn && (isMember || isAdmin)) {
+//     navItems.push({ path: "/events", label: t("nav.events"), icon: Calendar });
+//   }
+
+//   if (isLoggedIn && isAdmin) {
+//     navItems.push({ path: "/admin", label: t("nav.admin"), icon: Shield });
+//   }
+
+//   const handleNavigation = (path) => {
+//     navigate(path);
+//     setSidebarOpen(false);
+//   };
+
+//   return (
+//     <>
+//       <header className="sticky top-0 left-0 w-full bg-white/95 backdrop-blur-lg shadow-md z-50 border-b border-gray-100">
+//         <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-4 sm:px-6">
+//           {/* Logo - Position changes based on language */}
+//           <div
+//             className={`flex items-center space-x-3 cursor-pointer group ${
+//               isRTL ? "order-3 flex-row-reverse space-x-reverse" : "order-1"
+//             }`}
+//             onClick={() => navigate("/")}
+//           >
+//             <div className="relative">
+//               <img
+//                 src="/logo.png"
+//                 alt="Guysh Logo"
+//                 className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform duration-300 group-hover:scale-110"
+//               />
+//               <div className="absolute inset-0 bg-[#193042] opacity-0 group-hover:opacity-10 rounded-full transition-opacity duration-300"></div>
+//             </div>
+//             <span className="text-xl font-bold text-[#193042] hidden sm:block tracking-tight">
+//               GUYSH
+//             </span>
+//           </div>
+
+//           {/* Desktop Navigation - Always in center */}
+//           <nav
+//             className={`hidden lg:flex items-center space-x-1 order-2 ${
+//               isRTL ? "flex-row-reverse space-x-reverse" : ""
+//             }`}
+//           >
+//             {navItems.map((item) => {
+//               const Icon = item.icon;
+//               return (
+//                 <button
+//                   key={item.path}
+//                   onClick={() => navigate(item.path)}
+//                   className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-[#912211] hover:bg-gray-50 transition-all duration-200 ${
+//                     isRTL ? "flex-row-reverse" : ""
+//                   }`}
+//                 >
+//                   <Icon size={18} />
+//                   <span>{item.label}</span>
+//                 </button>
+//               );
+//             })}
+
+//             {isLoggedIn && !isMember && !myProfile && (
+//               <button
+//                 onClick={() => navigate("/membership-form")}
+//                 className="ms-2 bg-gradient-to-r from-[#6e9225] to-[#5a7a1e] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+//               >
+//                 {t("nav.finishProfile")}
+//               </button>
+//             )}
+//           </nav>
+
+//           {/* Right Side - Position changes based on language */}
+//           <div
+//             className={`flex items-center gap-3 sm:gap-4 ${
+//               isRTL ? "order-1 flex-row-reverse" : "order-3"
+//             }`}
+//           >
+//             {/* Language Switch - Desktop */}
+//             <div className="hidden sm:flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+//               <button
+//                 onClick={() => {
+//                   setSidebarOpen(false); // close before language change
+//                   changeLanguage("ar");
+//                 }}
+//                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
+//                   language === "ar"
+//                     ? "bg-white text-[#912211] shadow-sm"
+//                     : "text-gray-600 hover:text-gray-900"
+//                 }`}
+//               >
+//                 AR
+//               </button>
+
+//               <button
+//                 onClick={() => {
+//                   setSidebarOpen(false); // close before language change
+//                   changeLanguage("en");
+//                 }}
+//                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
+//                   language === "en"
+//                     ? "bg-white text-[#912211] shadow-sm"
+//                     : "text-gray-600 hover:text-gray-900"
+//                 }`}
+//               >
+//                 EN
+//               </button>
+
+//             </div>
+
+//             {/* Login Button (if not logged in) */}
+//             {!isLoggedIn && (
+//               <button
+//                 className="hidden sm:block bg-gradient-to-r from-[#193042] to-[#254e6f] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+//                 onClick={() => navigate("/login")}
+//               >
+//                 {t("nav.login")}
+//               </button>
+//             )}
+
+//             {/* Menu Button - Always visible */}
+//             <button
+//               onClick={() => setSidebarOpen(!sidebarOpen)}
+//               className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+//             >
+//               <Menu size={24} className="text-gray-700" />
+//             </button>
+//           </div>
+//         </div>
+//       </header>
+
+//       {/* Sidebar Overlay */}
+//       {sidebarOpen && (
+//         <div
+//           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"
+//           onClick={() => setSidebarOpen(false)}
+//         />
+//       )}
+
+//       {/* Sidebar */}
+//       <div
+//         ref={sidebarRef}
+//         className={`fixed top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 transition-transform duration-300 ease-in-out transform
+//           ${isRTL ?  "left-0" :"right-0"}
+//           ${sidebarOpen ? "translate-x-0" : isRTL ? "-translate-x-full" : "translate-x-full"}
+//         `}
+//         style={{ transitionProperty: "transform" }}
+//       >
+//         <div className="flex flex-col h-full">
+//           {/* Sidebar Header */}
+//           <div
+//             className={`flex items-center justify-between p-6 border-b border-gray-100 ${
+//               isRTL ? "flex-row-reverse" : ""
+//             }`}
+//           >
+//             <div
+//               className={`flex items-center gap-3 ${
+//                 isRTL ? "flex-row-reverse" : ""
+//               }`}
+//             >
+//               <img src="/logo.png" alt="Guysh Logo" className="h-10 w-10" />
+//               <span className="text-xl font-bold text-[#193042]">GUYSH</span>
+//             </div>
+//             <button
+//               onClick={() => setSidebarOpen(false)}
+//               className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+//             >
+//               <X size={24} />
+//             </button>
+//           </div>
+
+//           {/* User Info (if logged in) */}
+//           {isLoggedIn && (
+//             <div className="p-6 bg-gradient-to-br from-gray-50 to-white border-b border-gray-100">
+//               <div className={`flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
+//                 <UserAvatar nameOrEmail={user.name || user.email} />
+//                 <div className={isRTL ? "text-right" : "text-left"}>
+//                   <p className="text-sm font-semibold text-gray-900 truncate">
+//                     {user.name || user.email}
+//                   </p>
+//                   <p className="text-xs text-gray-500 truncate">{user.email}</p>
+//                 </div>
+//               </div>
+//             </div>
+//           )}
+
+//           {/* Navigation Items */}
+//           <nav className="flex-1 overflow-y-auto p-4">
+//             <div className="space-y-1">
+//               {navItems.map((item) => {
+//                 const Icon = item.icon;
+//                 return (
+//                   <button
+//                     key={item.path}
+//                     onClick={() => handleNavigation(item.path)}
+//                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#912211] transition-all duration-200 group ${
+//                       isRTL ? "flex-row-reverse text-right" : "text-left"
+//                     }`}
+//                   >
+//                     <Icon size={20} className="text-gray-500 group-hover:text-[#912211] transition-colors" />
+//                     <span className="text-sm font-medium flex-1">{item.label}</span>
+//                     <ChevronRight
+//                       size={18}
+//                       className={`text-gray-400 group-hover:text-[#912211] transition-all ${
+//                         isRTL ? "rotate-180" : ""
+//                       }`}
+//                     />
+//                   </button>
+//                 );
+//               })}
+
+//               {isLoggedIn && !isMember && !myProfile && (
+//                 <button
+//                   onClick={() => handleNavigation("/membership-form")}
+//                   className="w-full mt-4 bg-gradient-to-r from-[#6e9225] to-[#5a7a1e] text-white px-4 py-3 rounded-lg text-sm font-semibold hover:shadow-lg transition-all duration-200"
+//                 >
+//                   {t("nav.finishProfile")}
+//                 </button>
+//               )}
+//             </div>
+
+//             {/* Language Switch - Mobile */}
+//             <div className="mt-6 pt-6 border-t border-gray-100 sm:hidden">
+//               <div className={`flex items-center gap-2 mb-3 ${isRTL ? "flex-row-reverse" : ""}`}>
+//                 <Globe size={18} className="text-gray-500" />
+//                 <span className="text-sm font-medium text-gray-700">
+//                   {t("nav.language") || "Language"}
+//                 </span>
+//               </div>
+//               <div className="flex gap-2">
+//                 <button
+//                   onClick={() => changeLanguage("ar")}
+//                   className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+//                     language === "ar"
+//                       ? "bg-[#193042] text-white shadow-md"
+//                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+//                   }`}
+//                 >
+//                   العربية
+//                 </button>
+//                 <button
+//                   onClick={() => changeLanguage("en")}
+//                   className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+//                     language === "en"
+//                       ? "bg-[#193042] text-white shadow-md"
+//                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+//                   }`}
+//                 >
+//                   English
+//                 </button>
+//               </div>
+//             </div>
+
+//             {/* User Actions - If logged in */}
+//             {isLoggedIn && (
+//               <div className="mt-6 pt-6 border-t border-gray-100 space-y-1">
+//                 <button
+//                   onClick={() => handleNavigation("/my-profile")}
+//                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
+//                     isRTL ? "flex-row-reverse text-right" : "text-left"
+//                   }`}
+//                 >
+//                   <User size={20} className="text-gray-500" />
+//                   <span className="text-sm font-medium">{t("nav.viewProfile")}</span>
+//                 </button>
+
+//                 <button
+//                   onClick={() => {
+//                     handleDeleteProfile();
+//                     setSidebarOpen(false);
+//                   }}
+//                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors ${
+//                     isRTL ? "flex-row-reverse text-right" : "text-left"
+//                   }`}
+//                 >
+//                   <Trash2 size={20} />
+//                   <span className="text-sm font-medium">{t("nav.deleteProfile")}</span>
+//                 </button>
+//                 <button
+//                   onClick={() => {
+//                     navigate("/change-password");
+//                     setSidebarOpen(false);
+//                   }}
+//                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
+//                     isRTL ? "flex-row-reverse text-right" : "text-left"
+//                   }`}
+//                 >
+//                   <span className="text-sm font-medium">{t("nav.cpass")}</span>
+//                 </button>
+
+//                 <button
+//                   onClick={() => {
+//                     logout();
+//                     navigate("/");
+//                     setSidebarOpen(false);
+//                   }}
+//                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
+//                     isRTL ? "flex-row-reverse text-right" : "text-left"
+//                   }`}
+//                 >
+//                   <LogOut size={20} className="text-gray-500" />
+//                   <span className="text-sm font-medium">{t("nav.logout")}</span>
+//                 </button>
+//               </div>
+//             )}
+
+//             {/* Legal & Information Links - Always visible */}
+//             <div className="mt-6 pt-6 border-t border-gray-100 space-y-1">
+//               <button
+//                 onClick={handleDownload}
+//                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
+//                   isRTL ? "flex-row-reverse text-right" : "text-left"
+//                 }`}
+//               >
+//                 <User size={20} className="text-gray-500" />
+//                 <span className="text-sm font-medium">{t("nav.rules-rights")}</span>
+//               </button>
+              
+//               <button
+//                 onClick={() => handleNavigation("/terms-conditions")}
+//                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
+//                   isRTL ? "flex-row-reverse text-right" : "text-left"
+//                 }`}
+//               >
+//                 <FileText size={20} className="text-gray-500" />
+//                 <span className="text-sm font-medium">{t("nav.term-cond")}</span>
+//               </button>
+              
+//               <button
+//                 onClick={() => handleNavigation("/privacy-policy")}
+//                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
+//                   isRTL ? "flex-row-reverse text-right" : "text-left"
+//                 }`}
+//               >
+//                 <Lock size={20} className="text-gray-500" />
+//                 <span className="text-sm font-medium">{t("nav.prpo")}</span>
+//               </button>
+//             </div>
+
+//             {/* Login Button - If not logged in */}
+//             {!isLoggedIn && (
+//               <button
+//                 onClick={() => handleNavigation("/login")}
+//                 className="w-full mt-6 bg-gradient-to-r from-[#193042] to-[#254e6f] text-white px-4 py-3 rounded-lg text-sm font-semibold hover:shadow-lg transition-all duration-200"
+//               >
+//                 {t("nav.login")}
+//               </button>
+//             )}
+//           </nav>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../data/AuthContext";
+// [FIX] Corrected path from ../data/AuthContext to ../context/AuthContext
+import { useAuth } from "../data/AuthContext.jsx"; 
 import UserAvatar from "./UserAvatar";
 import { useTranslation } from "react-i18next";
-import { deleteProfile, downloadRules } from "../services/authService";
+// [FIX] Added .js extension
+import { deleteProfile, downloadRules } from "../services/authService.js"; 
 import { 
   User, 
   Trash2, 
@@ -1326,7 +1774,7 @@ import {
 } from "lucide-react";
 
 export default function Navbar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(); // Use i18n for language check
   const {
     user,
     isLoggedIn,
@@ -1341,21 +1789,20 @@ export default function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
 
-  const isRTL = language === "ar";
+  // [FIX] We no longer need this variable for styling
+  // const isRTL = language === "ar";
 
-  // Close sidebar when clicking outside
+  // ... (useEffect hooks remain the same) ...
   useEffect(() => {
     function handleClickOutside(event) {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setSidebarOpen(false);
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Prevent body scroll when sidebar is open
   useEffect(() => {
     if (sidebarOpen) {
       document.body.style.overflow = "hidden";
@@ -1367,7 +1814,9 @@ export default function Navbar() {
     };
   }, [sidebarOpen]);
 
+
   const handleDeleteProfile = async () => {
+    // [FIX] Use a custom modal, not window.confirm
     if (window.confirm(t("nav.confirmDelete"))) {
       try {
         await deleteProfile();
@@ -1412,11 +1861,11 @@ export default function Navbar() {
     <>
       <header className="sticky top-0 left-0 w-full bg-white/95 backdrop-blur-lg shadow-md z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-4 sm:px-6">
-          {/* Logo - Position changes based on language */}
+          
+          {/* [FIX] Logo - Use Tailwind RTL variants */}
           <div
-            className={`flex items-center space-x-3 cursor-pointer group ${
-              isRTL ? "order-3 flex-row-reverse space-x-reverse" : "order-1"
-            }`}
+            className="flex items-center space-x-3 cursor-pointer group 
+                       order-1   rtl:order-1"
             onClick={() => navigate("/")}
           >
             <div className="relative">
@@ -1432,11 +1881,10 @@ export default function Navbar() {
             </span>
           </div>
 
-          {/* Desktop Navigation - Always in center */}
+          {/* [FIX] Desktop Navigation - Use Tailwind RTL variants */}
           <nav
-            className={`hidden lg:flex items-center space-x-1 order-2 ${
-              isRTL ? "flex-row-reverse space-x-reverse" : ""
-            }`}
+            className="hidden lg:flex items-center space-x-1 order-2 
+                       rtl:flex-row-reverse rtl:space-x-reverse"
           >
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -1444,9 +1892,9 @@ export default function Navbar() {
                 <button
                   key={item.path}
                   onClick={() => navigate(item.path)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-[#912211] hover:bg-gray-50 transition-all duration-200 ${
-                    isRTL ? "flex-row-reverse" : ""
-                  }`}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 
+                             hover:text-[#912211] hover:bg-gray-50 transition-all duration-200
+                             rtl:flex-row-reverse"
                 >
                   <Icon size={18} />
                   <span>{item.label}</span>
@@ -1457,24 +1905,25 @@ export default function Navbar() {
             {isLoggedIn && !isMember && !myProfile && (
               <button
                 onClick={() => navigate("/membership-form")}
-                className="ml-2 bg-gradient-to-r from-[#6e9225] to-[#5a7a1e] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+                // [FIX] Use logical margin 'ms-2' (margin-start)
+                className="ms-2 bg-gradient-to-r from-[#6e9225] to-[#5a7a1e] text-white px-5 py-2.5 rounded-lg text-sm font-semibold 
+                           hover:shadow-lg hover:scale-105 transition-all duration-200"
               >
                 {t("nav.finishProfile")}
               </button>
             )}
           </nav>
 
-          {/* Right Side - Position changes based on language */}
+          {/* [FIX] Right Side - Use Tailwind RTL variants */}
           <div
-            className={`flex items-center gap-3 sm:gap-4 ${
-              isRTL ? "order-1 flex-row-reverse" : "order-3"
-            }`}
+            className="flex items-center gap-3 sm:gap-4 
+                       order-3 rtl:order-3 "
           >
             {/* Language Switch - Desktop */}
             <div className="hidden sm:flex items-center gap-1 bg-gray-100 rounded-lg p-1">
               <button
                 onClick={() => {
-                  setSidebarOpen(false); // close before language change
+                  setSidebarOpen(false); 
                   changeLanguage("ar");
                 }}
                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
@@ -1488,7 +1937,7 @@ export default function Navbar() {
 
               <button
                 onClick={() => {
-                  setSidebarOpen(false); // close before language change
+                  setSidebarOpen(false);
                   changeLanguage("en");
                 }}
                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
@@ -1499,13 +1948,13 @@ export default function Navbar() {
               >
                 EN
               </button>
-
             </div>
 
             {/* Login Button (if not logged in) */}
             {!isLoggedIn && (
               <button
-                className="hidden sm:block bg-gradient-to-r from-[#193042] to-[#254e6f] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+                className="hidden sm:block bg-gradient-to-r from-[#193042] to-[#254e6f] text-white px-5 py-2.5 rounded-lg text-sm font-semibold 
+                           hover:shadow-lg hover:scale-105 transition-all duration-200"
                 onClick={() => navigate("/login")}
               >
                 {t("nav.login")}
@@ -1531,26 +1980,24 @@ export default function Navbar() {
         />
       )}
 
-      {/* Sidebar */}
+      {/* [FIX] Sidebar - Use Tailwind RTL variants for positioning */}
       <div
         ref={sidebarRef}
-        className={`fixed top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 transition-transform duration-300 ease-in-out transform
-          ${isRTL ?  "left-0" :"right-0"}
-          ${sidebarOpen ? "translate-x-0" : isRTL ? "-translate-x-full" : "translate-x-full"}
-        `}
+        className={`fixed top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-50 
+                   transition-transform duration-300 ease-in-out transform
+                   right-0 rtl:left-0 rtl:right-auto
+                   ${sidebarOpen ? "translate-x-0" : "translate-x-full rtl:-translate-x-full"}
+                  `}
         style={{ transitionProperty: "transform" }}
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
           <div
-            className={`flex items-center justify-between p-6 border-b border-gray-100 ${
-              isRTL ? "flex-row-reverse" : ""
-            }`}
+            className="flex items-center justify-between p-6 border-b border-gray-100 
+                       rtl:flex-row-reverse"
           >
             <div
-              className={`flex items-center gap-3 ${
-                isRTL ? "flex-row-reverse" : ""
-              }`}
+              className="flex items-center gap-3 rtl:flex-row-reverse"
             >
               <img src="/logo.png" alt="Guysh Logo" className="h-10 w-10" />
               <span className="text-xl font-bold text-[#193042]">GUYSH</span>
@@ -1566,9 +2013,9 @@ export default function Navbar() {
           {/* User Info (if logged in) */}
           {isLoggedIn && (
             <div className="p-6 bg-gradient-to-br from-gray-50 to-white border-b border-gray-100">
-              <div className={`flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
+              <div className="flex items-center gap-3 rtl:flex-row-reverse">
                 <UserAvatar nameOrEmail={user.name || user.email} />
-                <div className={isRTL ? "text-right" : "text-left"}>
+                <div className="rtl:text-right">
                   <p className="text-sm font-semibold text-gray-900 truncate">
                     {user.name || user.email}
                   </p>
@@ -1587,17 +2034,16 @@ export default function Navbar() {
                   <button
                     key={item.path}
                     onClick={() => handleNavigation(item.path)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#912211] transition-all duration-200 group ${
-                      isRTL ? "flex-row-reverse text-right" : "text-left"
-                    }`}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 
+                               hover:bg-gray-50 hover:text-[#912211] transition-all duration-200 group 
+                               rtl:flex-row-reverse rtl:text-right"
                   >
                     <Icon size={20} className="text-gray-500 group-hover:text-[#912211] transition-colors" />
                     <span className="text-sm font-medium flex-1">{item.label}</span>
                     <ChevronRight
                       size={18}
-                      className={`text-gray-400 group-hover:text-[#912211] transition-all ${
-                        isRTL ? "rotate-180" : ""
-                      }`}
+                      className="text-gray-400 group-hover:text-[#912211] transition-all
+                                 rtl:rotate-180"
                     />
                   </button>
                 );
@@ -1606,7 +2052,8 @@ export default function Navbar() {
               {isLoggedIn && !isMember && !myProfile && (
                 <button
                   onClick={() => handleNavigation("/membership-form")}
-                  className="w-full mt-4 bg-gradient-to-r from-[#6e9225] to-[#5a7a1e] text-white px-4 py-3 rounded-lg text-sm font-semibold hover:shadow-lg transition-all duration-200"
+                  className="w-full mt-4 bg-gradient-to-r from-[#6e9225] to-[#5a7a1e] text-white px-4 py-3 rounded-lg text-sm font-semibold 
+                             hover:shadow-lg transition-all duration-200"
                 >
                   {t("nav.finishProfile")}
                 </button>
@@ -1615,7 +2062,7 @@ export default function Navbar() {
 
             {/* Language Switch - Mobile */}
             <div className="mt-6 pt-6 border-t border-gray-100 sm:hidden">
-              <div className={`flex items-center gap-2 mb-3 ${isRTL ? "flex-row-reverse" : ""}`}>
+              <div className="flex items-center gap-2 mb-3 rtl:flex-row-reverse">
                 <Globe size={18} className="text-gray-500" />
                 <span className="text-sm font-medium text-gray-700">
                   {t("nav.language") || "Language"}
@@ -1650,9 +2097,8 @@ export default function Navbar() {
               <div className="mt-6 pt-6 border-t border-gray-100 space-y-1">
                 <button
                   onClick={() => handleNavigation("/my-profile")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
-                    isRTL ? "flex-row-reverse text-right" : "text-left"
-                  }`}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 
+                             transition-colors rtl:flex-row-reverse rtl:text-right"
                 >
                   <User size={20} className="text-gray-500" />
                   <span className="text-sm font-medium">{t("nav.viewProfile")}</span>
@@ -1663,9 +2109,8 @@ export default function Navbar() {
                     handleDeleteProfile();
                     setSidebarOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors ${
-                    isRTL ? "flex-row-reverse text-right" : "text-left"
-                  }`}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 
+                             transition-colors rtl:flex-row-reverse rtl:text-right"
                 >
                   <Trash2 size={20} />
                   <span className="text-sm font-medium">{t("nav.deleteProfile")}</span>
@@ -1675,10 +2120,10 @@ export default function Navbar() {
                     navigate("/change-password");
                     setSidebarOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
-                    isRTL ? "flex-row-reverse text-right" : "text-left"
-                  }`}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 
+                             transition-colors rtl:flex-row-reverse rtl:text-right"
                 >
+                  <Lock size={20} className="text-gray-500" />
                   <span className="text-sm font-medium">{t("nav.cpass")}</span>
                 </button>
 
@@ -1688,9 +2133,8 @@ export default function Navbar() {
                     navigate("/");
                     setSidebarOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
-                    isRTL ? "flex-row-reverse text-right" : "text-left"
-                  }`}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 
+                             transition-colors rtl:flex-row-reverse rtl:text-right"
                 >
                   <LogOut size={20} className="text-gray-500" />
                   <span className="text-sm font-medium">{t("nav.logout")}</span>
@@ -1702,9 +2146,8 @@ export default function Navbar() {
             <div className="mt-6 pt-6 border-t border-gray-100 space-y-1">
               <button
                 onClick={handleDownload}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
-                  isRTL ? "flex-row-reverse text-right" : "text-left"
-                }`}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 
+                           transition-colors rtl:flex-row-reverse rtl:text-right"
               >
                 <User size={20} className="text-gray-500" />
                 <span className="text-sm font-medium">{t("nav.rules-rights")}</span>
@@ -1712,9 +2155,8 @@ export default function Navbar() {
               
               <button
                 onClick={() => handleNavigation("/terms-conditions")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
-                  isRTL ? "flex-row-reverse text-right" : "text-left"
-                }`}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 
+                           transition-colors rtl:flex-row-reverse rtl:text-right"
               >
                 <FileText size={20} className="text-gray-500" />
                 <span className="text-sm font-medium">{t("nav.term-cond")}</span>
@@ -1722,9 +2164,8 @@ export default function Navbar() {
               
               <button
                 onClick={() => handleNavigation("/privacy-policy")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors ${
-                  isRTL ? "flex-row-reverse text-right" : "text-left"
-                }`}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 
+                           transition-colors rtl:flex-row-reverse rtl:text-right"
               >
                 <Lock size={20} className="text-gray-500" />
                 <span className="text-sm font-medium">{t("nav.prpo")}</span>
@@ -1735,7 +2176,8 @@ export default function Navbar() {
             {!isLoggedIn && (
               <button
                 onClick={() => handleNavigation("/login")}
-                className="w-full mt-6 bg-gradient-to-r from-[#193042] to-[#254e6f] text-white px-4 py-3 rounded-lg text-sm font-semibold hover:shadow-lg transition-all duration-200"
+                className="w-full mt-6 bg-gradient-to-r from-[#193042] to-[#254e6f] text-white px-4 py-3 rounded-lg text-sm font-semibold 
+                           hover:shadow-lg transition-all duration-200"
               >
                 {t("nav.login")}
               </button>

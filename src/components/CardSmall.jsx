@@ -6,9 +6,9 @@ export default function CardSmall({ title, content, date, image, link }) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  // }, [i18n.language]);
 
   return (
     <div

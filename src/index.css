@@ -2,6 +2,6 @@
 
 
 /* optional: smooth RTL flipping */
-html[dir="rtl"] {
+/* html[dir="rtl"] {
   direction: rtl;
-}
+} */
