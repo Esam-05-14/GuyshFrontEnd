@@ -2104,17 +2104,7 @@ export default function Navbar() {
                   <span className="text-sm font-medium">{t("nav.viewProfile")}</span>
                 </button>
 
-                <button
-                  onClick={() => {
-                    handleDeleteProfile();
-                    setSidebarOpen(false);
-                  }}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 
-                             transition-colors rtl:flex-row-reverse rtl:text-right"
-                >
-                  <Trash2 size={20} />
-                  <span className="text-sm font-medium">{t("nav.deleteProfile")}</span>
-                </button>
+                
                 <button
                   onClick={() => {
                     navigate("/change-password");
@@ -2181,6 +2171,19 @@ export default function Navbar() {
               >
                 {t("nav.login")}
               </button>
+            )}
+            {isLoggedIn && (
+              <button
+                  onClick={() => {
+                    handleDeleteProfile();
+                    setSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 
+                             transition-colors rtl:flex-row-reverse rtl:text-right"
+                >
+                  <Trash2 size={20} />
+                  <span className="text-sm font-medium">{t("nav.deleteProfile")}</span>
+                </button>
             )}
           </nav>
         </div>

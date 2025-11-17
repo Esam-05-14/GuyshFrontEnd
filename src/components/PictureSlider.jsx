@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function PictureSlider() {
-  const images = ["/guysh1.jpg", "/guysh2.jpg"];
+  const images = ["/home_page1.JPG","/home_page2.JPG", "/guysh2.jpg"];
   const [index, setIndex] = useState(0);
 
   const nextSlide = () => setIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));

@@ -20,16 +20,6 @@ export default function GuidenceForm() {
     );
   }
   
-    if (!isLoggedIn) {
-      return (
-        <AccessMessage
-          title={t("airport_form.access.login_required_title")}
-          message={t("airport_form.access.login_required_msg")}
-          buttonText={t("airport_form.access.go_login")}
-          onButtonClick={() => navigate("/login")}
-        />
-      );
-    }
   
     if (!user.roles?.is_active) {
       return (

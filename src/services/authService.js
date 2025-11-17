@@ -234,10 +234,15 @@ export async function fetchUserRole() {
 
 
 export async function logoutRequest() {
-  // 1️⃣ First: send login credentials
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
   const response = await fetch(api("/users/logout/"), {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json",
+       "Authorization": `bearer ${token}` 
+    },
   });
 
   if (!response.ok) {

@@ -272,7 +272,7 @@
     "arabicName": "Arabic Name",
     "phone": "Phone Number",
     "address": "Address",
-    "rpNumber": "RP Number",
+    "rpNumber": "Residence permit Number",
     "selectUniversity": "Select University",
     "agreeTo": "I agree to the",
     "terms": "Terms and Conditions",
@@ -286,7 +286,7 @@
     "agreementError": "❌ Please agree to all required agreements before submitting."
   },
   "unionRegulationsText": "Union Regulations text goes here.",
-  "dataProcessingText": "By agreeing on that, we can process your data accoring to the agreed regulations.",
+  "dataProcessingText": "By agreeing on that, we can process your data according to the agreed regulations.",
 
   "termsAndConditions": "By creating an account, you agree to:\n1. Provide accurate information.\n2. Use this platform lawfully.\n3. Respect others’ privacy.\n4. Not impersonate another user.\n5. Allow updates to these terms as needed.",
   "privacyPolicy": "We value your privacy.\n1. We collect minimal data.\n2. We never sell user data.\n3. You can delete your info anytime.\n4. Cookies improve the experience.\n5. By using this site, you agree to our data practices."

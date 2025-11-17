@@ -125,7 +125,7 @@ export default function Register() {
 
     const email = e.target.email.value.trim();
     const password = e.target.password.value.trim();
-    const username = e.target.username.value.trim();
+    const username = e.target.email.value.trim();
 
     try {
       // console.log("Attempting register with", username);
@@ -166,17 +166,17 @@ export default function Register() {
         )}
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700">
               {t("register.username")} {/* Translated */}
-            </label>
-            <input
+            {/* </label> */}
+            {/* <input
               type="text"
               name="username"
               required
               className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#193042] focus:outline-none"
-            />
-          </div>
+            // /> */}
+          {/* </div> */} 
 
           <div>
             <label className="block text-sm font-medium text-gray-700">

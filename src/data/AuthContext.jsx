@@ -163,7 +163,19 @@ export function AuthProvider({ children }) {
           if (remainingSeconds > 60) {
             // Token is VALID
             const userParsed = JSON.parse(savedUser);
-            const profileParsed = JSON.parse(localStorage.getItem("UserProfile"));
+
+            const storedProfile = localStorage.getItem("UserProfile");
+            let profileParsed = null; // Default to null
+            if (storedProfile && storedProfile !== "undefined" && storedProfile !== "null") {
+              try {
+                profileParsed = JSON.parse(storedProfile);
+              } catch (parseError) {
+                // This can happen if the JSON is corrupted (e.g., "[object Object]")
+                console.error("Failed to parse stored UserProfile, resetting:", parseError);
+                profileParsed = null;
+                localStorage.removeItem("UserProfile"); // Clean up corrupted data
+              }
+            }
 
             setToken(storedToken);
             setUser(userParsed);

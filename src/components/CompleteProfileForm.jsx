@@ -522,10 +522,6 @@ const UNION_REGULATIONS_PDF_URL = "/public/assets/guysh_regulations_1.0.pdf";
 
 
 // --- New Utility function for date formatting ---
-const getFormattedConsentDate = () => {
-  // Returns a date string in ISO 8601 format (e.g., "2025-11-13T18:26:39+01:00")
-  return new Date().toISOString();
-};
 
 
 
@@ -605,8 +601,8 @@ export default function CompleteProfileForm() {
       // setFormData(data); 
       localStorage.setItem("UserProfile",JSON.stringify(data));
       setMyProfile(data);
-      // Optionally navigate away after success
-      navigate('/my-profile'); 
+      // navigate('/my-profile'); 
+      window.location.href = '/my-profile';
     } catch (err) {
       console.error("Profile creation failed:", err);
       // You should check err.response.data for specific server errors if possible
