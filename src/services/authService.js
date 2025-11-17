@@ -255,7 +255,40 @@ export async function logoutRequest() {
 }
 // Assume 'api' function is defined elsewhere to build the URL
 // import { api } from "./utils"; 
+export async function downloadProfile() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found. User might not be logged in.");
+  }
+  const response = await fetch(api("/users/export-my-data/", {"Authorization": `bearer ${token}`}));
 
+  if (!response.ok) {
+    // Throw error with status for better debugging
+    throw new Error(`Failed to download profile: ${response.status} ${response.statusText}`);
+  }
+
+  // 1️⃣ Get the binary file data as a Blob (Binary Large Object)
+  const blob = await response.blob();
+
+  // 2️⃣ Create a URL pointing to the Blob object
+  const url = window.URL.createObjectURL(blob);
+
+  // 3️⃣ Create a temporary anchor (<a>) element to trigger the download
+  const link = document.createElement('a');
+  link.href = url;
+  
+  // 4️⃣ Set the file name (you can use a default name or extract it from headers)
+  // In a real application, check for the 'Content-Disposition' header for the filename.
+  // link.setAttribute('download', 'GUYSH_Regulations.pdf'); 
+  
+  // 5️⃣ Append link to body, click it, and remove it
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  
+  // 6️⃣ Clean up the temporary URL object
+  window.URL.revokeObjectURL(url);
+}
 export async function downloadRules() {
   const response = await fetch(api("/legal/regulations"));
 

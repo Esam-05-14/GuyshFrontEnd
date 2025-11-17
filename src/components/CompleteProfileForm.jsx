@@ -512,7 +512,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../data/AuthContext";
-import { createProfile, getActivateVersions } from "../services/authService";
+import { createProfile, getActivateVersions , downloadRules } from "../services/authService";
 import { useTranslation } from "react-i18next";
 
 // --- New Version Constant ---
@@ -565,6 +565,15 @@ export default function CompleteProfileForm() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleDownload = async () =>{
+      try{
+        await downloadRules()
+      }catch(err){
+        // console.log(err);
+        
+      }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -731,15 +740,13 @@ export default function CompleteProfileForm() {
               />
               <span>
                 {t("profileForm.agreeTo")}{" "}
-                <a 
-                  href={UNION_REGULATIONS_PDF_URL} // CHECK THIS VALUE
-                  download="guysh_regulations_1.0.pdf" 
-                  target="_blank" 
+                <button
+                  onClick={handleDownload}
                   className="text-blue-600 underline"
-                  rel="noopener noreferrer"
+                  
                 >
                   {t("profileForm.unionRegulations")}
-                </a>
+                </button>
               </span>
             </label>
 

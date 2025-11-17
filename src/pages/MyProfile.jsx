@@ -54,6 +54,9 @@ export default function MyProfile() {
       [name]: value,
     }));
   };
+  const handleDownload = () =>{
+    //
+  }
 
   // handle submit
   const handleSubmit = async (e) => {
@@ -63,6 +66,8 @@ export default function MyProfile() {
 
     try {
       const { data } = await updateProfile(formData);
+      //check this line
+      localStorage.setItem("UserProfile",JSON.stringify(data));
       setMessage(t("myProfile.updateSuccess"));
       setFormData(data);
       setEditing(false);
@@ -204,6 +209,17 @@ export default function MyProfile() {
               >
                 {t("myProfile.editButton")}
               </button>
+              
+            )}
+            {!editing && (
+              <button
+                type="button"
+                onClick={() => handleDownload()}
+                className="bg-[#193042] text-white py-2 px-4 rounded hover:bg-[#284b68] transition-all duration-300 ease-in-out"
+              >
+                {language === 'ar' ? "تنزيل ملفي الشخصي": "export my profile"}
+              </button>
+              
             )}
 
             {editing && (

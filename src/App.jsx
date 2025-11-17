@@ -65,16 +65,18 @@ function App() {
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/my-profile" element={<MyProfile />} />
         </Route>
-        <Route element={<ProtectedRoutes allowedRoles={['is_superuser']}/>}>
+        <Route element={<ProtectedRoutes allowedRoles={['is_superuser', 'is_media_officer']}/>}>
           <Route path='/admin' element={<Admin/>} />
+          <Route path="/admin/events" element={<AdminEvents />} />
+          <Route path="/admin/news" element={<AdminPosts />} />
+          <Route path="/admin/email-notifications" element={<AdminEmailNotifications />} />
+        </Route>
+        <Route element={<ProtectedRoutes allowedRoles={['is_superuser']}/>}>
           <Route path='/admin/users' element={<Users/>} />
           <Route path='/admin/profiles' element={<UserProfiles/>} />
           <Route path="/admin/profiles/:id" element={<UserProfilePage />} />
           <Route path="/admin/board-members" element={<AdminBoardMembers />} />
           <Route path="/admin/airport-pickup" element={<AdminAirportPickupRequests />} />
-          <Route path="/admin/events" element={<AdminEvents />} />
-          <Route path="/admin/news" element={<AdminPosts />} />
-          <Route path="/admin/email-notifications" element={<AdminEmailNotifications />} />
           <Route path="/admin/membership-requests" element={<AdminMembershipRequests/>}/>
         </Route>
         <Route path='/login' element={<Login/>} />
