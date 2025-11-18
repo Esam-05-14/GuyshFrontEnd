@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../data/AuthContext";
-import { updateProfile } from "../services/authService";
+import { downloadProfile, updateProfile } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -54,9 +54,14 @@ export default function MyProfile() {
       [name]: value,
     }));
   };
-  const handleDownload = () =>{
-    //
-  }
+  const handleDownload = async () =>{
+        try{
+          await downloadProfile()
+        }catch(err){
+          // console.log(err);
+          
+        }
+    }
 
   // handle submit
   const handleSubmit = async (e) => {

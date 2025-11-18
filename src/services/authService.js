@@ -279,7 +279,7 @@ export async function downloadProfile() {
   
   // 4️⃣ Set the file name (you can use a default name or extract it from headers)
   // In a real application, check for the 'Content-Disposition' header for the filename.
-  // link.setAttribute('download', 'GUYSH_Regulations.pdf'); 
+  link.setAttribute('download', 'my-profile'); 
   
   // 5️⃣ Append link to body, click it, and remove it
   document.body.appendChild(link);
