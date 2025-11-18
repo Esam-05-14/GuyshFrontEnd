@@ -1785,6 +1785,8 @@ export default function Navbar() {
   } = useAuth();
   const isAdmin = user?.roles?.is_superuser;
   const isMember = user?.roles?.is_member;
+  const isMedia = user?.roles?.is_media_officer;
+
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
@@ -1848,7 +1850,7 @@ export default function Navbar() {
     navItems.push({ path: "/events", label: t("nav.events"), icon: Calendar });
   }
 
-  if (isLoggedIn && isAdmin) {
+  if (isLoggedIn && (isAdmin || isMedia)) {
     navItems.push({ path: "/admin", label: t("nav.admin"), icon: Shield });
   }
 

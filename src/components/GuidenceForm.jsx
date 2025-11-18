@@ -21,7 +21,7 @@ export default function GuidenceForm() {
   }
   
   
-    if (!user.roles?.is_active) {
+    if (user && !user.roles?.is_active) {
       return (
         <AccessMessage
           title={t("airport_form.access.account_pending_title")}
@@ -32,7 +32,7 @@ export default function GuidenceForm() {
       );
     }
   
-    if (user.roles?.is_member) {
+    if (user && user.roles?.is_member) {
       return (
         <AccessMessage
           title={t("airport_form.access.service_unavailable_title")}
