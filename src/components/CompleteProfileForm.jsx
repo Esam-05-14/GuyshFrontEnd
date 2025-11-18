@@ -604,14 +604,13 @@ export default function CompleteProfileForm() {
     };
 
     try {
-      const { data } = await createProfile(payload);
+      const data = await createProfile(payload);
       setMessage(t("profileForm.success"));
-      // NOTE: You are overwriting formData with API response data. This might be intentional.
-      // setFormData(data); 
+
       localStorage.setItem("UserProfile",JSON.stringify(data));
+      
       setMyProfile(data);
-      // navigate('/my-profile'); 
-      window.location.href = '/my-profile';
+      navigate('/my-profile'); 
     } catch (err) {
       console.error("Profile creation failed:", err);
       // You should check err.response.data for specific server errors if possible
