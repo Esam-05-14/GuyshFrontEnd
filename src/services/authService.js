@@ -260,7 +260,13 @@ export async function downloadProfile() {
   if (!token) {
     throw new Error("No token found. User might not be logged in.");
   }
-  const response = await fetch(api("/users/export-my-data/", {"Authorization": `bearer ${token}`}));
+  const response = await fetch(api("/users/export-my-data/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `bearer ${token}`,
+    },
+  }));
 
   if (!response.ok) {
     // Throw error with status for better debugging
