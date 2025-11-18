@@ -975,14 +975,11 @@ export async function airportPickupRequest( body) {
 
 
 export async function guidenceRequest( body) {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    throw new Error("No token found. User might not be logged in.");
-  }
+
   const response = await fetch(api("/forms/guidance-apply/"), {
     method: "POST",
     headers: { "Content-Type": "application/json",
-       "Authorization": `bearer ${token}`
+      
      },
     body: JSON.stringify(body),
   });
