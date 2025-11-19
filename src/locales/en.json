@@ -48,7 +48,7 @@
   "finishProfile": "Fill membership form",
   "viewProfile": "View Profile",
   "deleteProfile": "Delete Profile",
-  "confirmDelete": "Are you sure you want to delete your profile?",
+  "confirmDelete": "Are you sure you want to delete your profile? It means you Withdraw you union membership",
   "profileDeleted": "Profile deleted successfully.",
   "rules-rights" : "Union Rules and Rights",
   "prpo" : "Privacy Policy",

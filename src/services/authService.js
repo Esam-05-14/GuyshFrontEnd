@@ -7,6 +7,28 @@ function api(path) {
   return `${API_URL}/api${path}`;
 }
 
+export async function getTerms(lang) {
+  const response = await fetch(api(`/legal/terms?lang=${lang}`));
+
+  if (!response.ok) {
+    // Throw error with status for better debugging
+    throw new Error(`Failed to get terms file: ${response.status} ${response.statusText}`);
+  }
+  const data = await response.json();
+  return data;
+
+}
+export async function getPrivacy(lang) {
+  const response = await fetch(api(`/legal/privacy?lang=${lang}`));
+
+  if (!response.ok) {
+    // Throw error with status for better debugging
+    throw new Error(`Failed to get privacy file: ${response.status} ${response.statusText}`);
+  }
+  const data = await response.json();
+  return data;
+
+}
 // Add this new function to your authService.js
 export async function checkTokenValidity() {
   // This request should be made with the existing JWT in the header
