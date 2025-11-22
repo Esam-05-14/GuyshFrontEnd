@@ -137,7 +137,8 @@ function Universities() {
               >
                 <div className="p-6 flex flex-col items-center text-center  lex-grow">
                   <img
-                    src={`../assets/logos/${uni.name}.png`}
+                    
+                    src={ uni.name === "Balassi Institute" ? "../assets/logos/Balassi Institute.png": `../assets/logos/${uni.name}.png`}
                     alt={uni.name}
                     onError={(e) => {
                       e.target.src = "../assets/logos/Balassi Institute.png";
