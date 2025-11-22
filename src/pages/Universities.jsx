@@ -140,7 +140,7 @@ function Universities() {
                     src={`../assets/logos/${uni.name}.png`}
                     alt={uni.name}
                     onError={(e) => {
-                      e.target.src = "../assets/logos/University of Szeged.png";
+                      e.target.src = "../assets/logos/Balassi Institute.png";
                       e.onerror = null;
                     }}
                     className="w-32 h-32 object-contain mb-4"
