@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../data/AuthContext";
 import { downloadProfile, updateProfile } from "../services/authService";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
 
 export default function MyProfile() {
   const { myProfile, universities, setMyProfile, language} = useAuth();
@@ -12,6 +13,11 @@ export default function MyProfile() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+  
 
   const formatDate = (dateString) => {
     if (!dateString) return new Date().toLocaleDateString();
@@ -40,9 +46,13 @@ export default function MyProfile() {
 
   if (!formData) {
     return (
-      <div className="min-h-screen flex justify-center items-center text-gray-600">
-        <h1>{t("myProfile.loading")}</h1>
-      </div>
+      <button
+                  onClick={() => handleNavigation("/membership-form")}
+                  className="w-50 mt-4 bg-gradient-to-r from-[#6e9225] to-[#5a7a1e] text-white px-4 py-3 rounded-lg text-sm font-semibold 
+                             hover:shadow-lg transition-all duration-200"
+                >
+                  {t("nav.finishProfile")}
+                </button>
     );
   }
 

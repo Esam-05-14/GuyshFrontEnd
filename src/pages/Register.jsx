@@ -111,12 +111,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerRequest } from "../services/authService"; // Removed .js extension
 import { useTranslation } from "react-i18next"; // Import the hook
+import { useAuth } from "../data/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { t, i18n } = useTranslation(); // Initialize the hook
+  const {language} = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -215,6 +218,17 @@ export default function Register() {
             {loading ? t("register.registering") : t("register.registerButton")}
           </button>
         </form>
+        <div className="text-center text-sm text-gray-600 mt-6 space-y-2">
+          <p>
+            {language === 'ar' ? "لديك حساب؟":"Already have an account? "}{" "}
+            <Link
+              to="/login"
+              className="text-[#193042] font-medium hover:underline"
+            >
+              {language === 'ar' ?" سجل دخولك هنا":"Login here"}
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

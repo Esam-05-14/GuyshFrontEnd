@@ -60,18 +60,18 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/news/:id" element={<NewsDetails />} />
         <Route path="/universities" element={<Universities />} />
-        <Route element={<ProtectedRoutes allowedRoles={['is_superuser','is_active']}/>}>
+        <Route element={<ProtectedRoutes allowedRoles={['is_staff','is_active']}/>}>
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/my-profile" element={<MyProfile />} />
         </Route>
-        <Route element={<ProtectedRoutes allowedRoles={['is_superuser', 'is_media_officer']}/>}>
+        <Route element={<ProtectedRoutes allowedRoles={['is_staff', 'is_media_officer']}/>}>
           <Route path='/admin' element={<Admin/>} />
           <Route path="/admin/events" element={<AdminEvents />} />
           <Route path="/admin/news" element={<AdminPosts />} />
           <Route path="/admin/email-notifications" element={<AdminEmailNotifications />} />
         </Route>
-        <Route element={<ProtectedRoutes allowedRoles={['is_superuser']}/>}>
+        <Route element={<ProtectedRoutes allowedRoles={['is_staff']}/>}>
           <Route path='/admin/users' element={<Users/>} />
           <Route path='/admin/profiles' element={<UserProfiles/>} />
           <Route path="/admin/profiles/:id" element={<UserProfilePage />} />
